@@ -7,9 +7,12 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
 
     <meta charset="UTF-8">
-    <title>🍺Ver1)Recommendation</title>
+    <title>Ver1)Recommendation</title>
     <style>
         h1 { text-align: center; color: white;}
+        h3 {
+            text-align: center; color: white;
+        }
         img {
             display: block; margin: 0px auto;
             width:40%;
@@ -31,25 +34,26 @@
             font-size : 20px;
         }
         body{
-            background-image:url("{% static 'mg/맥주배경.jpg' %}");
+            {% comment %} background-image:url("{% static 'mg/ver1.jpg' %}"); {% endcomment %}
             background-size:100% 200%;
         }
     </style>
 </head>
 <body>
 <div style="background-color:#0d47a1;">
-    <h1>좋아하는 맥주와 중요시 하는 취향을 선택해주세요.</h1>
+    <h1>경험했던 여행지 중 다시 가고싶은 여행지를 선택해주세요.</h1>
+    <h3>비슷한 여행지를 추천해드립니다.</h3>
 </div>
     <div id = 'contents' style="text-align:center;">
-        <img id="mg1" src="static/mg/Beer.jfif">
+        <img id="mg1" src="static/mg/ver1.png">
         <div>
             <form method="POST">
                 <br>
                 {% csrf_token %}
-                아이디 :
-                <input type="text" name="name"><br><br>
+                {% comment %} 아이디 :
+                <input type="text" name="name"><br><br> {% endcomment %}
 
-                맥주 :
+                여행지 :
                 <select name="beer">
                     {% for tmp in beer_list %}
                         <option value='{{tmp}}'>{{tmp}}</option>

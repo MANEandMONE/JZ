@@ -29,16 +29,10 @@ ALLOWED_HOSTS = ['*']
 # Application definition
 
 INSTALLED_APPS = [
-    'django.contrib.admin',
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
-    'beer',
-    'bootstrap4',
-    'rest_framework',
-    'corsheaders'
+    'django.contrib.admin', 'django.contrib.auth',
+    'django.contrib.contenttypes', 'django.contrib.sessions',
+    'django.contrib.messages', 'django.contrib.staticfiles', 'beer',
+    'bootstrap4', 'rest_framework', 'corsheaders', 'embed_video'
 ]
 
 MIDDLEWARE = [
@@ -61,7 +55,6 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [os.path.join(BASE_DIR, 'templates/beer')],
-        
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -130,10 +123,11 @@ USE_TZ = False
 ROOT_DIR = os.path.dirname(BASE_DIR)
 
 STATIC_DIR = os.path.join(BASE_DIR, 'beer/static')
-STATICFILES_DIRS = [ os.path.join(BASE_DIR, 'frontend', 'build', 'static')
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'frontend', 'build', 'static')
     # STATIC_DIR,
     # "static",
 ]
-
+MEDIA_URL = '/media/'
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static_files')
