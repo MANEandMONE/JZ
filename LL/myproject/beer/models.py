@@ -120,7 +120,7 @@ class Hotel(models.Model):
     name = models.TextField(blank=True, null=True)
     rating = models.FloatField(blank=True, null=True)
     review = models.TextField(blank=True, null=True)
-    claafications = models.TextField(blank=True, null=True)
+    classfications = models.TextField(blank=True, null=True)
     address = models.TextField(blank=True, null=True)
     cost = models.TextField(blank=True, null=True)
     url = models.TextField(blank=True, null=True)
@@ -128,3 +128,18 @@ class Hotel(models.Model):
     class Meta:
         managed = False
         db_table = 'hotel'
+
+
+class Restaurant(models.Model):
+    index = models.IntegerField(primary_key=True)
+    locate = models.TextField(blank=True, null=True)
+    name = models.TextField(blank=True, null=True)
+    rating = models.FloatField(blank=True, null=True)
+    classfications = models.TextField(blank=True, null=True)
+    address = models.TextField(blank=True, null=True)
+    hour = models.TextField(blank=True, null=True)
+    url = models.TextField(blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'restaurant'

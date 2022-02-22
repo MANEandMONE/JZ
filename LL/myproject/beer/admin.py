@@ -7,10 +7,17 @@ from .models import *
 
 class HotelAdmin(admin.ModelAdmin):
     list_display = ('index', 'locate', 'name', 'rating', 'review',
-                    'claafications', 'address', 'cost', 'url')
+                    'classfications', 'address', 'cost', 'url')
+
+
+class RestaurantAdmin(admin.ModelAdmin):
+    list_display = ('index', 'locate', 'name', 'rating', 'classfications',
+                    'address', 'hour', 'url')
 
 
 admin.site.register(Hotel, HotelAdmin)
+
+admin.site.register(Restaurant, RestaurantAdmin)
 
 # class UserAdmin(admin.ModelAdmin) :
 #     list_display = ('username', 'password')

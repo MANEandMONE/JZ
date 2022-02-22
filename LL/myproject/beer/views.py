@@ -1092,3 +1092,7 @@ def ver3(request):
         })
     else:
         return render(request, 'beer/ver3.html', {'beer_list': beer_list})
+
+
+# def htrs(request):
+#     ver3()
