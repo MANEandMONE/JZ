@@ -14,6 +14,8 @@
       type="text/css">
     <script src="https://vjs.zencdn.net/7.1.0/video.js"></script>
     <script src="../../static/js/videojs-pannellum-plugin.js"></script>
+    <link rel="stylesheet" href={% static 'css/style.css' %}>
+    <link rel="stylesheet" href={% static 'css/reset.css' %}>
 
 
     <style>
@@ -28,6 +30,18 @@
     </style>
 </head>
 <body>
+    <div class="nav-comtain">
+        <nav>
+            <a href="/">HOME</a>
+            <a href="ver1">EXPERIENCE</a>
+            <a href="ver3">TEMA</a>
+            <div id="indicator"></div>
+        </nav>
+    </div>
+    <br/>
+    <div class="header">
+        <a class="header-a" onclick="location.href='/'">너와 나드리</a>
+    </div>
 
 <div style="background-color:#0d47a1;">
     <h1>첫 번째 추천 여행지는 {{ result.0 }} 입니다.</h1>
