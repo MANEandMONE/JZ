@@ -15,8 +15,7 @@ import warnings
 from rest_framework import viewsets
 import csv
 import random
-#from .models import beer
-
+from .models import *
 # def register(request):   #회원가입 페이지를 보여주기 위한 함수
 #     if request.method == "GET" :
 #         return render(request, 'beer/register.html') #register를 요청받으면 register.html 로 응답
@@ -174,79 +173,61 @@ def ver1(request):
 
 
 def ver3(request):
+    df_cluster = pd.read_csv('result.csv', encoding='utf-8', index_col=0)
 
-    beer_list = pd.read_csv('도시이름.csv', encoding='utf-8', index_col=0)
-    beer_list = beer_list['city']
-    result = []
-    cst0_list = [
-        '양재시민의숲', '한강대교', '노을공원', '서울숲공원', '남산공원', '창경궁', '여의도공원', '석촌호수 공원',
-        '배곧생명공원', '도라전망대', '양화한강공원', '낙성대공원', '국립고궁박물관', '여의도공원', '섭지코지',
-        '청계 광장', '송도구름산책로', '여의도한강공원', '사라봉공원', '도두 무지개 해안도로', '용머리해안', '낙산공원',
-        '진주성', '반포한강공원', '반포대교 달빛무지개분수', '평화의공원', '경춘선숲길', '월드컵공원', '북한산 백운대',
-        '덕수궁', '경복궁', '정방폭포', '하늘공원', '망원한강공원', '선유도공원', '한라산국립공원', '북한산국립공원',
-        '경의선숲길', '몽마르뜨공원'
-    ]
+    cst0_list = df_cluster.loc[df_cluster['Cluster'] == 0, 'locate'].tolist()
 
-    cst1_list = [
-        '국립중앙박물관', '국립민속박물관', '성산일출봉', '수종사', '화담숲', '시흥갯골생태공원', '물의정원',
-        '한림공원', '한라수목원', 'DDP 동대문디자인플라자', '북촌한옥마을', '홍대쇼핑거리', '비자림'
-    ]
+    cst1_list = df_cluster.loc[df_cluster['Cluster'] == 1, 'locate'].tolist()
 
-    cst2_list = [
-        '보신각', '남대문시장', '광장시장', '제주불빛정원', '제주동문시장', '통인시장', '정선아리랑시장',
-        '서울로7017', '서귀포매일올레시장', '의왕레일바이크', '달전망대', '땅끝전망대', '홍대앞예술시장프리마켓'
-    ]
+    cst2_list = df_cluster.loc[df_cluster['Cluster'] == 2, 'locate'].tolist()
 
-    cst3_list = [
-        '남한산성 북문', '행주산성', '전쟁기념관', '광화문광장', '창의문', '서대문자연사박물관', '충무아트센터',
-        '용인자연 휴양림', '만천하스카이워크', '제주절물자연휴양림', '절두산 순교성지', '붉은오름 사려니숲길',
-        '해운대해수욕장', 'N서울타워'
-    ]
+    cst3_list = df_cluster.loc[df_cluster['Cluster'] == 3, 'locate'].tolist()
 
-    cst4_list = [
-        '서울월드컵경기장', '북악팔각정', '대림미술관', '문화비축기지', '감천문화마을', '장항스카이워크', '용연구름다리',
-        '덕진공원', '이화동 벽화마을', '벽골제', '파리공원', '장항스카이워크', '대전스카이로드', '새연교', '진도타워',
-        '백제문화단지', '남산골 한옥마을', '만장굴', '광명동굴', '답다니탑망대', '청풍호관광모노레일', '168계단',
-        '목포 갓바위', '청풍문화재단지', '흰여울마을', '천제연폭포', '부산타워', '메타세콰이아가로수길', '삼청동길',
-        '서울함공원', '전주 한옥마을', '인사동거리', '쇠소깍', '안동 하회마을', '도담삼봉', '청계천',
-        '문경새재오픈세트장', '주산지'
-    ]
+    cst4_list = df_cluster.loc[df_cluster['Cluster'] == 4, 'locate'].tolist()
 
-    cst5_list = [
-        '인천 차이나타운', '탑골공원', '자만벽화마을', '제주조천 스위스마을', '영종대교기념관', '헤이리 예술마을',
-        '송월동 동화마을', '프로방스 마을', '경암동철길마을 시작점', '춘향테마파크', '1913 송정역시장', '모래시계공원',
-        '용두암'
-    ]
+    cst5_list = df_cluster.loc[df_cluster['Cluster'] == 5, 'locate'].tolist()
+
+    cst6_list = df_cluster.loc[df_cluster['Cluster'] == 6, 'locate'].tolist()
+
+    cst7_list = df_cluster.loc[df_cluster['Cluster'] == 7, 'locate'].tolist()
+
+    cst8_list = df_cluster.loc[df_cluster['Cluster'] == 8, 'locate'].tolist()
+
+    cst9_list = df_cluster.loc[df_cluster['Cluster'] == 9, 'locate'].tolist()
+
+    cst10_list = df_cluster.loc[df_cluster['Cluster'] == 10, 'locate'].tolist()
+
+    cst11_list = df_cluster.loc[df_cluster['Cluster'] == 11, 'locate'].tolist()
 
     if request.method == 'POST':
         detail = request.POST.get('detail', '')
 
         if detail in ['food', 'walk', 'nature']:  #0
-            result = cst2_list
+            result = cst0_list
             random.shuffle(result)
 
         elif detail in ['food', 'walk', 'culture']:  #1
-            result = cst1_list
+            result = cst8_list
             random.shuffle(result)
 
         elif detail in ['food', 'walk', 'date']:  #2
-            result = cst2_list
-            random.shuffle(result)
-
-        elif detail in ['food', 'walk', 'sleep']:  #3
-            result = cst3_list
-            random.shuffle(result)
-
-        elif detail in ['food', 'walk', 'drive']:  #4
-            result = cst4_list
-            random.shuffle(result)
-
-        elif detail in ['food', 'walk', 'night']:  #5
             result = cst5_list
             random.shuffle(result)
 
+        elif detail in ['food', 'walk', 'sleep']:  #3
+            result = cst4_list
+            random.shuffle(result)
+
+        elif detail in ['food', 'walk', 'drive']:  #4
+            result = cst3_list
+            random.shuffle(result)
+
+        elif detail in ['food', 'walk', 'night']:  #5
+            result = cst8_list
+            random.shuffle(result)
+
         elif detail in ['food', 'walk', 'fori']:  #0
-            result = cst0_list
+            result = cst5_list
             random.shuffle(result)
 
         elif detail in ['food', 'walk', 'sns']:  #1
@@ -254,15 +235,15 @@ def ver3(request):
             random.shuffle(result)
 
         elif detail in ['food', 'walk', 'family']:  #2
-            result = cst2_list
-            random.shuffle(result)
-
-        elif detail in ['food', 'walk', 'view']:  #3
             result = cst3_list
             random.shuffle(result)
 
-        elif detail in ['food', 'nature', 'culture']:  #4
+        elif detail in ['food', 'walk', 'view']:  #3
             result = cst4_list
+            random.shuffle(result)
+
+        elif detail in ['food', 'nature', 'culture']:  #4
+            result = cst8_list
             random.shuffle(result)
 
         elif detail in ['food', 'nature', 'date']:  #5
@@ -270,7 +251,7 @@ def ver3(request):
             random.shuffle(result)
 
         elif detail in ['food', 'nature', 'sleep']:  #0
-            result = cst0_list
+            result = cst_list
             random.shuffle(result)
 
         elif detail in ['food', 'nature', 'drive']:  #1
@@ -1088,11 +1069,12 @@ def ver3(request):
 
         return render(request, 'beer/ver3_result.html', {
             'result': result,
-            'beer_list': beer_list
         })
     else:
-        return render(request, 'beer/ver3.html', {'beer_list': beer_list})
+        return render(request, 'beer/ver3.html')
 
 
-# def htrs(request):
-#     ver3()
+def hotel(request):
+    datas = Hotel.objects.all()
+
+    return render(request, 'beer/htrs.html', {'hotels': datas})

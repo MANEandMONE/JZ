@@ -15,10 +15,16 @@ class RestaurantAdmin(admin.ModelAdmin):
                     'address', 'hour', 'url')
 
 
+class ResultAdmin(admin.ModelAdmin):
+    list_displat = ('locate', 'rating', 'review', 'rating', 'classfications',
+                    'address', 'explain', 'mood', 'topic', 'reason', 'Cluster')
+
+
 admin.site.register(Hotel, HotelAdmin)
 
 admin.site.register(Restaurant, RestaurantAdmin)
 
+admin.site.register(Result, ResultAdmin)
 # class UserAdmin(admin.ModelAdmin) :
 #     list_display = ('username', 'password')
 
