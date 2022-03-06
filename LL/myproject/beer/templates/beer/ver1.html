@@ -16,7 +16,9 @@
         } {% endcomment %}
         img {
             display: block; margin: 0px auto;
-            width:40%;
+            width:80%;
+            height:70%;
+            border-radius:3vw;
         }
         select {
             width: 200px;
@@ -39,6 +41,12 @@
             {% comment %} background-image:url("{% static 'mg/ver1.jpg' %}"); {% endcomment %}
             background-size:100% 200%;
         }
+        h1{
+            text-align:center;
+            font-size:2.5vw;
+            padding-left:4%;
+            padding-right:4%;
+        }
     </style>
 </head>
 <body>
@@ -46,7 +54,7 @@
         <nav>
             <a href="/">HOME</a>
             <a href="ver1">EXPERIENCE</a>
-            <a href="ver3">TEMA</a>
+            <a href="ver3">THEME</a>
             <div id="indicator"></div>
         </nav>
     </div>
@@ -54,21 +62,18 @@
     <div class="header">
         <a class="header-a" onclick="location.href='/'">너와 나드리</a>
     </div>
-<div class="ver1-header">
-    <h1>경험했던 여행지 중 다시 가고싶은 여행지를 선택해주세요.</h1>
-    <h3>비슷한 여행지를 추천해드립니다.</h3>
-</div>
-    <div id = 'contents' style="text-align:center;">
-        <img id="mg1" src="static/mg/ver1.png">
-        <div>
-            <form method="POST">
+        <div class="ver1-header">
+            <h1 style="padding-top:3%;">경험했던 여행지 중 다시 가고싶은 여행지를 선택해주세요.
+                비슷한 여행지를 추천해 드립니다.
+            </h1>
+            <form method="POST" style="text-align:center;">
                 <br>
                 {% csrf_token %}
                 {% comment %} 아이디 :
                 <input type="text" name="name"><br><br> {% endcomment %}
 
                 여행지 :
-                <select name="beer">
+                <select name="beer" style="margin-top:5%">
                     {% for tmp in beer_list %}
                         <option value='{{tmp}}'>{{tmp}}</option>
                     {% endfor %}
@@ -89,9 +94,12 @@
                     <option value="busy">혼잡도</option> {% endcomment %}
                     
 
-                </select><br><br>
-                <input class="btn btn-success" type="submit" value="Pick!">
+                </select><br/>
+                <input class="btn-submit" type="submit" value="Pick!">
             </form>
+        </div>
+        <div id = 'contents' style="text-align:center; opacity:0.5; background-color:#F5F5F5; padding-top:10%;" >
+            <img id="mg1" src="static/mg/airplane2.jpg">
         </div>
     </div>
 </body>

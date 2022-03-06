@@ -84,11 +84,10 @@ nav a
     display: table-cell;
     text-align: center;
     color: #949494;
-    text-decoration: none;
+    text-decoration: none !important; 
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     font-weight: bold;
     padding: 10px 20px;
-  
     transition: 0.2s ease color;
 }
 
@@ -186,7 +185,25 @@ nav a:nth-child(3):hover ~ #indicator
     background: linear-gradient(130deg, purple, palevioletred);
 }
 
-/* 경험으로 추천받기 ver3*/
+
+/* 경험으로 추천받기 ver1 */
+.ver1-header {
+    position: absolute;
+    align-items: center;
+    font-family: "jua";
+    background-color:#f8f8ff;
+    border: solid 1px #e6e6e6;
+    border-radius: 6vh;
+    height: 40vh;
+    width: 60vw;
+    top:49vh;
+    left: 19vw;
+    z-index: 1000;
+}
+
+
+
+/* 테마로 추천받기 ver3*/
 
 .ver3-contain {
     position: absolute;
@@ -284,128 +301,20 @@ nav a:nth-child(3):hover ~ #indicator
 /* ver3 결과*/
 
 .ver3-wrapper {
-    margin-top: 5%;
+    padding-top: 5%;
+    text-align: center;
     background-color: #F5F5F5;
 }
 
 .ver3-result-contain {
     display: block;
-    margin-bottom: 2%;
-    padding-left: 2%;
-    padding-right: 2%;
+    padding-bottom: 3%;
 }
 
 
 #result0 {
     /* display: block; */
 }
-
-#toc-content {
-    display: none;
-    background-color: #e9ecef;
-    height: 65vh;
-    padding-top: 10vh;
-    padding-left: 3%;
-  }
-#toc-toggle {
-    background-color: #6394A1;
-    cursor: pointer;
-    color: #fff;
-    font-size:20px;
-    display: inline-block;
-    font-family: "jua";
-    font-size: 1.2vw;
-    width: 10vw;
-    height: 5vh;
-    padding-top: 3vh;
-    text-align: center;
-    border-radius:25px ;
-    margin-right: 1%;
-  }
-#toc-toggle:hover {
-    text-decoration: none;
-
-  }
-  #toc-content1 {
-    display: none;
-    background-color: #e9ecef;
-    height: 65vh;
-    padding-top: 10vh;
-    padding-left: 3%;
-  }
-#toc-toggle1 {
-    background-color: #6394A1;
-    cursor: pointer;
-    color: #fff;
-    font-size:20px;
-    display: inline-block;
-    font-family: "jua";
-    font-size: 1.2vw;
-    width: 10vw;
-    height: 5vh;
-    padding-top: 3vh;
-    text-align: center;
-    border-radius:25px ;
-    margin-right: 1%;
-  }
-#toc-toggle1:hover {
-    text-decoration: none;
-
-  }
-  #toc-content2 {
-    display: none;
-    background-color: #e9ecef;
-    height: 65vh;
-    padding-top: 10vh;
-    padding-left: 3%;
-  }
-#toc-toggle2 {
-    background-color: #6394A1;
-    cursor: pointer;
-    color: #fff;
-    font-size:20px;
-    display: inline-block;
-    font-family: "jua";
-    font-size: 1.2vw;
-    width: 10vw;
-    height: 5vh;
-    padding-top: 3vh;
-    text-align: center;
-    border-radius:25px ;
-    margin-right: 1%;
-  }
-#toc-toggle2:hover {
-    text-decoration: none;
-
-  }
-  #toc-content3 {
-    display: none;
-    background-color: #e9ecef;
-    height: 65vh;
-    padding-top: 10vh;
-    padding-left: 3%;
-  }
-#toc-toggle3 {
-    background-color: #6394A1;
-    cursor: pointer;
-    color: #fff;
-    font-size:20px;
-    display: inline-block;
-    font-family: "jua";
-    font-size: 1.2vw;
-    width: 10vw;
-    height: 5vh;
-    padding-top: 3vh;
-    text-align: center;
-    border-radius:25px ;
-    margin-right: 1%;
-  }
-#toc-toggle3:hover {
-    text-decoration: none;
-
-  }
-
-
 .ver3-result-info {
     display: inline-block;
     font-family: "jua";
