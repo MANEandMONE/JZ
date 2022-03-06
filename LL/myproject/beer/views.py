@@ -202,171 +202,171 @@ def ver3(request):
     if request.method == 'POST':
         detail = request.POST.get('detail', '')
 
-        if detail in ['food', 'walk', 'nature']:  #0
+        if detail in ['food', 'walk', 'nature']:
             result = cst0_list
             random.shuffle(result)
 
-        elif detail in ['food', 'walk', 'culture']:  #1
+        elif detail in ['food', 'walk', 'culture']:
             result = cst8_list
             random.shuffle(result)
 
-        elif detail in ['food', 'walk', 'date']:  #2
+        elif detail in ['food', 'walk', 'date']:
             result = cst5_list
             random.shuffle(result)
 
-        elif detail in ['food', 'walk', 'sleep']:  #3
+        elif detail in ['food', 'walk', 'sleep']:
             result = cst4_list
             random.shuffle(result)
 
-        elif detail in ['food', 'walk', 'drive']:  #4
+        elif detail in ['food', 'walk', 'drive']:
             result = cst3_list
             random.shuffle(result)
 
-        elif detail in ['food', 'walk', 'night']:  #5
+        elif detail in ['food', 'walk', 'night']:
             result = cst8_list
             random.shuffle(result)
 
-        elif detail in ['food', 'walk', 'fori']:  #0
+        elif detail in ['food', 'walk', 'fori']:
             result = cst5_list
             random.shuffle(result)
 
-        elif detail in ['food', 'walk', 'sns']:  #1
+        elif detail in ['food', 'walk', 'sns']:
             result = cst1_list
             random.shuffle(result)
 
-        elif detail in ['food', 'walk', 'family']:  #2
+        elif detail in ['food', 'walk', 'family']:
             result = cst3_list
             random.shuffle(result)
 
-        elif detail in ['food', 'walk', 'view']:  #3
+        elif detail in ['food', 'walk', 'view']:
             result = cst4_list
             random.shuffle(result)
 
-        elif detail in ['food', 'nature', 'culture']:  #4
+        elif detail in ['food', 'nature', 'culture']:
             result = cst8_list
             random.shuffle(result)
 
-        elif detail in ['food', 'nature', 'date']:  #5
+        elif detail in ['food', 'nature', 'date']:
             result = cst5_list
             random.shuffle(result)
 
-        elif detail in ['food', 'nature', 'sleep']:  #0
+        elif detail in ['food', 'nature', 'sleep']:
             result = cst2_list
             random.shuffle(result)
 
-        elif detail in ['food', 'nature', 'drive']:  #1
+        elif detail in ['food', 'nature', 'drive']:
             result = cst0_list
             random.shuffle(result)
 
-        elif detail in ['food', 'nature', 'night']:  #2
+        elif detail in ['food', 'nature', 'night']:
             result = cst2_list
             random.shuffle(result)
 
-        elif detail in ['food', 'nature', 'fori']:  #3
+        elif detail in ['food', 'nature', 'fori']:
             result = cst5_list
             random.shuffle(result)
 
-        elif detail in ['food', 'nature', 'sns']:  #4
+        elif detail in ['food', 'nature', 'sns']:
             result = cst1_list
             random.shuffle(result)
 
-        elif detail in ['food', 'nature', 'family']:  #5
+        elif detail in ['food', 'nature', 'family']:
             result = cst3_list
             random.shuffle(result)
 
-        elif detail in ['food', 'nature', 'view']:  #0
+        elif detail in ['food', 'nature', 'view']:
             result = cst3_list
             random.shuffle(result)
 
-        elif detail in ['food', 'culture', 'date']:  #1
+        elif detail in ['food', 'culture', 'date']:
             result = cst8_list
             random.shuffle(result)
 
-        elif detail in ['food', 'culture', 'sleep']:  #2
+        elif detail in ['food', 'culture', 'sleep']:
             result = cst8_list
             random.shuffle(result)
 
-        elif detail in ['food', 'culture', 'drive']:  #3
+        elif detail in ['food', 'culture', 'drive']:
             result = cst8_list
             random.shuffle(result)
 
-        elif detail in ['food', 'culture', 'night']:  #4
+        elif detail in ['food', 'culture', 'night']:
             result = cst8_list
             random.shuffle(result)
 
-        elif detail in ['food', 'culture', 'fori']:  #5
+        elif detail in ['food', 'culture', 'fori']:
             result = cst5_list
             random.shuffle(result)
 
-        elif detail in ['food', 'culture', 'sns']:  #0
+        elif detail in ['food', 'culture', 'sns']:
             result = cst5_list
             random.shuffle(result)
 
-        elif detail in ['food', 'culture', 'family']:  #1
+        elif detail in ['food', 'culture', 'family']:
             result = cst8_list
             random.shuffle(result)
 
-        elif detail in ['food', 'culture', 'view']:  #2
+        elif detail in ['food', 'culture', 'view']:
             result = cst8_list
             random.shuffle(result)
 
-        elif detail in ['food', 'date', 'sleep']:  #3
+        elif detail in ['food', 'date', 'sleep']:
             result = cst9_list
             random.shuffle(result)
 
-        elif detail in ['food', 'date', 'drive']:  #4
+        elif detail in ['food', 'date', 'drive']:
             result = cst0_list
             random.shuffle(result)
 
-        elif detail in ['food', 'date', 'night']:  #5
+        elif detail in ['food', 'date', 'night']:
             result = cst0_list
             random.shuffle(result)
 
-        elif detail in ['food', 'date', 'fori']:  #0
+        elif detail in ['food', 'date', 'fori']:
             result = cst5_list
             random.shuffle(result)
 
-        elif detail in ['food', 'date', 'sns']:  #1
+        elif detail in ['food', 'date', 'sns']:
             result = cst6_list
             random.shuffle(result)
 
-        elif detail in ['food', 'date', 'family']:  #2
+        elif detail in ['food', 'date', 'family']:
             result = cst3_list
             random.shuffle(result)
 
-        elif detail in ['food', 'date', 'view']:  #3
+        elif detail in ['food', 'date', 'view']:
             result = cst4_list
             random.shuffle(result)
 
-        elif detail in ['food', 'sleep', 'drive']:  #4
+        elif detail in ['food', 'sleep', 'drive']:
             result = cst10_list
             random.shuffle(result)
 
-        elif detail in ['food', 'sleep', 'night']:  #5
+        elif detail in ['food', 'sleep', 'night']:
             result = cst11_list
             random.shuffle(result)
 
-        elif detail in ['food', 'sleep', 'fori']:  #0
+        elif detail in ['food', 'sleep', 'fori']:
             result = cst5_list
             random.shuffle(result)
 
-        elif detail in ['food', 'sleep', 'sns']:  #1
+        elif detail in ['food', 'sleep', 'sns']:
             result = cst1_list
             random.shuffle(result)
 
-        elif detail in ['food', 'sleep', 'family']:  #2
+        elif detail in ['food', 'sleep', 'family']:
             result = cst0_list
             random.shuffle(result)
 
-        elif detail in ['food', 'sleep', 'view']:  #3
+        elif detail in ['food', 'sleep', 'view']:
             result = cst0_list
             random.shuffle(result)
 
-        elif detail in ['food', 'drive', 'night']:  #4
+        elif detail in ['food', 'drive', 'night']:
             result = cst5_list
             random.shuffle(result)
 
-        elif detail in ['food', 'drive', 'fori']:  #5
+        elif detail in ['food', 'drive', 'fori']:
             result = cst5_list
             random.shuffle(result)
 
@@ -463,7 +463,7 @@ def ver3(request):
             random.shuffle(result)
 
         elif detail in ['walk', 'culture', 'drive']:
-            result = cst_list  ###### 여기서부터
+            result = cst8_list
             random.shuffle(result)
 
         elif detail in ['walk', 'culture', 'night']:
@@ -1074,6 +1074,25 @@ def ver3(request):
 
 
 def hotel(request):
-    datas = Hotel.objects.all()
+    result = ['양재시민의숲', '경복궁', '쇠소깍', '천제연폭포']
+    datas1 = Hotel.objects.filter(locate=result[0])
+    datas2 = Hotel.objects.filter(locate=result[1])
+    datas3 = Hotel.objects.filter(locate=result[2])
+    datas4 = Hotel.objects.filter(locate=result[3])
 
-    return render(request, 'beer/htrs.html', {'hotels': datas})
+    datas5 = Restaurant.objects.filter(locate=result[0])
+    datas6 = Restaurant.objects.filter(locate=result[1])
+    datas7 = Restaurant.objects.filter(locate=result[2])
+    datas8 = Restaurant.objects.filter(locate=result[3])
+
+    return render(
+        request, 'beer/hotel.html', {
+            'hotels1': datas1,
+            'hotels2': datas2,
+            'hotels3': datas3,
+            'hotels4': datas4,
+            'restaurant1': datas5,
+            'restaurant2': datas6,
+            'restaurant3': datas7,
+            'restaurant4': datas8,
+        })
