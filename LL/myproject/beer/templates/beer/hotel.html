@@ -14,8 +14,9 @@
     <p>
         {% if hotels1.count > 0 %}
         {% for a in hotels1 %}
-    <h1>{{a.name}}</h1> {{a.rating}}, {{a.review}}, {{a.classfications}}, {{a.cost}}, <a href='{{a.url}}'><img
-            src="static/mg/hotel/{{ a.name }}.jpg" alt="사진은 수집중입니다😢"></a><br>
+    <h1>{{a.name}}</h1>
+    <h2>{{a.rating}}, {{a.review}}, {{a.classfications}}, {{a.cost}}</h2> <a href='{{a.url}}'><img
+            src="static/mg/hotel/{{ a.name }}.jpg" alt="사진은 수집중입니다😢"></a><br><br>
     {% endfor %}
     {% endif %}
     </p>
@@ -23,62 +24,69 @@
     <p>
         {% if hotels2.count > 0 %}
         {% for a in hotels2 %}
-        {{a.name}}, {{a.rating}}, {{a.review}}, {{a.classfications}}, {{a.cost}}, <a href='{{a.url}}'><img
-                src="static/mg/hotel/{{ a.name }}.jpg" alt="사진은 수집중입니다😢"></a><br>
-        {% endfor %}
-        {% endif %}
+    <h1>{{a.name}}</h1>
+    <h2>{{a.rating}}, {{a.review}}, {{a.classfications}}, {{a.cost}}</h2> <a href='{{a.url}}'><img
+            src="static/mg/hotel/{{ a.name }}.jpg" alt="사진은 수집중입니다😢"></a><br><br>
+    {% endfor %}
+    {% endif %}
     </p><br>
     <p>
         {% if hotels3.count > 0 %}
         {% for a in hotels3 %}
-        {{a.name}}, {{a.rating}}, {{a.review}}, {{a.classfications}}, {{a.cost}}, <a href='{{a.url}}'><img
-                src="static/mg/hotel/{{ a.name }}.jpg" alt="사진은 수집중입니다😢"></a><br>
-        {% endfor %}
-        {% endif %}
+    <h1>{{a.name}}</h1>
+    <h2>{{a.rating}}, {{a.review}}, {{a.classfications}}, {{a.cost}}</h2> <a href='{{a.url}}'><img
+            src="static/mg/hotel/{{ a.name }}.jpg" alt="사진은 수집중입니다😢"></a><br><br>
+    {% endfor %}
+    {% endif %}
     </p><br>
     <p>
         {% if hotels4.count > 0 %}
         {% for a in hotels4 %}
-        {{a.name}}, {{a.rating}}, {{a.review}}, {{a.classfications}}, {{a.cost}}, <a href='{{a.url}}'><img
-                src="static/mg/hotel/{{ a.name }}.jpg" alt="사진은 수집중입니다😢"></a><br>
-        {% endfor %}
-        {% endif %}
+    <h1>{{a.name}}</h1>
+    <h2>{{a.rating}}, {{a.review}}, {{a.classfications}}, {{a.cost}}</h2> <a href='{{a.url}}'><img
+            src="static/mg/hotel/{{ a.name }}.jpg" alt="사진은 수집중입니다😢"></a><br><br>
+    {% endfor %}
+    {% endif %}
 
 
-        <!-- 식당 -->
-        <br><br><br>
+    <!-- 식당 -->
+    <br><br><br>
     <p>
         {% if restaurant1.count > 0 %}
         {% for a in restaurant1 %}
-        {{a.name}}, {{a.rating}}, {{a.classfications}}, {{a.address}}, {{a.hour}}, <a href='{{a.url}}'><img
-                src="static/mg/restaurant/{{ a.name }}.jpg" alt="사진은 수집중입니다😢"></a><br>
-        {% endfor %}
-        {% endif %}
+    <h1>{{a.name}}</h1>
+    <h2>{{a.rating}}, {{a.classfications}}, {{a.address}}, {{a.hour}}</h2> <a href='{{a.url}}'><img
+            src="static/mg/restaurant/{{ a.name }}.jpg" alt="사진은 수집중입니다😢"></a><br><br>
+    {% endfor %}
+    {% endif %}
     </p>
     <br>
     <p>
         {% if restaurant2.count > 0 %}
         {% for a in restaurant2 %}
-        {{a.name}}, {{a.rating}}, {{a.classfications}}, {{a.address}}, {{a.hour}}, <a href='{{a.url}}'><img
-                src="static/mg/restaurant/{{ a.name }}.jpg" alt="사진은 수집중입니다😢"></a><br>
-        {% endfor %}
-        {% endif %}
+    <h1>{{a.name}}</h1>
+    <h2>{{a.rating}}, {{a.classfications}}, {{a.address}}, {{a.hour}}</h2> <a href='{{a.url}}'><img
+            src="static/mg/restaurant/{{ a.name }}.jpg" alt="사진은 수집중입니다😢"></a><br><br>
+    {% endfor %}
+    {% endif %}
     </p><br>
     <p>
         {% if restaurant3.count > 0 %}
         {% for a in restaurant3 %}
-        {{a.name}}, {{a.rating}}, {{a.classfications}}, {{a.address}}, {{a.hour}}, <a href='{{a.url}}'><img
-                src="static/mg/restaurant/{{ a.name }}.jpg" alt="사진은 수집중입니다😢"></a><br>
-        {% endfor %}
-        {% endif %}
+    <h1>{{a.name}}</h1>
+    <h2>{{a.rating}}, {{a.classfications}}, {{a.address}}, {{a.hour}}</h2> <a href='{{a.url}}'><img
+            src="static/mg/restaurant/{{ a.name }}.jpg" alt="사진은 수집중입니다😢"></a><br><br>
+    {% endfor %}
+    {% endif %}
     </p><br>
     <p>
         {% if restaurant4.count > 0 %}
         {% for a in restaurant4 %}
-        {{a.name}}, {{a.rating}}, {{a.classfications}}, {{a.address}}, {{a.hour}}, <a href='{{a.url}}'><img
-                src="static/mg/restaurant/{{ a.name }}.jpg" alt="사진은 수집중입니다😢"></a><br>
-        {% endfor %}
-        {% endif %}
+    <h1>{{a.name}}</h1>
+    <h2>{{a.rating}}, {{a.classfications}}, {{a.address}}, {{a.hour}}</h2> <a href='{{a.url}}'><img
+            src="static/mg/restaurant/{{ a.name }}.jpg" alt="사진은 수집중입니다😢"></a><br><br>
+    {% endfor %}
+    {% endif %}
     </p><br>
 </body>
 
