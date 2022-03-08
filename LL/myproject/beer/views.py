@@ -1066,9 +1066,32 @@ def ver3(request):
             result = cst2_list
             random.shuffle(result)
 
-        return render(request, 'beer/ver3_result.html', {
-            'result': result,
-        })
+        hotel1 = Hotel.objects.filter(locate=result[0])
+        hotel2 = Hotel.objects.filter(locate=result[1])
+        hotel3 = Hotel.objects.filter(locate=result[2])
+        hotel4 = Hotel.objects.filter(locate=result[3])
+        hotel5 = Hotel.objects.filter(locate=result[4])
+
+        restaurant1 = Restaurant.objects.filter(locate=result[0])
+        restaurant2 = Restaurant.objects.filter(locate=result[1])
+        restaurant3 = Restaurant.objects.filter(locate=result[2])
+        restaurant4 = Restaurant.objects.filter(locate=result[3])
+        restaurant5 = Restaurant.objects.filter(locate=result[5])
+
+        return render(
+            request, 'beer/ver3_result.html', {
+                'result': result,
+                'hotels1': hotel1,
+                'hotels2': hotel2,
+                'hotels3': hotel3,
+                'hotels4': hotel4,
+                'hotels5': hotel5,
+                'restaurant1': restaurant1,
+                'restaurant2': restaurant2,
+                'restaurant3': restaurant3,
+                'restaurant4': restaurant4,
+                'restaurant5': restaurant5,
+            })
     else:
         return render(request, 'beer/ver3.html')
 
