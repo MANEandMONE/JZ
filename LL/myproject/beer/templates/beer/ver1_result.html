@@ -89,12 +89,13 @@
     <div class="header">
         <a class="header-a" onclick="location.href='/'">너와 나드리</a>
     </div>
+
     <div class="ver3-wrapper">
         <div class="ver3-result-contain">
             <div>
                 <h1>첫 번째 추천 여행지는 {{ result.0 }} 입니다.</h1>
             </div>
-            <img src="static/mg/{{ result.0 }}.jfif" alt="사진은 수집중입니다😢">
+            <img src="static/mg/place/{{ result.0 }}.jfif" alt="사진은 수집중입니다😢">
             <h2 class="result-h2">
                 <a class="ver3-result-info" href='#'>관련 정보 보기</a>
                 <span id="toc-toggle" onclick="openCloseToc()">관련 영상 보기</span>
@@ -116,18 +117,17 @@
                                     pannellum: {}
                                 }
                             });
-
                         </script>
                     </video>
                 </div>
             </h2>
-
         </div>
+
         <div class="ver3-result-contain">
             <div>
                 <h1>두 번째 추천 여행지는 {{ result.1 }} 입니다.</h1>
             </div>
-            <img src="static/mg/{{ result.1 }}.jfif" alt="사진은 수집중입니다😢">
+            <img src="static/mg/place/{{ result.1 }}.jfif" alt="사진은 수집중입니다😢">
             <h2 class="result-h2"><a class="ver3-result-info" href='#'>관련 정보 더 보기</a><span id="toc-toggle1"
                     onclick="openCloseToc1()">관련 영상 보기</span><a class="ver3-result-hotel" href="#">숙소 보러 가기</a>
                 <div id="toc-content1">
@@ -147,7 +147,6 @@
                                     pannellum: {}
                                 }
                             });
-
                         </script>
                     </video>
                 </div>
@@ -158,7 +157,7 @@
             <div>
                 <h1>세 번째 추천 여행지는 {{ result.2 }} 입니다.</h1>
             </div>
-            <img src="static/mg/{{ result.2 }}.jfif" alt="사진은 수집중입니다😢">
+            <img src="static/mg/place/{{ result.2 }}.jfif" alt="사진은 수집중입니다😢">
             <h2 class="result-h2"><a class="ver3-result-info" href='#'>관련 정보 더 보기</a><span id="toc-toggle2"
                     onclick="openCloseToc2()">관련 영상 보기</span><a class="ver3-result-hotel" href="#">숙소 보러 가기</a>
                 <div id="toc-content2">
@@ -178,16 +177,16 @@
                                     pannellum: {}
                                 }
                             });
-
                         </script>
                     </video>
                 </div>
         </div>
+
         <div class="ver3-result-contain">
             <div>
                 <h1>네 번째 추천 여행지는 {{ result.3 }} 입니다.</h1>
             </div>
-            <img src="static/mg/{{ result.3 }}.jfif" alt="사진은 수집중입니다😢">
+            <img src="static/mg/place/{{ result.3 }}.jfif" alt="사진은 수집중입니다😢">
             <h2 class="result-h2"><a class="ver3-result-info" href='#'>관련 정보 더 보기</a><span id="toc-toggle3"
                     onclick="openCloseToc3()">관련 영상 보기</span><a class="ver3-result-hotel" href="#">숙소 보러 가기</a>
                 <div id="toc-content3">
@@ -207,7 +206,35 @@
                                     pannellum: {}
                                 }
                             });
+                        </script>
+                    </video>
+                </div>
+        </div>
 
+        <div class="ver3-result-contain">
+            <div>
+                <h1>다섯 번째 추천 여행지는 {{ result.4 }} 입니다.</h1>
+            </div>
+            <img src="static/mg/place/{{ result.4 }}.jfif" alt="사진은 수집중입니다😢">
+            <h2 class="result-h2"><a class="ver3-result-info" href='#'>관련 정보 더 보기</a><span id="toc-toggle3"
+                    onclick="openCloseToc3()">관련 영상 보기</span><a class="ver3-result-hotel" href="#">숙소 보러 가기</a>
+                <div id="toc-content3">
+                    <video id="result3" class="video-js vjs-default-skin vjs-big-play-centered" controls preload="none"
+                        style="width:50vw; height:55vh; margin:0 auto; display:block;" crossorigin="anonymous">
+                        <source src="/static/md/{{result.4}}.webm" type="video/webm" />
+                        <source src="/static/md/{{result.4}}.mp4" type="video/mp4" />
+                        <p class="vjs-no-js">
+                            To view this video please enable JavaScript, and consider upgrading to
+                            a web browser that <a href="http://videojs.com/html5-video-support/"
+                                target="_blank">supports HTML5 video</a>
+                        </p>
+
+                        <script>
+                            videojs('result4', {
+                                plugins: {
+                                    pannellum: {}
+                                }
+                            });
                         </script>
                     </video>
                 </div>

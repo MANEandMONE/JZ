@@ -128,12 +128,12 @@ def recomm_feature(df):
 
 def recomm_beer(item_sim_df, beer_name):
     # 해당 맥주와 유사도가 높은 맥주 5개만 추천
-    return item_sim_df[beer_name].sort_values(ascending=False)[1:4]
+    return item_sim_df[beer_name].sort_values(ascending=False)[0:10]
 
 
 def recomm_detail(item_sim_df, detail):
     # 해당 맥주와 유사도가 높은 맥주 5개만 추천
-    return item_sim_df[detail].sort_values(ascending=False)[1:4]
+    return item_sim_df[detail].sort_values(ascending=False)[0:10]
 
 
 def index(request):
@@ -154,7 +154,7 @@ def ver1(request):
 
         result = recomm_beer(df, beer_name)
         result = result.index.tolist()
-
+        random.shuffle(result)
         return render(request, 'beer/ver1_result.html', {
             'result': result,
             'beer_list': beer_list,
