@@ -1,81 +1,85 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <script src='https://cdn.plot.ly/plotly-latest.min.js'></script>
-    <!--    <link rel= "stylesheet" type="text/css" href="{% static 'css/ver1_result.css' %}">-->
+	<script src='https://cdn.plot.ly/plotly-latest.min.js'></script>
+<!--    <link rel= "stylesheet" type="text/css" href="{% static 'css/ver1_result.css' %}">-->
 
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>추천 결과</title>
-    <link rel="stylesheet" href="https://cdn.pannellum.org/2.5/pannellum.css" />
+    <link rel="stylesheet" href="https://cdn.pannellum.org/2.5/pannellum.css"/>
     <script type="text/javascript" src="https://cdn.pannellum.org/2.5/pannellum.js"></script>
 
-    <link href="https://vjs.zencdn.net/7.1.0/video-js.css" rel="stylesheet" type="text/css">
+    <link href="https://vjs.zencdn.net/7.1.0/video-js.css" rel="stylesheet"
+      type="text/css">
     <script src="https://vjs.zencdn.net/7.1.0/video.js"></script>
     <script src="../../static/js/videojs-pannellum-plugin.js"></script>
-    <script>
-        function openCloseToc() {
-            if (document.getElementById('toc-content').style.display === 'block') {
-                document.getElementById('toc-content').style.display = 'none';
-                document.getElementById('toc-toggle').textContent = '관련 영상보기';
-            } else {
-                document.getElementById('toc-content').style.display = 'block';
-                document.getElementById('toc-toggle').textContent = '그만보기';
-            }
-        }
-        function openCloseToc1() {
-            if (document.getElementById('toc-content1').style.display === 'block') {
-                document.getElementById('toc-content1').style.display = 'none';
-                document.getElementById('toc-toggle1').textContent = '관련 영상보기';
-            } else {
-                document.getElementById('toc-content1').style.display = 'block';
-                document.getElementById('toc-toggle1').textContent = '그만보기';
-            }
-        }
-        function openCloseToc2() {
-            if (document.getElementById('toc-content2').style.display === 'block') {
-                document.getElementById('toc-content2').style.display = 'none';
-                document.getElementById('toc-toggle2').textContent = '관련 영상보기';
-            } else {
-                document.getElementById('toc-content2').style.display = 'block';
-                document.getElementById('toc-toggle2').textContent = '그만보기';
-            }
-        }
-        function openCloseToc3() {
-            if (document.getElementById('toc-content3').style.display === 'block') {
-                document.getElementById('toc-content3').style.display = 'none';
-                document.getElementById('toc-toggle3').textContent = '관련 영상보기';
-            } else {
-                document.getElementById('toc-content3').style.display = 'block';
-                document.getElementById('toc-toggle3').textContent = '그만보기';
-            }
-        }
-    </script>
     <link rel="stylesheet" href={% static 'css/style.css' %}>
     <link rel="stylesheet" href={% static 'css/reset.css' %}>
-    <link rel="stylesheet" href={% static 'css/toggle.css' %}>
-    <style>
-        img {
-            border: 1px solid 1px;
-            border-radius: 3vw;
-            display: inline-block;
-            text-align: center;
-            min-width: 40%;
-            min-height: 40%;
-            max-width: 40%;
-            max-height: 40%;
-        }
+    <link rel="stylesheet" href={% static 'css/toggle.css'%}>
+    <script>
+        function openCloseToc4() {
+            if(document.getElementById('toc-content4').style.display === 'block') {
+              document.getElementById('toc-content4').style.display = 'none';
+              document.getElementById('toc-toggle4').textContent = '관련 영상보기';
+            } else {
+              document.getElementById('toc-content4').style.display = 'block';
+              document.getElementById('toc-toggle4').textContent = '그만보기';
+            }
+          }
+          function openCloseToc5() {
+              if(document.getElementById('toc-content5').style.display === 'block') {
+                document.getElementById('toc-content5').style.display = 'none';
+                document.getElementById('toc-toggle5').textContent = '관련 영상보기';
+              } else {
+                document.getElementById('toc-content5').style.display = 'block';
+                document.getElementById('toc-toggle5').textContent = '그만보기';
+              }
+            }
+            function openCloseToc6() {
+              if(document.getElementById('toc-content6').style.display === 'block') {
+                document.getElementById('toc-content6').style.display = 'none';
+                document.getElementById('toc-toggle6').textContent = '관련 영상보기';
+              } else {
+                document.getElementById('toc-content6').style.display = 'block';
+                document.getElementById('toc-toggle6').textContent = '그만보기';
+              }
+            }
+            function openCloseToc11() {
+                if(document.getElementById('toc-content11').style.display === 'block') {
+                  document.getElementById('toc-content11').style.display = 'none';
+                  document.getElementById('toc-toggle11').textContent = '숙소 보러 가기';
+                } else {
+                  document.getElementById('toc-content11').style.display = 'block';
+                  document.getElementById('toc-toggle11').textContent = '그만보기';
+                }
+              }
+              function openCloseToc12() {
+                if(document.getElementById('toc-content12').style.display === 'block') {
+                  document.getElementById('toc-content12').style.display = 'none';
+                  document.getElementById('toc-toggle12').textContent = '숙소 보러 가기';
+                } else {
+                  document.getElementById('toc-content12').style.display = 'block';
+                  document.getElementById('toc-toggle12').textContent = '그만보기';
+                }
+              }
+              function openCloseToc13() {
+                if(document.getElementById('toc-content13').style.display === 'block') {
+                  document.getElementById('toc-content13').style.display = 'none';
+                  document.getElementById('toc-toggle13').textContent = '숙소 보러 가기';
+                } else {
+                  document.getElementById('toc-content13').style.display = 'block';
+                  document.getElementById('toc-toggle13').textContent = '그만보기';
+                }
+              }
+    </script>
 
-        h1 {
-            color: #000;
-            font-family: "jua";
-            font-size: 3vw;
-            margin-bottom: 2%;
-        }
+    <style>
+        h1 {color: #000; font-family: "jua"; font-size:3vw; margin-bottom:2%;}
     </style>
 </head>
-
 <body>
     <div class="nav-comtain">
         <nav>
@@ -85,162 +89,166 @@
             <div id="indicator"></div>
         </nav>
     </div>
-    <br />
+    <br/>
     <div class="header">
         <a class="header-a" onclick="location.href='/'">너와 나드리</a>
+    </div>
+<div class="ver3-wrapper">
+    <div class="ver3-result-contain">
+        <div>
+            <h1>첫 번째 추천 여행지는 {{ result.0 }} 입니다.</h1>
+        </div>
+        <img class="result-img" src="static/mg/{{ result.0 }}.jfif" alt="사진은 수집중입니다😢">
+        <h2 class="result-h2"><a class="ver3-result-info" href='#'>관련 정보 보기</a><span id="toc-toggle4" onclick="openCloseToc4()">관련 영상 보기</span><span class="ver3-result-hotel" id="toc-toggle11" onclick="openCloseToc11()">숙소 보러 가기</span>
+            <div id="toc-content4">
+                <video id="result0" class="video-js vjs-default-skin vjs-big-play-centered"
+                controls preload="none" style="width:50vw; height:55vh; margin:0 auto; display:block;"
+                crossorigin="anonymous">
+                    <source src="/static/md/{{result.0}}.webm" type="video/webm"/>
+                    <source src="/static/md/{{result.0}}.mp4" type="video/mp4"/>
+                    <p class="vjs-no-js">
+                        To view this video please enable JavaScript, and consider upgrading to
+                        a web browser that <a href="http://videojs.com/html5-video-support/"
+                        target="_blank">supports HTML5 video</a>
+                    </p>
+
+                    <script>
+                    videojs('result0', {
+                        plugins: {
+                            pannellum: {}
+                        }
+                    });
+                    
+                </script>
+                </video></h2>
+            </div>
+            <div id="toc-content11">
+                <p>
+                    {% if hotels1.count > 0 %}
+                    {% for a in hotels1 %}
+                <div class="hotel-contain">
+                    <div class="hotel-contain-left">
+                        <a href='{{a.url}}'><img class="hotel-img"src="static/mg/hotel/{{ a.name }}.jpg" alt="사진은 수집중입니다😢"></a><br><br>
+                    </div>
+                    <div class="hotel-contain-right">
+                        <h1>{{a.name}}</h1><div class="classfication">{{a.classfications}}</div>
+                        <p class="rate-and-review">👍{{a.rating}} ✍리뷰{{a.review}}</p>
+                        <div class="hotel-cost">{{a.cost}}</div> 
+                        <div class="hotel-book">예약하기</div>
+                    </div>
+                    <hr width="70%">
+                </div>
+                {% endfor %}
+                {% endif %}
+                </p>
+            </div>
     </div>
 
     <div class="ver3-wrapper">
         <div class="ver3-result-contain">
             <div>
-                <h1>첫 번째 추천 여행지는 {{ result.0 }} 입니다.</h1>
-            </div>
-            <img src="static/mg/place/{{ result.0 }}.jfif" alt="사진은 수집중입니다😢">
-            <h2 class="result-h2">
-                <a class="ver3-result-info" href='#'>관련 정보 보기</a>
-                <span id="toc-toggle" onclick="openCloseToc()">관련 영상 보기</span>
-                <a class="ver3-result-hotel" href="#">숙소 보러 가기</a>
-                <div id="toc-content">
-                    <video id="result0" class="video-js vjs-default-skin vjs-big-play-centered" controls preload="none"
-                        style="width:50vw; height:55vh; margin:0 auto; display:block" crossorigin="anonymous">
-                        <source src="/static/md/{{result.0}}.webm" type="video/webm" />
-                        <source src="/static/md/{{result.0}}.mp4" type="video/mp4" />
-                        <p class="vjs-no-js">
-                            To view this video please enable JavaScript, and consider upgrading to
-                            a web browser that <a href="http://videojs.com/html5-video-support/"
-                                target="_blank">supports HTML5 video</a>
-                        </p>
-
-                        <script>
-                            videojs('result0', {
-                                plugins: {
-                                    pannellum: {}
-                                }
-                            });
-                        </script>
-                    </video>
-                </div>
-            </h2>
-        </div>
-
-        <div class="ver3-result-contain">
-            <div>
                 <h1>두 번째 추천 여행지는 {{ result.1 }} 입니다.</h1>
             </div>
-            <img src="static/mg/place/{{ result.1 }}.jfif" alt="사진은 수집중입니다😢">
-            <h2 class="result-h2"><a class="ver3-result-info" href='#'>관련 정보 더 보기</a><span id="toc-toggle1"
-                    onclick="openCloseToc1()">관련 영상 보기</span><a class="ver3-result-hotel" href="#">숙소 보러 가기</a>
-                <div id="toc-content1">
-                    <video id="result1" class="video-js vjs-default-skin vjs-big-play-centered" controls preload="none"
-                        style="width:50vw; height:55vh; margin:0 auto; display:block" crossorigin="anonymous">
-                        <source src="/static/md/{{result.1}}.webm" type="video/webm" />
-                        <source src="/static/md/{{result.1}}.mp4" type="video/mp4" />
-                        <p class="vjs-no-js">
-                            To view this video please enable JavaScript, and consider upgrading to
-                            a web browser that <a href="http://videojs.com/html5-video-support/"
-                                target="_blank">supports HTML5 video</a>
-                        </p>
+            <img class="result-img" src="static/mg/{{ result.1 }}.jfif" alt="사진은 수집중입니다😢">
+            <h2 class="result-h2"><a class="ver3-result-info" href='#'>관련 정보 보기</a><span id="toc-toggle5" onclick="openCloseToc5()">관련 영상 보기</span><span class="ver3-result-hotel" id="toc-toggle12" onclick="openCloseToc12()">숙소 보러 가기</span>
+            <div id="toc-content5">
+                <video id="result1" class="video-js vjs-default-skin vjs-big-play-centered"
+                controls preload="none" style="width:50vw; height:55vh; margin:0 auto; display:block;"
+                crossorigin="anonymous">
+                    <source src="/static/md/{{result.1}}.webm" type="video/webm"/>
+                    <source src="/static/md/{{result.1}}.mp4" type="video/mp4"/>
+                    <p class="vjs-no-js">
+                        To view this video please enable JavaScript, and consider upgrading to
+                        a web browser that <a href="http://videojs.com/html5-video-support/"
+                        target="_blank">supports HTML5 video</a>
+                    </p>
 
-                        <script>
-                            videojs('result1', {
-                                plugins: {
-                                    pannellum: {}
-                                }
-                            });
-                        </script>
-                    </video>
+                </video>
+                </div></h2>
+
+                <script>
+                videojs('result1', {
+                    plugins: {
+                        pannellum: {}
+                    }
+                });
+                
+                </script>
+            </div>
+            <div id="toc-content12">
+                <p>
+                    {% if hotels1.count > 0 %}
+                    {% for a in hotels1 %}
+                <div class="hotel-contain">
+                    <div class="hotel-contain-left">
+                        <a href='{{a.url}}'><img class="hotel-img"src="static/mg/hotel/{{ a.name }}.jpg" alt="사진은 수집중입니다😢"></a><br><br>
+                    </div>
+                    <div class="hotel-contain-right">
+                        <h1>{{a.name}}</h1><div class="classfication">{{a.classfications}}</div>
+                        <p class="rate-and-review">👍{{a.rating}} ✍리뷰{{a.review}}</p>
+                        <div class="hotel-cost">{{a.cost}}</div> 
+                        <div class="hotel-book">예약하기</div>
+                    </div>
+                    <hr width="70%">
                 </div>
-            </h2>
+                {% endfor %}
+                {% endif %}
+                </p>
+            </div>
         </div>
+    </div>
 
+    <div class="ver3-wrapper">
         <div class="ver3-result-contain">
             <div>
                 <h1>세 번째 추천 여행지는 {{ result.2 }} 입니다.</h1>
             </div>
-            <img src="static/mg/place/{{ result.2 }}.jfif" alt="사진은 수집중입니다😢">
-            <h2 class="result-h2"><a class="ver3-result-info" href='#'>관련 정보 더 보기</a><span id="toc-toggle2"
-                    onclick="openCloseToc2()">관련 영상 보기</span><a class="ver3-result-hotel" href="#">숙소 보러 가기</a>
-                <div id="toc-content2">
-                    <video id="result2" class="video-js vjs-default-skin vjs-big-play-centered" controls preload="none"
-                        style="width:50vw; height:55vh; margin:0 auto; display:block;" crossorigin="anonymous">
-                        <source src="/static/md/{{result.2}}.webm" type="video/webm" />
-                        <source src="/static/md/{{result.2}}.mp4" type="video/mp4" />
-                        <p class="vjs-no-js">
-                            To view this video please enable JavaScript, and consider upgrading to
-                            a web browser that <a href="http://videojs.com/html5-video-support/"
-                                target="_blank">supports HTML5 video</a>
-                        </p>
+            <img class="result-img" src="static/mg/{{ result.2 }}.jfif" alt="사진은 수집중입니다😢">
+            <h2 class="result-h2"><a class="ver3-result-info" href='#'>관련 정보 보기</a><span id="toc-toggle6" onclick="openCloseToc6()">관련 영상 보기</span><span class="ver3-result-hotel" id="toc-toggle13" onclick="openCloseToc13()">숙소 보러 가기</span>
+            <source src="/static/mg/{{ result.2 }}.mp4" alt="영상은 수집중입니다😢">
+            <div id="toc-content6">
+                <video id="result2" class="video-js vjs-default-skin vjs-big-play-centered"
+                controls preload="none" style="width:50vw; height:55vh; margin:0 auto; display:block;"
+                crossorigin="anonymous">
+                    <source src="/static/md/{{result.2}}.webm" type="video/webm"/>
+                    <source src="/static/md/{{result.2}}.mp4" type="video/mp4"/>
+                    <p class="vjs-no-js">
+                        To view this video please enable JavaScript, and consider upgrading to
+                        a web browser that <a href="http://videojs.com/html5-video-support/"
+                        target="_blank">supports HTML5 video</a>
+                    </p>
+                </video>
 
-                        <script>
-                            videojs('result2', {
-                                plugins: {
-                                    pannellum: {}
-                                }
-                            });
-                        </script>
-                    </video>
-                </div>
-        </div>
-
-        <div class="ver3-result-contain">
-            <div>
-                <h1>네 번째 추천 여행지는 {{ result.3 }} 입니다.</h1>
+                <script>
+                videojs('result2', {
+                    plugins: {
+                        pannellum: {}
+                    }
+                });
+                </script>
             </div>
-            <img src="static/mg/place/{{ result.3 }}.jfif" alt="사진은 수집중입니다😢">
-            <h2 class="result-h2"><a class="ver3-result-info" href='#'>관련 정보 더 보기</a><span id="toc-toggle3"
-                    onclick="openCloseToc3()">관련 영상 보기</span><a class="ver3-result-hotel" href="#">숙소 보러 가기</a>
-                <div id="toc-content3">
-                    <video id="result3" class="video-js vjs-default-skin vjs-big-play-centered" controls preload="none"
-                        style="width:50vw; height:55vh; margin:0 auto; display:block;" crossorigin="anonymous">
-                        <source src="/static/md/{{result.3}}.webm" type="video/webm" />
-                        <source src="/static/md/{{result.3}}.mp4" type="video/mp4" />
-                        <p class="vjs-no-js">
-                            To view this video please enable JavaScript, and consider upgrading to
-                            a web browser that <a href="http://videojs.com/html5-video-support/"
-                                target="_blank">supports HTML5 video</a>
-                        </p>
-
-                        <script>
-                            videojs('result3', {
-                                plugins: {
-                                    pannellum: {}
-                                }
-                            });
-                        </script>
-                    </video>
+            <div id="toc-content13">
+                <p>
+                    {% if hotels1.count > 0 %}
+                    {% for a in hotels1 %}
+                <div class="hotel-contain">
+                    <div class="hotel-contain-left">
+                        <a href='{{a.url}}'><img class="hotel-img"src="static/mg/hotel/{{ a.name }}.jpg" alt="사진은 수집중입니다😢"></a><br><br>
+                    </div>
+                    <div class="hotel-contain-right">
+                        <h1>{{a.name}}</h1><div class="classfication">{{a.classfications}}</div>
+                        <p class="rate-and-review">👍{{a.rating}} ✍리뷰{{a.review}}</p>
+                        <div class="hotel-cost">{{a.cost}}</div> 
+                        <div class="hotel-book">예약하기</div>
+                    </div>
+                    <hr width="70%">
                 </div>
-        </div>
-
-        <div class="ver3-result-contain">
-            <div>
-                <h1>다섯 번째 추천 여행지는 {{ result.4 }} 입니다.</h1>
+                {% endfor %}
+                {% endif %}
+                </p>
             </div>
-            <img src="static/mg/place/{{ result.4 }}.jfif" alt="사진은 수집중입니다😢">
-            <h2 class="result-h2"><a class="ver3-result-info" href='#'>관련 정보 더 보기</a><span id="toc-toggle3"
-                    onclick="openCloseToc3()">관련 영상 보기</span><a class="ver3-result-hotel" href="#">숙소 보러 가기</a>
-                <div id="toc-content3">
-                    <video id="result3" class="video-js vjs-default-skin vjs-big-play-centered" controls preload="none"
-                        style="width:50vw; height:55vh; margin:0 auto; display:block;" crossorigin="anonymous">
-                        <source src="/static/md/{{result.4}}.webm" type="video/webm" />
-                        <source src="/static/md/{{result.4}}.mp4" type="video/mp4" />
-                        <p class="vjs-no-js">
-                            To view this video please enable JavaScript, and consider upgrading to
-                            a web browser that <a href="http://videojs.com/html5-video-support/"
-                                target="_blank">supports HTML5 video</a>
-                        </p>
-
-                        <script>
-                            videojs('result4', {
-                                plugins: {
-                                    pannellum: {}
-                                }
-                            });
-                        </script>
-                    </video>
-                </div>
         </div>
     </div>
-
+</div>
 </body>
-
 </html>

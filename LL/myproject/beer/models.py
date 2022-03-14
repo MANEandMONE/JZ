@@ -146,10 +146,11 @@ class Restaurant(models.Model):
 
 
 class Result(models.Model):
+    index = models.IntegerField(blank=True, null=True)
     locate = models.CharField(primary_key=True, max_length=45)
     rating = models.FloatField(blank=True, null=True)
     review = models.TextField(blank=True, null=True)
-    classfifations = models.TextField(blank=True, null=True)
+    classfications = models.TextField(blank=True, null=True)
     address = models.TextField(blank=True, null=True)
     explain = models.TextField(blank=True, null=True)
     mood = models.TextField(blank=True, null=True)

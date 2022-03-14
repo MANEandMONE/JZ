@@ -7,6 +7,8 @@
     <!--    <link rel= "stylesheet" type="text/css" href="{% static 'css/ver1_result.css' %}">-->
 
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>추천 결과</title>
     <link rel="stylesheet" href="https://cdn.pannellum.org/2.5/pannellum.css" />
     <script type="text/javascript" src="https://cdn.pannellum.org/2.5/pannellum.js"></script>
@@ -18,7 +20,7 @@
         function openCloseToc() {
             if (document.getElementById('toc-content').style.display === 'block') {
                 document.getElementById('toc-content').style.display = 'none';
-                document.getElementById('toc-toggle').textContent = '관련 영상보기';
+                document.getElementById('toc-toggle').textContent = '관련 영상 보기';
             } else {
                 document.getElementById('toc-content').style.display = 'block';
                 document.getElementById('toc-toggle').textContent = '그만보기';
@@ -27,7 +29,7 @@
         function openCloseToc1() {
             if (document.getElementById('toc-content1').style.display === 'block') {
                 document.getElementById('toc-content1').style.display = 'none';
-                document.getElementById('toc-toggle1').textContent = '관련 영상보기';
+                document.getElementById('toc-toggle1').textContent = '관련 영상 보기';
             } else {
                 document.getElementById('toc-content1').style.display = 'block';
                 document.getElementById('toc-toggle1').textContent = '그만보기';
@@ -36,7 +38,7 @@
         function openCloseToc2() {
             if (document.getElementById('toc-content2').style.display === 'block') {
                 document.getElementById('toc-content2').style.display = 'none';
-                document.getElementById('toc-toggle2').textContent = '관련 영상보기';
+                document.getElementById('toc-toggle2').textContent = '관련 영상 보기';
             } else {
                 document.getElementById('toc-content2').style.display = 'block';
                 document.getElementById('toc-toggle2').textContent = '그만보기';
@@ -45,28 +47,54 @@
         function openCloseToc3() {
             if (document.getElementById('toc-content3').style.display === 'block') {
                 document.getElementById('toc-content3').style.display = 'none';
-                document.getElementById('toc-toggle3').textContent = '관련 영상보기';
+                document.getElementById('toc-toggle3').textContent = '관련 영상 보기';
             } else {
                 document.getElementById('toc-content3').style.display = 'block';
                 document.getElementById('toc-toggle3').textContent = '그만보기';
             }
         }
+        function openCloseToc7() {
+            if (document.getElementById('toc-content7').style.display === 'block') {
+                document.getElementById('toc-content7').style.display = 'none';
+                document.getElementById('toc-toggle7').textContent = '숙소 보러 가기';
+            } else {
+                document.getElementById('toc-content7').style.display = 'block';
+                document.getElementById('toc-toggle7').textContent = '그만보기';
+            }
+        }
+        function openCloseToc8() {
+            if (document.getElementById('toc-content8').style.display === 'block') {
+                document.getElementById('toc-content8').style.display = 'none';
+                document.getElementById('toc-toggle8').textContent = '숙소 보러 가기';
+            } else {
+                document.getElementById('toc-content8').style.display = 'block';
+                document.getElementById('toc-toggle8').textContent = '그만보기';
+            }
+        }
+        function openCloseToc9() {
+            if (document.getElementById('toc-content9').style.display === 'block') {
+                document.getElementById('toc-content9').style.display = 'none';
+                document.getElementById('toc-toggle9').textContent = '숙소 보러 가기';
+            } else {
+                document.getElementById('toc-content9').style.display = 'block';
+                document.getElementById('toc-toggle9').textContent = '그만보기';
+            }
+        }
+        function openCloseToc10() {
+            if (document.getElementById('toc-content10').style.display === 'block') {
+                document.getElementById('toc-content10').style.display = 'none';
+                document.getElementById('toc-toggle10').textContent = '숙소 보러 가기';
+            } else {
+                document.getElementById('toc-content10').style.display = 'block';
+                document.getElementById('toc-toggle10').textContent = '그만보기';
+            }
+        }
+
     </script>
     <link rel="stylesheet" href={% static 'css/style.css' %}>
     <link rel="stylesheet" href={% static 'css/reset.css' %}>
     <link rel="stylesheet" href={% static 'css/toggle.css' %}>
     <style>
-        img {
-            border: 1px solid 1px;
-            border-radius: 3vw;
-            display: inline-block;
-            text-align: center;
-            min-width: 40%;
-            min-height: 40%;
-            max-width: 40%;
-            max-height: 40%;
-        }
-
         h1 {
             color: #000;
             font-family: "jua";
@@ -92,13 +120,12 @@
     <div class="ver3-wrapper">
         <div class="ver3-result-contain">
             <div>
-                <h1>첫 번째 추천 여행지는 {{ result.0 }} 입니다.</h1>
+                <h1>첫 번째 추천 여행지는 {{ result.0 }}입니다.</h1>
             </div>
-            <img src="static/mg/place/{{ result.0 }}.jfif" alt="사진은 수집중입니다😢">
-            <h2 class="result-h2">
-                <a class="ver3-result-info" href='#'>관련 정보 보기</a>
-                <span id="toc-toggle" onclick="openCloseToc()">관련 영상 보기</span>
-                <a class="ver3-result-hotel" href="#">숙소 보러 가기</a>
+            <img class="result-img" src="static/mg/place/{{ result.0 }}.jfif" alt="사진은 수집중입니다😢">
+            <h2 class="result-h2"><a class="ver3-result-info" href='#'>맛집 정보 보기</a><span id="toc-toggle"
+                    onclick="openCloseToc()">관련 영상 보기</span><span class="ver3-result-hotel" id="toc-toggle7"
+                    onclick="openCloseToc7()">숙소 보러 가기</span>
                 <div id="toc-content">
                     <video id="result0" class="video-js vjs-default-skin vjs-big-play-centered" controls preload="none"
                         style="width:50vw; height:55vh; margin:0 auto; display:block" crossorigin="anonymous">
@@ -116,19 +143,43 @@
                                     pannellum: {}
                                 }
                             });
+
                         </script>
                     </video>
                 </div>
             </h2>
+            <div id="toc-content7">
+                <p>
+                    {% if hotels1.count > 0 %}
+                    {% for a in hotels1 %}
+                <div class="hotel-contain">
+                    <div class="hotel-contain-left">
+                        <a href='{{a.url}}'><img class="hotel-img" src="static/mg/hotel/{{ a.name }}.jpg"
+                                alt="사진은 수집중입니다😢"></a><br><br>
+                    </div>
+                    <div class="hotel-contain-right">
+                        <h1>{{a.name}}</h1>
+                        <div class="classfication">{{a.classfications}}</div>
+                        <p class="rate-and-review">👍{{a.rating}} ✍리뷰{{a.review}}</p>
+                        <div class="hotel-cost">{{a.cost}}</div>
+                        <div class="hotel-book">예약하기</div>
+                    </div>
+                    <hr width="70%">
+                </div>
+                {% endfor %}
+                {% endif %}
+                </p>
+            </div>
 
         </div>
         <div class="ver3-result-contain">
             <div>
                 <h1>두 번째 추천 여행지는 {{ result.1 }} 입니다.</h1>
             </div>
-            <img src="static/mg/place/{{ result.1 }}.jfif" alt="사진은 수집중입니다😢">
-            <h2 class="result-h2"><a class="ver3-result-info" href='#'>관련 정보 더 보기</a><span id="toc-toggle1"
-                    onclick="openCloseToc1()">관련 영상 보기</span><a class="ver3-result-hotel" href="#">숙소 보러 가기</a>
+            <img class="result-img" src="static/mg/place/{{ result.1 }}.jfif" alt="사진은 수집중입니다😢">
+            <h2 class="result-h2"><a class="ver3-result-info" href='#'>맛집 정보 더 보기</a><span id="toc-toggle1"
+                    onclick="openCloseToc1()">관련 영상 보기</span><span class="ver3-result-hotel" id="toc-toggle8"
+                    onclick="openCloseToc8()">숙소 보러 가기</span>
                 <div id="toc-content1">
                     <video id="result1" class="video-js vjs-default-skin vjs-big-play-centered" controls preload="none"
                         style="width:50vw; height:55vh; margin:0 auto; display:block" crossorigin="anonymous">
@@ -146,19 +197,43 @@
                                     pannellum: {}
                                 }
                             });
+
                         </script>
                     </video>
                 </div>
             </h2>
+            <div id="toc-content8">
+                <p>
+                    {% if hotels2.count > 0 %}
+                    {% for a in hotels2 %}
+                <div class="hotel-contain">
+                    <div class="hotel-contain-left">
+                        <a href='{{a.url}}'><img class="hotel-img" src="static/mg/hotel/{{ a.name }}.jpg"
+                                alt="사진은 수집중입니다😢"></a><br><br>
+                    </div>
+                    <div class="hotel-contain-right">
+                        <h1>{{a.name}}</h1>
+                        <div class="classfication">{{a.classfications}}</div>
+                        <p class="rate-and-review">👍{{a.rating}} ✍리뷰{{a.review}}</p>
+                        <div class="hotel-cost">{{a.cost}}</div>
+                        <div class="hotel-book">예약하기</div>
+                    </div>
+                    <hr width="70%">
+                </div>
+                {% endfor %}
+                {% endif %}
+                </p>
+            </div>
         </div>
 
         <div class="ver3-result-contain">
             <div>
                 <h1>세 번째 추천 여행지는 {{ result.2 }} 입니다.</h1>
             </div>
-            <img src="static/mg/place/{{ result.2 }}.jfif" alt="사진은 수집중입니다😢">
-            <h2 class="result-h2"><a class="ver3-result-info" href='#'>관련 정보 더 보기</a><span id="toc-toggle2"
-                    onclick="openCloseToc2()">관련 영상 보기</span><a class="ver3-result-hotel" href="#">숙소 보러 가기</a>
+            <img class="result-img" src="static/mg/place/{{ result.2 }}.jfif" alt="사진은 수집중입니다😢">
+            <h2 class="result-h2"><a class="ver3-result-info" href='#'>맛집 정보 더 보기</a><span id="toc-toggle2"
+                    onclick="openCloseToc2()">관련 영상 보기</span><span class="ver3-result-hotel" id="toc-toggle9"
+                    onclick="openCloseToc9()">숙소 보러 가기</span>
                 <div id="toc-content2">
                     <video id="result2" class="video-js vjs-default-skin vjs-big-play-centered" controls preload="none"
                         style="width:50vw; height:55vh; margin:0 auto; display:block;" crossorigin="anonymous">
@@ -176,18 +251,41 @@
                                     pannellum: {}
                                 }
                             });
+
                         </script>
                     </video>
                 </div>
+                <div id="toc-content9">
+                    <p>
+                        {% if hotels3.count > 0 %}
+                        {% for a in hotels3 %}
+                    <div class="hotel-contain">
+                        <div class="hotel-contain-left">
+                            <a href='{{a.url}}'><img class="hotel-img" src="static/mg/hotel/{{ a.name }}.jpg"
+                                    alt="사진은 수집중입니다😢"></a><br><br>
+                        </div>
+                        <div class="hotel-contain-right">
+                            <h1>{{a.name}}</h1>
+                            <div class="classfication">{{a.classfications}}</div>
+                            <p class="rate-and-review">👍{{a.rating}} ✍리뷰{{a.review}}</p>
+                            <div class="hotel-cost">{{a.cost}}</div>
+                            <div class="hotel-book">예약하기</div>
+                        </div>
+                        <hr width="70%">
+                    </div>
+                    {% endfor %}
+                    {% endif %}
+                    </p>
+                </div>
         </div>
-
         <div class="ver3-result-contain">
             <div>
                 <h1>네 번째 추천 여행지는 {{ result.3 }} 입니다.</h1>
             </div>
-            <img src="static/mg/place/{{ result.3 }}.jfif" alt="사진은 수집중입니다😢">
-            <h2 class="result-h2"><a class="ver3-result-info" href='#'>관련 정보 더 보기</a><span id="toc-toggle3"
-                    onclick="openCloseToc3()">관련 영상 보기</span><a class="ver3-result-hotel" href="#">숙소 보러 가기</a>
+            <img class="result-img" src="static/mg/place/{{ result.3 }}.jfif" alt="사진은 수집중입니다😢">
+            <h2 class="result-h2"><a class="ver3-result-info" href='#'>맛집 정보 더 보기</a><span id="toc-toggle3"
+                    onclick="openCloseToc3()">관련 영상 보기</span><span class="ver3-result-hotel" id="toc-toggle10"
+                    onclick="openCloseToc10()">숙소 보러 가기</span>
                 <div id="toc-content3">
                     <video id="result3" class="video-js vjs-default-skin vjs-big-play-centered" controls preload="none"
                         style="width:50vw; height:55vh; margin:0 auto; display:block;" crossorigin="anonymous">
@@ -205,38 +303,31 @@
                                     pannellum: {}
                                 }
                             });
+
                         </script>
                     </video>
                 </div>
-        </div>
-
-        <div class="ver3-result-contain">
-            <div>
-                <h1>다섯 번째 추천 여행지는 {{ result.4 }} 입니다.</h1>
-            </div>
-            <img src="static/mg/place/{{ result.4 }}.jfif" alt="사진은 수집중입니다😢">
-            <h2 class="result-h2"><a class="ver3-result-info" href='#'>관련 정보 더 보기</a><span id="toc-toggle3"
-                    onclick="openCloseToc3()">관련 영상 보기</span><a class="ver3-result-hotel" href="#">숙소 보러 가기</a>
-                <div id="toc-content3">
-                    <video id="result3" class="video-js vjs-default-skin vjs-big-play-centered" controls preload="none"
-                        style="width:50vw; height:55vh; margin:0 auto; display:block;" crossorigin="anonymous">
-                        <source src="/static/md/{{result.4}}.webm" type="video/webm" />
-                        <source src="/static/md/{{result.4}}.mp4" type="video/mp4" />
-                        <p class="vjs-no-js">
-                            To view this video please enable JavaScript, and consider upgrading to
-                            a web browser that <a href="http://videojs.com/html5-video-support/"
-                                target="_blank">supports
-                                HTML5 video</a>
-                        </p>
-
-                        <script>
-                            videojs('result4', {
-                                plugins: {
-                                    pannellum: {}
-                                }
-                            });
-                        </script>
-                    </video>
+                <div id="toc-content10">
+                    <p>
+                        {% if hotels4.count > 0 %}
+                        {% for a in hotels4 %}
+                    <div class="hotel-contain">
+                        <div class="hotel-contain-left">
+                            <a href='{{a.url}}'><img class="hotel-img" src="static/mg/hotel/{{ a.name }}.jpg"
+                                    alt="사진은 수집중입니다😢"></a><br><br>
+                        </div>
+                        <div class="hotel-contain-right">
+                            <h1>{{a.name}}</h1>
+                            <div class="classfication">{{a.classfications}}</div>
+                            <p class="rate-and-review">👍{{a.rating}} ✍리뷰{{a.review}}</p>
+                            <div class="hotel-cost">{{a.cost}}</div>
+                            <div class="hotel-book">예약하기</div>
+                        </div>
+                        <hr width="70%">
+                    </div>
+                    {% endfor %}
+                    {% endif %}
+                    </p>
                 </div>
         </div>
     </div>

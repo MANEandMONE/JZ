@@ -259,9 +259,7 @@ nav a:nth-child(3):hover ~ #indicator
     float: left;
     width: 16vw;
 }
-.ver3-human{
-    
-}
+
 .ver3-human-span {
     font-size: 1.5vw;
 }
@@ -312,9 +310,6 @@ nav a:nth-child(3):hover ~ #indicator
 }
 
 
-#result0 {
-    /* display: block; */
-}
 .ver3-result-info {
     display: inline-block;
     font-family: "jua";
@@ -342,4 +337,82 @@ nav a:nth-child(3):hover ~ #indicator
 }
 .result-h2{
     margin-top: 1%;
+}
+.hotel-img {
+    width: 25vw;
+    height: 45vh;
+    border-radius: 0.5vw;
+    margin-right: 1vw;
+}
+
+.hotel-contain {
+    display: inline-block;
+    width: 62vw;
+    height: 52vh;
+    position: relative;
+}
+.hotel-contain-left {
+    padding-top: 3.5vh;
+    width: 42%;
+    background: #e9ecef;
+    height: 100%;
+    float: left;
+    box-sizing: border-box;
+    background-size: fill;
+    text-align: right;
+    
+}
+
+.hotel-contain-right {
+    padding-top: 4.5vh;
+    width: 58%;
+    background: #e9ecef;
+    height: 100%;
+    float: right;
+    box-sizing: border-box;
+    text-align: left;
+}
+.classfication {
+    color: #D82148;
+    font-size: 1.6vw;
+    margin-bottom: 2%;
+}
+.rate-and-review {
+    font-size: 1vw;
+    font-weight: bold;
+}
+.hotel-cost {
+    font-size: 2.5vw;
+    font-weight: bold;
+    text-align: right;
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+    padding-bottom: 9vh;
+}
+
+.result-img {
+    border:1px solid 1px;
+    border-radius: 3vw;
+    display: inline-block;
+    text-align:center;
+    width:45vw;
+    height:70vh;
+}
+.hotel-book {
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+    background-color: #1C658C;
+    width:7vw;
+    height: 5vh;
+    border-radius: 0.5vw;
+    color: #EFFFFD;
+    font-size: 1.5vw;
+    font-family: "jua";
+    text-align: center;
+    box-sizing: border-box;
+    padding-top: 1%;
+    margin-bottom: 3vh;
+    cursor: pointer;
 }

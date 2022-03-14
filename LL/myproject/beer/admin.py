@@ -16,8 +16,9 @@ class RestaurantAdmin(admin.ModelAdmin):
 
 
 class ResultAdmin(admin.ModelAdmin):
-    list_displat = ('locate', 'rating', 'review', 'rating', 'classfications',
-                    'address', 'explain', 'mood', 'topic', 'reason', 'Cluster')
+    list_display = ('index', 'locate', 'rating', 'review', 'rating',
+                    'classfications', 'address', 'explain', 'mood', 'topic',
+                    'reason', 'cluster')
 
 
 admin.site.register(Hotel, HotelAdmin)
