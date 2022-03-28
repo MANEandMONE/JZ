@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 import json
 
 from django.http import HttpResponse, request, response
@@ -6,7 +6,8 @@ from django.contrib.auth.hashers import make_password
 
 from django.contrib.auth.models import User
 from django.contrib import auth
-
+from argon2 import PasswordHasher
+from .forms import RegisterForm
 # from .models import User
 import pandas as pd
 import numpy as np
@@ -20,6 +21,32 @@ from rest_framework import viewsets
 import csv
 import random
 from .models import *
+
+
+def register(request):
+    register_form = RegisterForm()
+    context = {'forms': register_form}
+
+    if request.method == 'GET':
+        return render(request, 'beer/register.html', context)
+
+    elif request.method == 'POST':
+        register_form = RegisterForm(request.POST)
+        if register_form.is_valid():
+            user = User(
+                user_id=register_form.user_id,
+                user_pw=register_form.user_pw,
+                user_name=register_form.user_name,
+                user_email=register_form.user_email,
+            )
+            user.save()
+            return redirect('/')
+        else:
+            context['forms'] = register_form
+            if register_form.errors:
+                for value in register_form.errors.values():
+                    context['error'] = value
+        return render(requset, 'beer/index.html', context)
 
 
 def signup(request):
@@ -65,6 +92,30 @@ def login(request):
 def logout(request):
     auth.logout(request)
     return redirect('')
+
+
+def clean(self):
+    cleaned_data = super().clean()
+
+    user_id = cleaned_data.get('user_id', '')
+    user_pw = cleaned_data.get('user_pw', '')
+
+    if user_id == '':
+        return self.add_error('user_id', '아이디를 다시 입력해 주세요')
+    elif user_pw == '':
+        return self.add_error('user_pw', '비밀번호를 다시 입력해 주세요.')
+    else:
+        try:
+            user = User.objects.get(user_id=user_id)
+        except User.DoesNotExist:
+            return self.add_error('user_id', '아이디가 존재하지 않습니다.')
+
+        try:
+            PasswordHasher().verify(user.user_pw, user_pw)
+        except exceptions.VerifyMismatchError:
+            return self.add_error('user_pw', '비밀번호가 다릅니다.')
+
+        self.login_session = user_user_id
 
 
 warnings.filterwarnings('ignore')

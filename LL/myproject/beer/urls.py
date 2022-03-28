@@ -9,6 +9,7 @@ urlpatterns = [
     path('signup', views.signup, name='signup'),
     path('login', views.login, name='login'),
     path('logout', views.logout, name='logout'),
+    path('register', views.register, name='register')
     # path('vr0', views.vr0, name='vr0')
     # path('result1', views.result1, name = 'result1')
     # 회원가입

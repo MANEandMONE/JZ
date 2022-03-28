@@ -32,5 +32,4 @@ urlpatterns = [
     path('', include('beer.urls')),
     # path('', include('register.urls')),
     # path('', HomeTemplateView.as_view(), name='home'),
-    # path('accounts/', include('accounts.urls'))
 ]
