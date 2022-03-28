@@ -21,6 +21,11 @@ class ResultAdmin(admin.ModelAdmin):
                     'reason', 'cluster')
 
 
+@admin.register(User)
+class UserAdmin(admin.ModelAdmin):
+    list_display = ('user_id', 'user_pw', 'user_email', 'user_register_dttm')
+
+
 admin.site.register(Hotel, HotelAdmin)
 
 admin.site.register(Restaurant, RestaurantAdmin)

@@ -3,6 +3,10 @@ import json
 
 from django.http import HttpResponse, request, response
 from django.contrib.auth.hashers import make_password
+
+from django.contrib.auth.models import User
+from django.contrib import auth
+
 # from .models import User
 import pandas as pd
 import numpy as np
@@ -16,24 +20,53 @@ from rest_framework import viewsets
 import csv
 import random
 from .models import *
-# def register(request):   #회원가입 페이지를 보여주기 위한 함수
-#     if request.method == "GET" :
-#         return render(request, 'beer/register.html') #register를 요청받으면 register.html 로 응답
 
-#     elif request.method == "POST":
-#         username = request.POST.get('username',None)   #딕셔너리형태
-#         password = request.POST.get('password',None)
-#         re_password = request.POST.get('re_password',None)
-#         res_data = {}
-#         if not (username and password and re_password) :
-#             res_data['error'] = "모든 값을 입력해야 합니다."
-#         if password != re_password :
-#             # return HttpResponse('비밀번호가 다릅니다.')
-#             res_data['error'] = '비밀번호가 다릅니다.'
-#         else :
-#             user = User(username=username, password=make_password(password))
-#             user.save()
-#         return render(request, 'beer/register.html', res_data) #register를 요청받으면 register.html 로 응답.
+
+def signup(request):
+    if request.method == "GET":
+        return render(request, 'beer/signup.html')
+
+    if request.method == "POST":
+        user_id = request.POST.get('id', '')
+        user_pw = request.POST.get('pw', '')
+        user_pw_confirm = request.POST.get('pw-confirm', '')
+        user_name = request.POST.get('name', '')
+        user_email = request.POST.get('email', '')
+
+        if (user_id or user_pw or user_pw_confirm or user_name
+                or user_email) == '':
+            return redirect('/beer/signup')
+        elif user_pw != user_pw_confirm:
+            return redirect('/beer/signup')
+        else:
+            user = User(user_id=user_id,
+                        user_pw=user_pw,
+                        user_name=user_name,
+                        user_email=user_email)
+            user.save()
+        return redirect('')
+
+
+def login(request):
+    if request.method == "POST":
+        username = request.POST['username']
+        password = request.POST['password']
+        user = auth.authenticate(requst, username=username, password=password)
+        if user is not None:
+            auth.login(reqest, user)
+            return redirect('')
+        else:
+            return render(request, 'beer/loginhtml',
+                          {'error': 'user or password is incorrenct'})
+    else:
+        return render(request, 'beer/login.html')
+
+
+def logout(request):
+    auth.logout(request)
+    return redirect('')
+
+
 warnings.filterwarnings('ignore')
 
 # Viewset API Set

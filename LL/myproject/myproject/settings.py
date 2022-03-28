@@ -24,7 +24,9 @@ SECRET_KEY = 'yjsboo+%m=w*jrh)-ec%gm#+*b@#q57@-4(!p@d1l4ndkx1s+6'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['192.168.35.131', 'localhost', '']
+ALLOWED_HOSTS = ['172.31.4.186', 'localhost']
+
+# '192.168.35.131',
 
 # Application definition
 
@@ -36,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'beer',
+    # 'register',
     'bootstrap4',
     'rest_framework',
     'corsheaders',
@@ -155,7 +158,7 @@ ROOT_DIR = os.path.dirname(BASE_DIR)
 
 STATIC_DIR = os.path.join(BASE_DIR, 'beer/static')
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'frontend', 'build', 'static')
+    os.path.join(BASE_DIR, 'static')
     # STATIC_DIR,
     # "static",
 ]

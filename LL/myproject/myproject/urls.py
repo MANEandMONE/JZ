@@ -21,6 +21,7 @@ from django.conf.urls import include
 # API viewset
 from rest_framework import routers
 from beer import views
+# from register import views
 # from django.views.generic import ProductView
 
 # class HomeTemplateView(ProductView):
@@ -29,6 +30,7 @@ from beer import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('beer.urls')),
+    # path('', include('register.urls')),
     # path('', HomeTemplateView.as_view(), name='home'),
     # path('accounts/', include('accounts.urls'))
 ]

@@ -416,3 +416,30 @@ nav a:nth-child(3):hover ~ #indicator
     margin-bottom: 3vh;
     cursor: pointer;
 }
+
+.rate-and-address {
+    font-size: 1vw;
+    font-weight: bold;
+}
+.restaurant-hour {
+    font-size: 1vw;
+    font-weight: bold;
+    padding-top: 1%;
+}
+.restaurant-book {
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+    background-color: #1C658C;
+    width:7vw;
+    height: 5vh;
+    border-radius: 0.5vw;
+    color: #EFFFFD;
+    font-size: 1.5vw;
+    font-family: "jua";
+    text-align: center;
+    box-sizing: border-box;
+    padding-top: 1%;
+    margin-bottom: 3vh;
+    cursor: pointer;
+}
