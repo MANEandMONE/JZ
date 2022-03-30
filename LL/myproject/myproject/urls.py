@@ -14,10 +14,12 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import path
 from django.conf import settings
 from django.conf.urls.static import static
 from django.conf.urls import include
+from django.views.generic import RedirectView
+
 # API viewset
 from rest_framework import routers
 from beer import views
@@ -29,7 +31,10 @@ from beer import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('beer.urls')),
+    path('home/', include('home.urls')),
+    path('/', include('beer.urls')),
+    path('', RedirectView.as_view(url="/home", permanent=True)),
+    path('user/', include('user.urls'))
     # path('', include('register.urls')),
     # path('', HomeTemplateView.as_view(), name='home'),
 ]

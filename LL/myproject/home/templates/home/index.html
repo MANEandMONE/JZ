@@ -1,0 +1,57 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+        integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap-theme.min.css"
+        integrity="sha384-6pzBo3FDv/PJ8r2KRkGHifhEocL+1X2rVCTTkUfGk7/0pbek5mMa1upzvWbrUbOZ" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"
+        integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href={% static 'css/style.css' %}>
+    <link rel="stylesheet" href={% static 'css/reset.css' %}>
+    <meta charset="UTF-8">
+    <title>너와나드리</title>
+    <style>
+        body {
+            background-color: #f8f8ff;
+        }
+
+        div {
+            text-align: center;
+        }
+
+        h1 {
+            text-align: center
+        }
+    </style>
+</head>
+
+<body>
+    <div class="nav-comtain">
+        <nav>
+            <a href="/">HOME</a>
+            <a href="{% url 'ver1'%}">EXPERIENCE</a>
+            <a href="{% url 'ver3'%}">THEME</a>
+            {% if login_session%}
+            <a href="{% url 'user:logout' %}"><button>로그아웃</button></a>
+            {% else %}
+            <a href="{% url 'user:login' %}"><button>로그인</button></a>
+            <a href="{% url 'user:register' %}"><button>회원가입</button></a>
+            {% endif %}
+            <div id="indicator"></div>
+        </nav>
+    </div>
+    <br />
+    <div class="header">
+        <a class="header-a" onclick="location.href='/'">너와 나드리</a>
+    </div>
+    <div id="recommendation">
+        <a class="recommendation-ver1" href="{% url 'ver1'%}">1. 경험으로 추천받기</a>
+        <a class="recommendation-ver3" href="{% url 'ver3'%}">2. 테마로 추천받기</a><br><br>
+    </div>
+</body>
+
+</html>

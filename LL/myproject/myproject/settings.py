@@ -38,6 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'beer',
+    'user',
+    'home',
     'bootstrap4',
     'rest_framework',
     'corsheaders',

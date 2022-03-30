@@ -1,5 +1,8 @@
 from django.shortcuts import render, redirect
-import json
+from django.db import transaction
+# import json
+
+from django.core.serializers.json import DjangoJSONEncoder
 
 from django.http import HttpResponse, request, response
 from django.contrib.auth.hashers import make_password
@@ -7,7 +10,7 @@ from django.contrib.auth.hashers import make_password
 from django.contrib.auth.models import User
 from django.contrib import auth
 from argon2 import PasswordHasher
-from .forms import RegisterForm
+from .forms import *
 # from .models import User
 import pandas as pd
 import numpy as np
@@ -21,106 +24,85 @@ from rest_framework import viewsets
 import csv
 import random
 from .models import *
+from user.models import User
 
+# # 회원가입
+# def register(request):
+#     register_form = RegisterForm()
+#     context = {'forms': register_form}
 
-def register(request):
-    register_form = RegisterForm()
-    context = {'forms': register_form}
+#     if request.method == 'GET':
+#         return render(request, 'beer/register.html', context)
 
-    if request.method == 'GET':
-        return render(request, 'beer/register.html', context)
+#     elif request.method == 'POST':
+#         register_form = RegisterForm(request.POST)
+#         if register_form.is_valid():
+#             user = User(user_id=register_form.user_id,
+#                         user_pw=register_form.user_pw,
+#                         user_name=register_form.user_name,
+#                         user_email=register_form.user_email)
+#             user.save()
+#             return redirect('/')
+#         else:
+#             context['forms'] = register_form
+#             if register_form.errors:
+#                 for value in register_form.errors.values():
+#                     context['error'] = value
+#         return render(request, 'beer/register.html', context)
 
-    elif request.method == 'POST':
-        register_form = RegisterForm(request.POST)
-        if register_form.is_valid():
-            user = User(
-                user_id=register_form.user_id,
-                user_pw=register_form.user_pw,
-                user_name=register_form.user_name,
-                user_email=register_form.user_email,
-            )
-            user.save()
-            return redirect('/')
-        else:
-            context['forms'] = register_form
-            if register_form.errors:
-                for value in register_form.errors.values():
-                    context['error'] = value
-        return render(requset, 'beer/index.html', context)
+# # 로그인 후 세션 데이터 저장
+# def login(request):
+#     loginform = LoginForm()
+#     context = {'forms': loginform}
 
+#     if request.method == 'GET':
+#         return render(request, 'beer/login.html', context)
 
-def signup(request):
-    if request.method == "GET":
-        return render(request, 'beer/signup.html')
+#     elif request.method == 'POST':
+#         loginform = LoginForm(request.POST)
 
-    if request.method == "POST":
-        user_id = request.POST.get('id', '')
-        user_pw = request.POST.get('pw', '')
-        user_pw_confirm = request.POST.get('pw-confirm', '')
-        user_name = request.POST.get('name', '')
-        user_email = request.POST.get('email', '')
+#         if loginform.is_valid():
+#             request.session['login_session'] = loginform.login_session
+#             request.session.set_expiry(0)
+#             return redirect('/')
+#         else:
+#             context['forms'] = loginform
+#             if loginform.errors:
+#                 for value in loginform.errors.values():
+#                     context['error'] = value
+#         return render(request, 'beer/login.html', context)
 
-        if (user_id or user_pw or user_pw_confirm or user_name
-                or user_email) == '':
-            return redirect('/beer/signup')
-        elif user_pw != user_pw_confirm:
-            return redirect('/beer/signup')
-        else:
-            user = User(user_id=user_id,
-                        user_pw=user_pw,
-                        user_name=user_name,
-                        user_email=user_email)
-            user.save()
-        return redirect('')
+# # 로그아웃 후 세션 데이터 초기화
+# def logout(request):
+#     request.session.flush()
+#     return redirect('/')
 
+# # 세션 데이터에 로그인 정보가 있는지 확인
+# def hello(request):
+#     context = {}
 
-def login(request):
-    if request.method == "POST":
-        username = request.POST['username']
-        password = request.POST['password']
-        user = auth.authenticate(requst, username=username, password=password)
-        if user is not None:
-            auth.login(reqest, user)
-            return redirect('')
-        else:
-            return render(request, 'beer/loginhtml',
-                          {'error': 'user or password is incorrenct'})
-    else:
-        return render(request, 'beer/login.html')
+#     login_session = request.session.get('login_session', '')
 
+#     if login_session == '':
+#         context['login_session'] = False
+#     else:
+#         context['login_session'] = True
 
-def logout(request):
-    auth.logout(request)
-    return redirect('')
+#     return render(request, 'beer/index.html', context)
 
+# def login_required(func):
 
-def clean(self):
-    cleaned_data = super().clean()
+#     def wrapper(request, *args, **kwargs):
+#         login_session = request.session.get('login_session', '')
 
-    user_id = cleaned_data.get('user_id', '')
-    user_pw = cleaned_data.get('user_pw', '')
+#         if login_session == '':
+#             return redirect('/login/')
 
-    if user_id == '':
-        return self.add_error('user_id', '아이디를 다시 입력해 주세요')
-    elif user_pw == '':
-        return self.add_error('user_pw', '비밀번호를 다시 입력해 주세요.')
-    else:
-        try:
-            user = User.objects.get(user_id=user_id)
-        except User.DoesNotExist:
-            return self.add_error('user_id', '아이디가 존재하지 않습니다.')
+#         return func(request, *args, **kwargs)
 
-        try:
-            PasswordHasher().verify(user.user_pw, user_pw)
-        except exceptions.VerifyMismatchError:
-            return self.add_error('user_pw', '비밀번호가 다릅니다.')
-
-        self.login_session = user_user_id
-
+#     return wrapper
 
 warnings.filterwarnings('ignore')
-
-# Viewset API Set
 
 
 # 우리가 예측한 평점과 실제 평점간의 차이를 MSE로 계산
@@ -220,8 +202,8 @@ def recomm_detail(item_sim_df, detail):
     return item_sim_df[detail].sort_values(ascending=False)[0:10]
 
 
-def index(request):
-    return render(request, 'beer/index.html')
+# def index(request):
+#     return render(request, 'beer/index.html')
 
 
 def ver1(request):

@@ -54,8 +54,14 @@
     <div class="nav-comtain">
         <nav>
             <a href="/">HOME</a>
-            <a href="ver1">EXPERIENCE</a>
-            <a href="ver3">THEME</a>
+            <a href="{% url 'ver1'%}">EXPERIENCE</a>
+            <a href="{% url 'ver3'%}">THEME</a>
+            {% if login_session%}
+            <a href="{% url 'user:logout' %}"><button>로그아웃</button></a>
+            {% else %}
+            <a href="{% url 'user:login' %}"><button>로그인</button></a>
+            <a href="{% url 'user:register' %}"><button>회원가입</button></a>
+            {% endif %}
             <div id="indicator"></div>
         </nav>
     </div>
