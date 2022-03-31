@@ -5,12 +5,7 @@ from django.db import transaction
 from django.core.serializers.json import DjangoJSONEncoder
 
 from django.http import HttpResponse, request, response
-from django.contrib.auth.hashers import make_password
 
-from django.contrib.auth.models import User
-from django.contrib import auth
-from argon2 import PasswordHasher
-from .forms import *
 # from .models import User
 import pandas as pd
 import numpy as np
@@ -23,84 +18,8 @@ import warnings
 from rest_framework import viewsets
 import csv
 import random
+
 from .models import *
-from user.models import User
-
-# # 회원가입
-# def register(request):
-#     register_form = RegisterForm()
-#     context = {'forms': register_form}
-
-#     if request.method == 'GET':
-#         return render(request, 'beer/register.html', context)
-
-#     elif request.method == 'POST':
-#         register_form = RegisterForm(request.POST)
-#         if register_form.is_valid():
-#             user = User(user_id=register_form.user_id,
-#                         user_pw=register_form.user_pw,
-#                         user_name=register_form.user_name,
-#                         user_email=register_form.user_email)
-#             user.save()
-#             return redirect('/')
-#         else:
-#             context['forms'] = register_form
-#             if register_form.errors:
-#                 for value in register_form.errors.values():
-#                     context['error'] = value
-#         return render(request, 'beer/register.html', context)
-
-# # 로그인 후 세션 데이터 저장
-# def login(request):
-#     loginform = LoginForm()
-#     context = {'forms': loginform}
-
-#     if request.method == 'GET':
-#         return render(request, 'beer/login.html', context)
-
-#     elif request.method == 'POST':
-#         loginform = LoginForm(request.POST)
-
-#         if loginform.is_valid():
-#             request.session['login_session'] = loginform.login_session
-#             request.session.set_expiry(0)
-#             return redirect('/')
-#         else:
-#             context['forms'] = loginform
-#             if loginform.errors:
-#                 for value in loginform.errors.values():
-#                     context['error'] = value
-#         return render(request, 'beer/login.html', context)
-
-# # 로그아웃 후 세션 데이터 초기화
-# def logout(request):
-#     request.session.flush()
-#     return redirect('/')
-
-# # 세션 데이터에 로그인 정보가 있는지 확인
-# def hello(request):
-#     context = {}
-
-#     login_session = request.session.get('login_session', '')
-
-#     if login_session == '':
-#         context['login_session'] = False
-#     else:
-#         context['login_session'] = True
-
-#     return render(request, 'beer/index.html', context)
-
-# def login_required(func):
-
-#     def wrapper(request, *args, **kwargs):
-#         login_session = request.session.get('login_session', '')
-
-#         if login_session == '':
-#             return redirect('/login/')
-
-#         return func(request, *args, **kwargs)
-
-#     return wrapper
 
 warnings.filterwarnings('ignore')
 
