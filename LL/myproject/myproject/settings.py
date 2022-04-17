@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'beer',
     'user',
     'home',
+    # 'cart',
     'bootstrap4',
     'rest_framework',
     'corsheaders',
@@ -110,10 +111,10 @@ WSGI_APPLICATION = 'myproject.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'project',
+        'NAME': 'projects',
         'USER': 'root',
         'PASSWORD': '00000000',
-        'HOST': 'localhost',
+        'HOST': '127.0.0.1',
         'PORT': '3306',
     }
 }
@@ -158,6 +159,8 @@ USE_TZ = False
 ROOT_DIR = os.path.dirname(BASE_DIR)
 
 STATIC_DIR = os.path.join(BASE_DIR, 'beer/static')
+STATIC_DIR = os.path.join(BASE_DIR, 'user/static')
+STATIC_DIR = os.path.join(BASE_DIR, 'home/static')
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static')
     # STATIC_DIR,

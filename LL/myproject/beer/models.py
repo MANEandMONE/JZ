@@ -116,49 +116,39 @@ class DjangoSession(models.Model):
 
 class Hotel(models.Model):
     index = models.IntegerField(primary_key=True)
-    locate = models.TextField(blank=True, null=True)
-    name = models.TextField(blank=True, null=True)
+    place = models.CharField(max_length=45, blank=True, null=True)
+    name = models.CharField(max_length=255, blank=True, null=True)
     rating = models.FloatField(blank=True, null=True)
-    review = models.TextField(blank=True, null=True)
-    classfications = models.TextField(blank=True, null=True)
-    address = models.TextField(blank=True, null=True)
-    cost = models.TextField(blank=True, null=True)
+    distance = models.FloatField(blank=True, null=True)
+    cost = models.IntegerField(blank=True, null=True)
+    address = models.CharField(max_length=255, blank=True, null=True)
+    explain = models.TextField(blank=True, null=True)
+    kind = models.FloatField(blank=True, null=True)
+    clean = models.FloatField(blank=True, null=True)
+    conv = models.FloatField(blank=True, null=True)
     url = models.TextField(blank=True, null=True)
+    img = models.TextField(blank=True, null=True)
+    classfication = models.CharField(max_length=45, blank=True, null=True)
 
     class Meta:
         managed = False
         db_table = 'hotel'
 
 
-class Restaurant(models.Model):
+class Tour(models.Model):
     index = models.IntegerField(primary_key=True)
-    locate = models.TextField(blank=True, null=True)
-    name = models.TextField(blank=True, null=True)
-    rating = models.FloatField(blank=True, null=True)
-    classfications = models.TextField(blank=True, null=True)
-    address = models.TextField(blank=True, null=True)
-    hour = models.TextField(blank=True, null=True)
-    url = models.TextField(blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'restaurant'
-
-
-class Result(models.Model):
-    index = models.IntegerField(blank=True, null=True)
-    locate = models.CharField(primary_key=True, max_length=45)
+    place = models.CharField(max_length=45, blank=True, null=True)
     rating = models.FloatField(blank=True, null=True)
     review = models.TextField(blank=True, null=True)
-    classfications = models.TextField(blank=True, null=True)
-    address = models.TextField(blank=True, null=True)
-    explain = models.TextField(blank=True, null=True)
-    mood = models.TextField(blank=True, null=True)
-    topic = models.TextField(blank=True, null=True)
-    reason = models.TextField(blank=True, null=True)
+    classfications = models.CharField(max_length=45, blank=True, null=True)
+    address = models.CharField(max_length=255, blank=True, null=True)
+    explain = models.CharField(max_length=255, blank=True, null=True)
+    mood = models.CharField(max_length=255, blank=True, null=True)
+    topic = models.CharField(max_length=255, blank=True, null=True)
+    reason = models.CharField(max_length=255, blank=True, null=True)
     cluster = models.IntegerField(db_column='Cluster', blank=True,
                                   null=True)  # Field name made lowercase.
 
     class Meta:
         managed = False
-        db_table = 'result'
+        db_table = 'tour'

@@ -6,29 +6,23 @@ from .models import *
 
 
 class HotelAdmin(admin.ModelAdmin):
-    list_display = ('index', 'locate', 'name', 'rating', 'review',
-                    'classfications', 'address', 'cost', 'url')
+    list_display = ('index', 'place', 'name', 'rating', 'distance', 'cost',
+                    'address', 'explain', 'kind', 'clean', 'conv', 'url',
+                    'img', 'classfication')
 
 
-class RestaurantAdmin(admin.ModelAdmin):
-    list_display = ('index', 'locate', 'name', 'rating', 'classfications',
-                    'address', 'hour', 'url')
+# class RestaurantAdmin(admin.ModelAdmin):
+#     list_display = ('index', 'locate', 'name', 'rating', 'classfications',
+#                     'address', 'hour', 'url')
 
 
-class ResultAdmin(admin.ModelAdmin):
-    list_display = ('index', 'locate', 'rating', 'review', 'rating',
-                    'classfications', 'address', 'explain', 'mood', 'topic',
-                    'reason', 'cluster')
+class TourAdmin(admin.ModelAdmin):
+    list_display = ('index', 'place', 'rating', 'review', 'classfications',
+                    'address', 'explain', 'mood', 'topic', 'reason', 'cluster')
 
-
-# class UserAdmin(admin.ModelAdmin):
-#     list_display = ('user_id', 'user_pw', 'user_name', 'user_email',
-#                     'user_register_dttm')
 
 admin.site.register(Hotel, HotelAdmin)
 
-admin.site.register(Restaurant, RestaurantAdmin)
+# admin.site.register(Restaurant, RestaurantAdmin)
 
-admin.site.register(Result, ResultAdmin)
-
-# admin.site.register(User, UserAdmin)
+admin.site.register(Tour, TourAdmin)

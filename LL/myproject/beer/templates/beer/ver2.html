@@ -1,147 +1,184 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap-theme.min.css" integrity="sha384-6pzBo3FDv/PJ8r2KRkGHifhEocL+1X2rVCTTkUfGk7/0pbek5mMa1upzvWbrUbOZ" crossorigin="anonymous">
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
 
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+        integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap-theme.min.css"
+        integrity="sha384-6pzBo3FDv/PJ8r2KRkGHifhEocL+1X2rVCTTkUfGk7/0pbek5mMa1upzvWbrUbOZ" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"
+        integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href={% static 'css/style.css' %}>
+    <link rel="stylesheet" href={% static 'css/reset.css' %}>
     <meta charset="UTF-8">
-    <title>🍺Ver2)Recommendation</title>
+    <title>테마별 추천</title>
     <style>
-        h1 { text-align: center; color: white;}
+        h1 {
+            text-align: center;
+            color: white;
+        }
+
         img {
-            display: block; margin: 0px auto;
-            width:40%;
+            display: block;
+            margin: 0px auto;
+            width: 40%;
         }
+
         select {
-        width: 200px;
-        padding: .8em .5em;
-        border: 1px solid #999;
-        font-family: inherit;
-        background: url('arrow.jpg') no-repeat 95% 50%;
-        border-radius: 0px;
-        -webkit-appearance: none;
-        -moz-appearance: none;
-        appearance: none;
+            width: 200px;
+            padding: .5em .5em;
+            border: 1px solid #999;
+            font-family: inherit;
+            background: url('arrow.jpg') no-repeat 95% 50%;
+            border-radius: 0px;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
         }
+
         input[type=text] {
-            width : 190px;
-            height : 30px;
-            font-size : 20px;
+            width: 190px;
+            height: 30px;
+            font-size: 20px;
         }
-        #user {
-        }
-        body{
-            background-image:url("{% static 'mg/맥주배경.jpg' %}");
-            background-size:100% 200%;
+
+        body {
+            background-size: 100% 200%;
         }
     </style>
 </head>
+
 <body>
-
-<div style="background-color:#0d47a1;">
-    <h1>좋아하는 맥주와 평점을 선택해주세요.</h1>
-</div>
-
-<div style="text-align:center;">
-    아이디 : <input type="text" name="name" text-align="center"><br><br>
-</div>
-
-<img src="static/mg/Beer.jfif" alt="추천맥주">
-<div id="user">
-    <div style="text-align:center; margin:10px;">
-    <form method="POST">
-        {% csrf_token %}
-        <div style="float:left; margin:5px;">
-        맥주 :
-        <select name="beer1">
-            {% for tmp in beer_list %}
-                <option value='{{tmp}}'>{{tmp}}</option>
-            {% endfor %}
-        </select><br>
-        평점 :
-        <select name="rating1">
-            <option value=1>1</option>
-            <option value=2>2</option>
-            <option value=3 selected>3</option>
-            <option value=4>4</option>
-            <option value=5>5</option>
-        </select><br><br>
-        </div>
-
-        <div style="float:left; margin:5px;">
-        맥주 :
-        <select name="beer2">
-            {% for tmp in beer_list %}
-                <option value='{{tmp}}'>{{tmp}}</option>
-            {% endfor %}
-        </select><br>
-        평점 :
-        <select name="rating2">
-            <option value=1>1</option>
-            <option value=2>2</option>
-            <option value=3 selected>3</option>
-            <option value=4>4</option>
-            <option value=5>5</option>
-        </select><br><br>
-        </div>
-
-        <div style="float:left; margin:5px;">
-        맥주 :
-        <select name="beer3">
-            {% for tmp in beer_list %}
-                <option value='{{tmp}}'>{{tmp}}</option>
-            {% endfor %}
-        </select><br>
-        평점 :
-        <select name="rating3">
-            <option value=1>1</option>
-            <option value=2>2</option>
-            <option value=3 selected>3</option>
-            <option value=4>4</option>
-            <option value=5>5</option>
-        </select><br><br>
-        </div>
-
-        <div style="float:left; margin:5px;">
-        맥주 :
-        <select name="beer4">
-            {% for tmp in beer_list %}
-                <option value='{{tmp}}'>{{tmp}}</option>
-            {% endfor %}
-        </select><br>
-        평점 :
-        <select name="rating4">
-            <option value=1>1</option>
-            <option value=2>2</option>
-            <option value=3 selected>3</option>
-            <option value=4>4</option>
-            <option value=5>5</option>
-        </select><br><br>
-        </div>
-
-        <div style="float:left; margin:5px;">
-        맥주 :
-        <select name="beer5">
-            {% for tmp in beer_list %}
-                <option value='{{tmp}}'>{{tmp}}</option>
-            {% endfor %}
-        </select><br>
-        평점 :
-        <select name="rating5">
-            <option value=1>1</option>
-            <option value=2>2</option>
-            <option value=3 selected>3</option>
-            <option value=4>4</option>
-            <option value=5>5</option>
-        </select>
-        </div>
-            <br><br><br>
-        <input class="btn btn-success" type="submit" value="Pick!">
-    </form>
+    <div class="nav-comtain">
+        <nav>
+            <a href="/">HOME</a>
+            <a href="{% url 'ver1'%}">EXPERIENCE</a>
+            <a href="{% url 'ver3'%}">THEME</a>
+            {% if login_session%}
+            <a href="{% url 'user:logout' %}"><button>로그아웃</button></a>
+            {% else %}
+            <a href="{% url 'user:login' %}"><button>로그인</button></a>
+            <a href="{% url 'user:register' %}"><button>회원가입</button></a>
+            {% endif %}
+            <div id="indicator"></div>
+        </nav>
     </div>
-</div>
-</div>
+    <br />
+    <div class="header">
+        <a class="header-a" onclick="location.href='/'">너와 나드리</a>
+    </div>
+    <div class="ver3-contain">
+        <form class="ver3-form" method="POST">
+            <div class="ver3-select">
+                <div class="ver3-destination">
+                    <span class="ver3-destination-span">목적지</span><br />
+                    <select class="ver3-destination-detail">
+                        <option class="optionbox" value='' selected>선택</option>
+                        <option class="optionbox" value='seoul'>서울</option>
+                        <option class="optionbox" value='gangwon'>강원도</option>
+                        <option class="optionbox" value='gyeonggi'>경기도</option>
+                        <option class="optionbox" value='chungcheongbuk'>충청북도</option>
+                        <option class="optionbox" value='chungcheongnam'>충청남도</option>
+                        <option class="optionbox" value='gyeongsangbuk'>경상북도</option>
+                        <option class="optionbox" value='gyeongsanganm'>경상남도</option>
+                        <option class="optionbox" value='jeollabuk'>전라북도</option>
+                        <option class="optionbox" value='Jeollanam'>전라남도</option>
+                    </select>
+                </div>
+                <div class="ver3-startday">
+                    <span class="ver3-startday-span">출발일 </span><br /><input type="date" class="ver3-startday-detail">
+                </div>
+                <div class="ver3-combackday">
+                    <span class="ver3-startday-span">복귀일 </span><br /><input type="date" class="ver3-startday-detail">
+                </div>
+                <div class="ver3-human">
+                    <span class="ver3-human-span">인원수 </span><br /><select class="ver3-human-detail">
+                        <option class="optionbox" value='' selected>선택</option>
+                        <option class="optionbox" value='one'>1</option>
+                        <option class="optionbox" value='two'>2</option>
+                        <option class="optionbox" value='tree'>3</option>
+                        <option class="optionbox" value='four'>4</option>
+                        <option class="optionbox" value='five'>5</option>
+                        <option class="optionbox" value='six'>6</option>
+                        <option class="optionbox" value='seven'>7~10</option>
+                        <option class="optionbox" value='eight'>11~15</option>
+                    </select>
+                </div>
+            </div>
+            {% csrf_token %}
+            <br />
+
+            <div class="ver3-tema"><span class="ver3-tema-span">#테마</span><br />
+                <div class="inner">
+                    <div class="ver3-tema-contain">
+                        <label class="tema-label"><input onclick="CountChecked(this)" type="checkbox" name="detail"
+                                value="picnic">나들이</label>
+                        <label class="tema-label"><input onclick="CountChecked(this)" type="checkbox" name="detail"
+                                value="family">가족여행</label>
+                        <label class="tema-label"><input onclick="CountChecked(this)" type="checkbox" name="detail"
+                                value="date`">데이트</label>
+                        <label class="tema-label"><input onclick="CountChecked(this)" type="checkbox" name="detail"
+                                value="heel">힐링(휴식)</label>
+                        <br><br>
+                        <label class="tema-label"><input onclick="CountChecked(this)" type="checkbox" name="detail"
+                                value="view">경치</label>
+                        <label class="tema-label"><input onclick="CountChecked(this)" type="checkbox" name="detail"
+                                value="drive">드라이브</label>
+                        <div class="inner">
+                            <div class="ver3-tema-contain">
+                                <label class="tema-label"><input onclick="CountChecked(this)" type="checkbox"
+                                        name="detail2" value="park">공원</label>
+                                <label class="tema-label"><input onclick="CountChecked(this)" type="checkbox"
+                                        name="detail2" value="culture">문화</label>
+                                <label class="tema-label"><input onclick="CountChecked(this)" type="checkbox"
+                                        name="detail2" value="walk">산책</label>
+                                <label class="tema-label"><input onclick="CountChecked(this)" type="checkbox"
+                                        name="detail2" value="food">먹방</label>
+                                <br><br>
+                                <label class="tema-label"><input onclick="CountChecked(this)" type="checkbox"
+                                        name="detail2" value="night">야경</label>
+                                <label class="tema-label"><input onclick="CountChecked(this)" type="checkbox"
+                                        name="detail2" value="activity">체험학습</label>
+                                <label class="tema-label"><input onclick="CountChecked(this)" type="checkbox"
+                                        name="detail2" value="bicycle">자전거</label>
+                                <br><br>
+                                <label class="tema-label"><input onclick="CountChecked(this)" type="checkbox"
+                                        name="detail2" value="ocean">바다</label>
+                                <label class="tema-label"><input onclick="CountChecked(this)" type="checkbox"
+                                        name="detail2" value="mountain">등산</label>
+                            </div>
+                            <input class="btn-submit" type="submit" value="Pick!" />
+                        </div>
+                    </div>
+        </form>
+    </div>
+    <div id='contents' style="text-align:center;">
+        {% comment %} <img id="mg1" src="static/mg/ver3.png"> {% endcomment %}
+        <div>
+
+        </div>
+    </div>
+    <script type="text/javascript">
+        var maxCount = 3;								// 카운트 최대값은 3
+        var count = 0;   								// 카운트, 0으로 초기화 설정
+
+        function CountChecked(field) { 					// field객체를 인자로 하는 CountChecked 함수 정의
+            if (field.checked) {						// 만약 field의 속성이 checked 라면(사용자가 클릭해서 체크상태가 된다면)
+                count += 1;								// count 1 증가
+            }
+            else {										// 아니라면 (field의 속성이 checked가 아니라면)
+                count -= 1;								// count 1 감소
+            }
+
+            if (count > maxCount) {						// 만약 count 값이 maxCount 값보다 큰 경우라면
+                alert("최대 3개까지만 선택가능합니다!");	// alert 창을 띄움
+                field.checked = false;						// (마지막 onclick한)field 객체의 checked를 false(checked가 아닌 상태)로 만든다.
+                count -= 1;									// 이때 올라갔던 카운트를 취소처리해야 하므로 count를 1 감소시킨다.
+            }
+        }
+    </script>
 </body>
+
 </html>
