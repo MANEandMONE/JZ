@@ -13,9 +13,14 @@
     <link rel="stylesheet" href={% static 'css/style.css' %}>
     <link rel="stylesheet" href={% static 'css/reset.css' %}>
     <meta charset="UTF-8">
-    <title>테마별 추천</title>
+    <title>경험기반추천</title>
     <style>
         h1 {
+            text-align: center;
+            color: black;
+        }
+
+        h3 {
             text-align: center;
             color: white;
         }
@@ -23,7 +28,9 @@
         img {
             display: block;
             margin: 0px auto;
-            width: 40%;
+            width: 80%;
+            height: 70%;
+            border-radius: 3vw;
         }
 
         select {
@@ -45,7 +52,17 @@
         }
 
         body {
+            display: block;
+            background-image:url("{% static 'mg/ver1.jpg' %}");
             background-size: 100% 200%;
+            background-color: #f8f8ff;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 2.5vw;
+            padding-left: 4%;
+            padding-right: 4%;
         }
     </style>
 </head>
@@ -54,13 +71,13 @@
     <div class="nav-comtain">
         <nav>
             <a href="/">HOME</a>
-            <a href="{% url 'ver1'%}">EXPERIENCE</a>
-            <a href="{% url 'ver3'%}">THEME</a>
+            <a href="{% url 'beer:ver1'%}">EXPERIENCE</a>
+            <a href="{% url 'beer:ver3'%}">THEME</a>
             {% if login_session%}
-            <a href="{% url 'user:logout' %}"><button>로그아웃</button></a>
+            <a href="{% url 'user:logout' %}"><button class="logout-btn">LOGOUT</button></a>
             {% else %}
-            <a href="{% url 'user:login' %}"><button>로그인</button></a>
-            <a href="{% url 'user:register' %}"><button>회원가입</button></a>
+            <a href="{% url 'user:login' %}"><button class="login-btn">LOGIN</button></a>
+            <a href="{% url 'user:register' %}"><button class="join-btn">JOIN</button></a>
             {% endif %}
             <div id="indicator"></div>
         </nav>
@@ -69,116 +86,110 @@
     <div class="header">
         <a class="header-a" onclick="location.href='/'">너와 나드리</a>
     </div>
-    <div class="ver3-contain">
-        <form class="ver3-form" method="POST">
-            <div class="ver3-select">
-                <div class="ver3-destination">
-                    <span class="ver3-destination-span">목적지</span><br />
-                    <select class="ver3-destination-detail">
-                        <option class="optionbox" value='' selected>선택</option>
-                        <option class="optionbox" value='seoul'>서울</option>
-                        <option class="optionbox" value='gangwon'>강원도</option>
-                        <option class="optionbox" value='gyeonggi'>경기도</option>
-                        <option class="optionbox" value='chungcheongbuk'>충청북도</option>
-                        <option class="optionbox" value='chungcheongnam'>충청남도</option>
-                        <option class="optionbox" value='gyeongsangbuk'>경상북도</option>
-                        <option class="optionbox" value='gyeongsanganm'>경상남도</option>
-                        <option class="optionbox" value='jeollabuk'>전라북도</option>
-                        <option class="optionbox" value='Jeollanam'>전라남도</option>
-                    </select>
-                </div>
-                <div class="ver3-startday">
-                    <span class="ver3-startday-span">출발일 </span><br /><input type="date" class="ver3-startday-detail">
-                </div>
-                <div class="ver3-combackday">
-                    <span class="ver3-startday-span">복귀일 </span><br /><input type="date" class="ver3-startday-detail">
-                </div>
-                <div class="ver3-human">
-                    <span class="ver3-human-span">인원수 </span><br /><select class="ver3-human-detail">
-                        <option class="optionbox" value='' selected>선택</option>
-                        <option class="optionbox" value='one'>1</option>
-                        <option class="optionbox" value='two'>2</option>
-                        <option class="optionbox" value='tree'>3</option>
-                        <option class="optionbox" value='four'>4</option>
-                        <option class="optionbox" value='five'>5</option>
-                        <option class="optionbox" value='six'>6</option>
-                        <option class="optionbox" value='seven'>7~10</option>
-                        <option class="optionbox" value='eight'>11~15</option>
-                    </select>
-                </div>
-            </div>
+    <div class="ver1-header">
+        <h1 style="padding-top:3%;">경험했던 여행지 중 다시 가고싶은 여행지를 선택해주세요.
+            비슷한 여행지를 추천해 드립니다.
+        </h1>
+        <form method="POST" style="text-align:center;">
+            <br>
             {% csrf_token %}
-            <br />
 
-            <div class="ver3-tema"><span class="ver3-tema-span">#테마</span><br />
-                <div class="inner">
-                    <div class="ver3-tema-contain">
-                        <label class="tema-label"><input onclick="CountChecked(this)" type="checkbox" name="detail"
-                                value="picnic">나들이</label>
-                        <label class="tema-label"><input onclick="CountChecked(this)" type="checkbox" name="detail"
-                                value="family">가족여행</label>
-                        <label class="tema-label"><input onclick="CountChecked(this)" type="checkbox" name="detail"
-                                value="date`">데이트</label>
-                        <label class="tema-label"><input onclick="CountChecked(this)" type="checkbox" name="detail"
-                                value="heel">힐링(휴식)</label>
-                        <br><br>
-                        <label class="tema-label"><input onclick="CountChecked(this)" type="checkbox" name="detail"
-                                value="view">경치</label>
-                        <label class="tema-label"><input onclick="CountChecked(this)" type="checkbox" name="detail"
-                                value="drive">드라이브</label>
-                        <div class="inner">
-                            <div class="ver3-tema-contain">
-                                <label class="tema-label"><input onclick="CountChecked(this)" type="checkbox"
-                                        name="detail2" value="park">공원</label>
-                                <label class="tema-label"><input onclick="CountChecked(this)" type="checkbox"
-                                        name="detail2" value="culture">문화</label>
-                                <label class="tema-label"><input onclick="CountChecked(this)" type="checkbox"
-                                        name="detail2" value="walk">산책</label>
-                                <label class="tema-label"><input onclick="CountChecked(this)" type="checkbox"
-                                        name="detail2" value="food">먹방</label>
-                                <br><br>
-                                <label class="tema-label"><input onclick="CountChecked(this)" type="checkbox"
-                                        name="detail2" value="night">야경</label>
-                                <label class="tema-label"><input onclick="CountChecked(this)" type="checkbox"
-                                        name="detail2" value="activity">체험학습</label>
-                                <label class="tema-label"><input onclick="CountChecked(this)" type="checkbox"
-                                        name="detail2" value="bicycle">자전거</label>
-                                <br><br>
-                                <label class="tema-label"><input onclick="CountChecked(this)" type="checkbox"
-                                        name="detail2" value="ocean">바다</label>
-                                <label class="tema-label"><input onclick="CountChecked(this)" type="checkbox"
-                                        name="detail2" value="mountain">등산</label>
-                            </div>
-                            <input class="btn-submit" type="submit" value="Pick!" />
-                        </div>
-                    </div>
+            여행지 :
+            <select name="beer" style="margin-top:5%">
+                {% for tmp in beer_list %}
+                <option value='{{tmp}}'>{{tmp}}</option>
+                {% endfor %}
+                <button class="btn-submit" type="submit" value="Pick!">
+                    <a href="{% url 'beer:ver2_session' %}">Click here!</a>
+                </button>
+                {% comment %} <input class="btn-submit" type="submit" value="Pick!" onClick="location.href={% url 'beer:ver2_session' %}"> {% endcomment %}
+                
+
         </form>
     </div>
-    <div id='contents' style="text-align:center;">
-        {% comment %} <img id="mg1" src="static/mg/ver3.png"> {% endcomment %}
-        <div>
 
-        </div>
+    <div id='contents' style="text-align:center; opacity:0.5; background-color:#F5F5F5; padding-top:10%;">
+        <img id="mg1" src="static/mg/airplane2.jpg">
     </div>
-    <script type="text/javascript">
-        var maxCount = 3;								// 카운트 최대값은 3
-        var count = 0;   								// 카운트, 0으로 초기화 설정
+    </div>
+    <footer class="footer" style="margin-top:5vh;">
+        <div class="footer-addr">
+            <div style="text-align:left">
+                <a class="footer-logo" onclick="location.href='/'">너와 나드리</a>
+            </div>
+            <h2>Contact</h2>
 
-        function CountChecked(field) { 					// field객체를 인자로 하는 CountChecked 함수 정의
-            if (field.checked) {						// 만약 field의 속성이 checked 라면(사용자가 클릭해서 체크상태가 된다면)
-                count += 1;								// count 1 증가
-            }
-            else {										// 아니라면 (field의 속성이 checked가 아니라면)
-                count -= 1;								// count 1 감소
-            }
+            <address>
+                <div style="text-align:left">
+                    <a
+                        href="https://www.google.com/maps/place/%EC%A4%91%EB%B6%80%EB%8C%80%ED%95%99%EA%B5%90+%EA%B3%A0%EC%96%91%EC%BA%A0%ED%8D%BC%EC%8A%A4+%E4%B8%AD%E9%83%A8%E5%A4%A7%E5%AD%B8%E6%A0%A1+Joongbu+University/data=!4m5!3m4!1s0x357c943e1caccd2b:0x56404200ca89df47!8m2!3d37.713203!4d126.8900751">
+                        중부대학교 창의캠퍼스. 세종관 828호
+                    </a><br>
+                </div>
 
-            if (count > maxCount) {						// 만약 count 값이 maxCount 값보다 큰 경우라면
-                alert("최대 3개까지만 선택가능합니다!");	// alert 창을 띄움
-                field.checked = false;						// (마지막 onclick한)field 객체의 checked를 false(checked가 아닌 상태)로 만든다.
-                count -= 1;									// 이때 올라갔던 카운트를 취소처리해야 하므로 count를 1 감소시킨다.
-            }
-        }
-    </script>
+                <a class="footer-btn">문의하기</a>
+            </address>
+        </div>
+
+        <ul class="footer-p">
+            <li class="p-item">
+                <h2 class="p-title">너와 나드리</h2>
+
+                <ul class="p-ul">
+                    <li>
+                        <p>김병찬</p>
+                    </li>
+
+                    <li>
+                        <p>정욱채</p>
+                    </li>
+
+                    <li>
+                        <p>한정우</p>
+                    </li>
+                </ul>
+            </li>
+
+            <li class="p-item">
+                <h2 class="p-title">사용기술</h2>
+
+                <ul class="p-ul">
+                    <li>
+                        <p>경험기반 추천받기</p>
+                    </li>
+
+                    <li>
+                        <p>테마기반 추천받기</p>
+                    </li>
+
+                    <li>
+                        <p>세션기반 추천받기</p>
+                    </li>
+                </ul>
+            </li>
+
+            <li class="p-item">
+                <h2 class="p-title">지도교수</h2>
+
+                <ul class="p-ul">
+                    <li>
+                        <p>김송강 교수</p>
+                    </li>
+
+                    <li>
+                        <p>황호진 교수</p>
+                    </li>
+
+                </ul>
+            </li>
+        </ul>
+
+        <div class="footer-sub">
+            <div class="sub-name">
+                <p>&copy; 2022 정보통신학과. 졸업작품 프로젝트.</p>
+            </div>
+        </div>
+    </footer>
 </body>
 
 </html>

@@ -1,50 +1,146 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-	<script src='https://cdn.plot.ly/plotly-latest.min.js'></script>
-    <link rel= "stylesheet" type="text/css" href="{% static 'css/ver2_result.css' %}">
+    <script src='https://cdn.plot.ly/plotly-latest.min.js'></script>
+    <!--    <link rel= "stylesheet" type="text/css" href="{% static 'css/ver1_result.css' %}">-->
+
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="https://cdn.pannellum.org/2.5/pannellum.css"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>추천 결과</title>
+    <link rel="stylesheet" href="https://cdn.pannellum.org/2.5/pannellum.css" />
     <script type="text/javascript" src="https://cdn.pannellum.org/2.5/pannellum.js"></script>
 
-    <link href="https://vjs.zencdn.net/7.1.0/video-js.css" rel="stylesheet"
-      type="text/css">
+    <link href="https://vjs.zencdn.net/7.1.0/video-js.css" rel="stylesheet" type="text/css">
+
     <script src="https://vjs.zencdn.net/7.1.0/video.js"></script>
-    <script src="/js/videojs-pannellum-plugin.js"></script>
-    <title>Ver2)Recommendation</title>
+    <script src="../../static/js/videojs-pannellum-plugin.js"></script>
+    <script src="../../static/js/toggle.js"></script>
+
+    <link rel="stylesheet" href={% static 'css/style.css' %}>
+    <link rel="stylesheet" href={% static 'css/reset.css' %}>
+    <link rel="stylesheet" href={% static 'css/toggle.css' %}>
+
+
     <style>
-        img {
-        display: block; margin: 0px auto;
-        max-width:10%; max-height:10%;
-        }
-        h1 { text-align: center; color: white;}
-        h2 { text-align: center;}
-        h3 { text-align: center;}
-        #header {
-            background-color:lightgrey;
-            height:100px;
+        h1 {
+            color: #000;
+            font-family: "jua";
+            font-size: 3vw;
+            margin-bottom: 2%;
         }
     </style>
 </head>
+
 <body>
+    <div class="nav-comtain">
+        <nav>
+            <a href="/">HOME</a>
+            <a href="{% url 'beer:ver1'%}">EXPERIENCE</a>
+            <a href="{% url 'beer:ver3'%}">THEME</a>
+            {% if login_session%}
+            <a href="{% url 'user:logout' %}"><button>로그아웃</button></a>
+            {% else %}
+            <a href="{% url 'user:login' %}"><button>로그인</button></a>
+            <a href="{% url 'user:register' %}"><button>회원가입</button></a>
+            {% endif %}
+            <div id="indicator"></div>
+        </nav>
+    </div>
+    <br />
+    <div class="header">
+        <a class="header-a" onclick="location.href='/'">너와 나드리</a>
+    </div>
+    <div class="ver3-wrapper">
+        <div class="ver3-result-contain">
+            <div>
+                <h1>첫 번째 추천 여행지는 {{ result.0 }} 입니다.</h1>
+            </div>
+            <img class="result-img" src="static/mg/place/{{ result.0 }}.jfif" alt="사진은 수집중입니다😢">
+            <h2 class="result-h2"><span id="toc-toggle18" onclick="openCloseToc18()">맛집 보러 가기</span><span
+                    id="toc-toggle4" onclick="openCloseToc4()">관련 영상 보기</span><span class="ver3-result-hotel"
+                    id="toc-toggle11" onclick="openCloseToc11()">숙소 보러 가기</span>
+                <div id="toc-content4">
+                    <video id="result0" class="video-js vjs-default-skin vjs-big-play-centered" controls preload="none"
+                        style="width:50vw; height:55vh; margin:0 auto; display:block;" crossorigin="anonymous">
+                        <source src="/static/md/{{result.0}}.webm" type="video/webm" />
+                        <source src="/static/md/{{result.0}}.mp4" type="video/mp4" />
+                        <p class="vjs-no-js">
+                            To view this video please enable JavaScript, and consider upgrading to
+                            a web browser that <a href="http://videojs.com/html5-video-support/"
+                                target="_blank">supports HTML5 video</a>
+                        </p>
 
-<div style="background-color:#0d47a1;">
-    <h1>첫 번째 추천 맥주는 {{ result.0 }} 입니다.</h1>
-</div>
-<img src="/static/mg/{{ result.0 }}.jfif" alt="사진은 수집중입니다😢">
+                        <script>
+                            videojs('result0', {
+                                plugins: {
+                                    pannellum: {}
+                                }
+                            });
+
+                        </script>
+                    </video>
+            </h2>
+        </div>
+        <div id="toc-content11">
+            <p>
+                {% if hotels1.count > 0 %}
+                {% for a in posts %}
+            <div class="hotel-contain">
+                <div class="hotel-contain-left">
+                    <form method="POST">
+                    <a href='{{a.url}}'><img class="hotel-img" src='{{a.img}}' alt="사진은 수집중입니다😢"></a><br><br>
+                </div>
+                <div class="hotel-contain-right">
+                    <h1>{{a.name}}</h1>
+                    <div class="classfication">{{a.classfications}}</div>
+                    <div class="distance"></div>
+                    <div class="explain"></div>
+                    <p class="rate-and-review">👍{{a.rating}} {{a.distance}} {{a.address}}
+                        {{a.kind}} {{a.clean}} {{a.conv}} <br> {{a.explain}}</p>
+                    <div class="hotel-cost">{{a.cost}}</div>
+                    <div class="hotel-book"><input type="submit",value="찜하기"></div>
+                    </form>
+                </div>
+                <hr width="70%">
+            </div>
+            {% endfor %}
+            {% endif %}
+            </p>
+            <div style="text-align:center">
+                <div class="pagination">
+
+                    <div style="width:35%; margin: 5px;">
+                        {% if posts.has_previous %}
+                        <a class="abutton" href="?page=1">맨 앞으로</a>
+                        <a class="abutton" href="?page={{ posts.previous_page_number }}">이전</a>
+                        {% endif %}
+                    </div>
+
+                    <div style="width:30%; margin: 5px;">
+                        {% for page in posts.paginator.page_range %}
+                            {% if page >= posts.number|add:-2 and page <= posts.number|add:2 %} <span
+                                class="{% if page == posts.number %}current{% endif %}">
+                                <a href="?page={{ page }}">{{ page}}</a>
+                                </span>
+                                {% elif page >= posts.number|add:-3 and page <= posts.number|add:3 %} .. {% endif %} 
+                            {% endfor %} </div>
+
+                                <div style="width:35%; margin: 5px;">
+                                    {% if posts.has_next %}
+                                    <a class="abutton" href="?page={{ posts.next_page_number }}">다음</a>
+                                    <a class="abutton" href="?page={{ posts.paginator.num_pages }}">맨 뒤로</a>
+                                    {% endif %}
+                                </div>
+
+                    </div>
+                </div>
 
 
-<div style="background-color:#0d47a1;">
-    <h1>두 번째 추천 맥주는 {{ result.1 }} 입니다.</h1>
-</div>
-<img src="/static/mg/{{ result.1 }}.jfif" alt="사진은 수집중입니다😢">
-
-
-<div style="background-color:#0d47a1;">
-    <h1>세 번째 추천 맥주는 {{ result.2 }} 입니다.</h1>
-</div>
-<img src="/static/mg/{{ result.2 }}.jfif" alt="사진은 수집중입니다😢">
-
+            </div>
+        </div>
 </body>
+
 </html>

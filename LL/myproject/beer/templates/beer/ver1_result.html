@@ -38,8 +38,8 @@
     <div class="nav-comtain">
         <nav>
             <a href="/">HOME</a>
-            <a href="{% url 'ver1'%}">EXPERIENCE</a>
-            <a href="{% url 'ver3'%}">THEME</a>
+            <a href="{% url 'beer:ver1'%}">EXPERIENCE</a>
+            <a href="{% url 'beer:ver3'%}">THEME</a>
             {% if login_session%}
             <a href="{% url 'user:logout' %}"><button>로그아웃</button></a>
             {% else %}
@@ -85,9 +85,10 @@
             </h2>
         </div>
         <div id="toc-content11">
+
             <p>
-                {% if hotels1.count > 0 %}
-                {% for a in hotels1 %}
+                {% if hotel1_1to10.count > 0 %}
+                {% for a in hotel1_1to10 %}
             <div class="hotel-contain">
                 <div class="hotel-contain-left">
                     <a href='{{a.url}}'><img class="hotel-img" src='{{a.img}}' alt="사진은 수집중입니다😢"></a><br><br>
@@ -107,6 +108,7 @@
             {% endfor %}
             {% endif %}
             </p>
+
         </div>
         <div id="toc-content18">
             <p>

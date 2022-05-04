@@ -40,7 +40,6 @@ INSTALLED_APPS = [
     'beer',
     'user',
     'home',
-    # 'cart',
     'bootstrap4',
     'rest_framework',
     'corsheaders',

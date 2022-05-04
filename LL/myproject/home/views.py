@@ -4,13 +4,13 @@ from django.http import HttpResponse
 
 
 def hello(request):
-    context = {}
+    text = {}
 
     login_session = request.session.get('login_session', '')
 
     if login_session == '':
-        context['login_session'] = False
+        text['login_session'] = False
     else:
-        context['login_session'] = True
+        text['login_session'] = True
 
-    return render(request, 'home/index.html', context)
+    return render(request, 'home/index.html', text)
