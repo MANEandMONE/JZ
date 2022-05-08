@@ -620,3 +620,33 @@
 #toc-toggle20:hover {
   text-decoration: none;
 }
+
+#toc-content30 {
+  overflow: scroll;
+  display: none;
+  background-color: #e9ecef;
+  height: 65vh;
+  padding-top: 5vh;
+  padding-bottom: 5vh;
+  text-align: center;
+}
+
+#toc-toggle30 {
+  background-color: #77cdd3;
+  cursor: pointer;
+  color: #fff;
+  font-size: 20px;
+  display: inline-block;
+  font-family: "jua";
+  font-size: 1.2vw;
+  width: 10vw;
+  height: 5vh;
+  padding-top: 3vh;
+  text-align: center;
+  border-radius: 25px;
+  margin-right: 1%;
+}
+
+#toc-toggle30:hover {
+  text-decoration: none;
+}

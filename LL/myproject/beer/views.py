@@ -164,6 +164,7 @@ def ver2_session(request):
     cost = request.GET.get('cost', '')
     sort = request.GET.get('sort', '')
     rating = request.GET.get('rating', '')
+    rating1 = request.GET.get('rating1', '')
     distance = request.GET.get('distance', '')
     review = request.GET.get('review', '')
 
@@ -304,7 +305,7 @@ def ver2_session(request):
     else:
         content_list = Hotel.objects.filter(place=result[0])
 
-    if rating == 'rating':
+    if rating1 == 'rating1':
         content_list1 = Restaurant.objects.filter(
             place=result[0]).order_by('-rating')
 
@@ -327,7 +328,7 @@ def ver2_session(request):
     posts1 = paginator1.get_page(page1)
 
     return render(
-        request, 'beer/ver2_result.html', {
+        request, 'beer/ver_result.html', {
             'login_session': login_session,
             'result': result,
             'sort': sort,

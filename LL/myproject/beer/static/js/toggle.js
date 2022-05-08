@@ -272,4 +272,14 @@ function openCloseToc21() {
     document.getElementById('toc-content21').style.display = 'block';
     document.getElementById('toc-toggle21').textContent = '그만보기';
   }
-}          
+}
+
+function openCloseToc30() {
+  if (document.getElementById('toc-content30').style.display === 'block') {
+    document.getElementById('toc-content30').style.display = 'none';
+    document.getElementById('toc-toggle30').textContent = '맛집 보러 가기';
+  } else {
+    document.getElementById('toc-content30').style.display = 'block';
+    document.getElementById('toc-toggle30').textContent = '그만보기';
+  }
+}
