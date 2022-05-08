@@ -11,9 +11,9 @@ class HotelAdmin(admin.ModelAdmin):
                     'img', 'classfication')
 
 
-# class RestaurantAdmin(admin.ModelAdmin):
-#     list_display = ('index', 'locate', 'name', 'rating', 'classfications',
-#                     'address', 'hour', 'url')
+class RestaurantAdmin(admin.ModelAdmin):
+    list_display = ('index', 'place', 'name', 'rating', 'review',
+                    'classfication', 'address', 'explain', 'url', 'img')
 
 
 class TourAdmin(admin.ModelAdmin):
@@ -23,6 +23,6 @@ class TourAdmin(admin.ModelAdmin):
 
 admin.site.register(Hotel, HotelAdmin)
 
-# admin.site.register(Restaurant, RestaurantAdmin)
+admin.site.register(Restaurant, RestaurantAdmin)
 
 admin.site.register(Tour, TourAdmin)

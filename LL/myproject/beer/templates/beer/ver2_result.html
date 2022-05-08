@@ -38,7 +38,7 @@
     <div class="nav-comtain">
         <nav>
             <a href="/">HOME</a>
-            <a href="{% url 'beer:ver1'%}">EXPERIENCE</a>
+            <a href="{% url 'beer:ver2'%}">EXPERIENCE</a>
             <a href="{% url 'beer:ver3'%}">THEME</a>
             {% if login_session%}
             <a href="{% url 'user:logout' %}"><button>로그아웃</button></a>
@@ -84,63 +84,114 @@
                     </video>
             </h2>
         </div>
-        <div id="toc-content11">
-            <p>
-                {% if hotels1.count > 0 %}
-                {% for a in posts %}
-            <div class="hotel-contain">
-                <div class="hotel-contain-left">
-                    <form method="POST">
-                    <a href='{{a.url}}'><img class="hotel-img" src='{{a.img}}' alt="사진은 수집중입니다😢"></a><br><br>
-                </div>
-                <div class="hotel-contain-right">
-                    <h1>{{a.name}}</h1>
-                    <div class="classfication">{{a.classfications}}</div>
-                    <div class="distance"></div>
-                    <div class="explain"></div>
-                    <p class="rate-and-review">👍{{a.rating}} {{a.distance}} {{a.address}}
-                        {{a.kind}} {{a.clean}} {{a.conv}} <br> {{a.explain}}</p>
-                    <div class="hotel-cost">{{a.cost}}</div>
-                    <div class="hotel-book"><input type="submit",value="찜하기"></div>
-                    </form>
-                </div>
-                <hr width="70%">
-            </div>
-            {% endfor %}
-            {% endif %}
-            </p>
-            <div style="text-align:center">
-                <div class="pagination">
+        <form method="GET">
+            <div id="toc-content11">
+                <input type="radio" name="rating" value="rating">평점 순
+                <input type="radio" name="distance" value="distance">거리 순
+                <input type="radio" name="cost" value="cost_up">가격 높은순
+                <input type="radio" name="cost" value="cost_down">가격 낮은순
+                <select name="sort" id="sort">
+                    <option value="hotell" id="hotell">호텔</option>
+                    <option value="hostel" id="hostel">호스텔</option>
+                    <option value="guesthouse" id="guesthouse">게스트하우스</option>
+                    <option value="motel" id="motel">모텔</option>
+                    <option value="resort" id="resort">리조트</option>
+                    <option value="pension" id="pension">펜션</option>
+                </select>
+                <button class="btn btn-primary" type="submit" value="">정렬</button>
+                <p>
+                    {% if content_list.count > 0 %}
+                    {% for a in posts %}
+                <div class="hotel-contain">
+             </form>       <div class="hotel-contain-left">
 
-                    <div style="width:35%; margin: 5px;">
+                        <div class="col-4">
+
+                        </div>
+                        <a href='{{a.url}}'><img class="hotel-img" src='{{a.img}}' alt="사진은 수집중입니다😢"></a><br><br>
+                    </div>
+                    <div class="hotel-contain-right">
+                        <h1>{{a.name}}</h1>
+                        <div class="classfication">{{a.classfications}}</div>
+                        <div class="distance"></div>
+                        <div class="explain"></div>
+                        <p class="rate-and-review">👍{{a.rating}} {{a.distance}} {{a.address}}
+                            {{a.kind}} {{a.clean}} {{a.conv}} <br> {{a.explain}}</p>
+                        <div class="hotel-cost">{{a.cost}}</div>
+                        <div class="hotel-book"><input type="submit" ,value="찜하기"></div>
+
+                    </div>
+                    <hr width="70%">
+                </div>
+                {% endfor %}
+                {% endif %}
+                </p>
+                <div style="text-align:center">
+                    <div class="pagination">
                         {% if posts.has_previous %}
-                        <a class="abutton" href="?page=1">맨 앞으로</a>
-                        <a class="abutton" href="?page={{ posts.previous_page_number }}">이전</a>
+                        <button name="page" value="1">First</button>
+                        <button name="page" value="{{posts.previous_page_number}}">Previous</button>
                         {% endif %}
-                    </div>
 
-                    <div style="width:30%; margin: 5px;">
-                        {% for page in posts.paginator.page_range %}
-                            {% if page >= posts.number|add:-2 and page <= posts.number|add:2 %} <span
-                                class="{% if page == posts.number %}current{% endif %}">
-                                <a href="?page={{ page }}">{{ page}}</a>
-                                </span>
-                                {% elif page >= posts.number|add:-3 and page <= posts.number|add:3 %} .. {% endif %} 
-                            {% endfor %} </div>
+                        <span>{{posts.number}} / {{posts.paginator.num_pages}}</span>
 
-                                <div style="width:35%; margin: 5px;">
-                                    {% if posts.has_next %}
-                                    <a class="abutton" href="?page={{ posts.next_page_number }}">다음</a>
-                                    <a class="abutton" href="?page={{ posts.paginator.num_pages }}">맨 뒤로</a>
-                                    {% endif %}
-                                </div>
-
+                        {% if posts.has_next %}
+                        <button name="page" value="{{posts.next_page_number}}">Next</button>
+                        <button name="page" value="{{posts.next_page_number}}">Last</a>
+                            {% endif %}
                     </div>
                 </div>
 
 
-            </div>
-        </div>
+        <form method="GET">
+            <div id="toc-content18">
+                <input type="radio" name="rating" value="rating">평점 순
+                <input type="radio" name="review" value="review">리뷰 개수
+
+                <button class="btn btn-primary" type="submit" value="">정렬</button>
+                <p>
+                {% if content_list1.count > 0 %}
+                {% for a in posts1 %}
+                <div class="hotel-contain">
+                    <div class="hotel-contain-left">
+
+                        <div class="col-4">
+
+                        </div>
+                        <a href='{{a.url}}'><img class="hotel-img" src='{{a.img}}' alt="사진은 수집중입니다😢"></a><br><br>
+                    </div>
+                    <div class="hotel-contain-right">
+                        <h1>{{a.name}}</h1>
+                        <div class="classfication">{{a.classfications}}</div>
+                        <div class="distance"></div>
+                        <div class="explain"></div>
+                        <p class="rate-and-review">👍{{a.rating}} {{a.review}} {{a.address}}
+                            {{a.classfication}}<br> {{a.explain}}</p>
+                        <div class="hotel-cost"></div>
+                        <div class="hotel-book"><input type="submit" ,value="찜하기"></div>
+
+                    </div>
+                    <hr width="70%">
+                </div>
+                {% endfor %}
+                {% endif %}
+                </p>
+                <div style="text-align:center">
+                    <div class="pagination">
+                        {% if posts1.has_previous %}
+                        <button name="page" value="1">First</button>
+                        <button name="page" value="{{posts1.previous_page_number}}">Previous</button>
+                        {% endif %}
+
+                        <span>{{posts1.number}} / {{posts1.paginator.num_pages}}</span>
+
+                        {% if posts1.has_next %}
+                        <button name="page" value="{{posts1.next_page_number}}">Next</button>
+                        <button name="page" value="{{posts1.next_page_number}}">Last</a>
+                            {% endif %}
+                    </div>
+                </div>
+            </form>
 </body>
 
 </html>

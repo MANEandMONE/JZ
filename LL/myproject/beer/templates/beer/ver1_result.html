@@ -87,8 +87,8 @@
         <div id="toc-content11">
 
             <p>
-                {% if hotel1_1to10.count > 0 %}
-                {% for a in hotel1_1to10 %}
+                {% if hotels1.count > 0 %}
+                {% for a in hotels1 %}
             <div class="hotel-contain">
                 <div class="hotel-contain-left">
                     <a href='{{a.url}}'><img class="hotel-img" src='{{a.img}}' alt="사진은 수집중입니다😢"></a><br><br>
@@ -116,14 +116,13 @@
                 {% for a in restaurant1 %}
             <div class="hotel-contain">
                 <div class="hotel-contain-left">
-                    <a href='{{a.url}}'><img class="hotel-img" src="static/mg/restaurant/{{ a.name }}.jpg"
-                            alt="사진은 수집중입니다😢"></a><br><br>
+                    <a href='{{a.url}}'><img class="hotel-img" src="{{ a.img }}" alt="사진은 수집중입니다😢"></a><br><br>
                 </div>
                 <div class="hotel-contain-right">
                     <h1>{{a.name}}</h1>
                     <div class="classfication">{{a.classfications}}</div>
                     <p class="rate-and-address">💗{{a.rating}} 📮주소 {{a.address}} </p>
-                    <p class="restaurant-hour">⏰영업시간{{a.hour}}</p>
+                    <p class="restaurant-hour">⏰영업시간{{a.explain}}</p>
                     <div class="restaurant-book">예약하기</div>
                 </div>
                 <hr width="70%">

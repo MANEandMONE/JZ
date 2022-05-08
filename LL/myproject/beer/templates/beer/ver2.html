@@ -71,7 +71,7 @@
     <div class="nav-comtain">
         <nav>
             <a href="/">HOME</a>
-            <a href="{% url 'beer:ver1'%}">EXPERIENCE</a>
+            <a href="{% url 'beer:ver2'%}">EXPERIENCE</a>
             <a href="{% url 'beer:ver3'%}">THEME</a>
             {% if login_session%}
             <a href="{% url 'user:logout' %}"><button class="logout-btn">LOGOUT</button></a>
@@ -90,20 +90,23 @@
         <h1 style="padding-top:3%;">경험했던 여행지 중 다시 가고싶은 여행지를 선택해주세요.
             비슷한 여행지를 추천해 드립니다.
         </h1>
-        <form method="POST" style="text-align:center;">
+        <form method="POST" id="ver2-form" style="text-align:center;">
             <br>
             {% csrf_token %}
-
+ 
             여행지 :
             <select name="beer" style="margin-top:5%">
                 {% for tmp in beer_list %}
                 <option value='{{tmp}}'>{{tmp}}</option>
                 {% endfor %}
-                <button class="btn-submit" type="submit" value="Pick!">
-                    <a href="{% url 'beer:ver2_session' %}">Click here!</a>
-                </button>
-                {% comment %} <input class="btn-submit" type="submit" value="Pick!" onClick="location.href={% url 'beer:ver2_session' %}"> {% endcomment %}
-                
+            </select>
+            {% comment %} <button type='submit'>Pick!</button> {% endcomment %}
+            <input class="btn-submit" type="submit" value="Pick!">
+            <a href="{% url 'beer:ver2_session'%}">다음 페이지 이동</a>
+            
+            
+
+
 
         </form>
     </div>

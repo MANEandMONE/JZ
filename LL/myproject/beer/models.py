@@ -152,3 +152,20 @@ class Tour(models.Model):
     class Meta:
         managed = False
         db_table = 'tour'
+
+
+class Restaurant(models.Model):
+    index = models.IntegerField(primary_key=True)
+    place = models.CharField(max_length=45, blank=True, null=True)
+    name = models.CharField(max_length=45, blank=True, null=True)
+    rating = models.FloatField(blank=True, null=True)
+    review = models.IntegerField(blank=True, null=True)
+    classfication = models.CharField(max_length=255, blank=True, null=True)
+    address = models.CharField(max_length=255, blank=True, null=True)
+    explain = models.CharField(max_length=255, blank=True, null=True)
+    url = models.TextField(blank=True, null=True)
+    img = models.TextField(blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'restaurant'
