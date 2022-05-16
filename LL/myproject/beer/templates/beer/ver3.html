@@ -10,8 +10,11 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"
     integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd"
     crossorigin="anonymous"></script>
+  <script src="../../static/js/slide.js"></script>
   <link rel="stylesheet" href={% static 'css/style.css' %}>
   <link rel="stylesheet" href={% static 'css/reset.css' %}>
+  <link rel="stylesheet" hrer={% static 'css/forms.css' %}>
+  <link rel="icon" type="image/x-icon" href={% static 'favicon/favicon.ico' %}>
   <meta charset="UTF-8">
   <title>테마별 추천</title>
   <style>
@@ -55,8 +58,8 @@
   <div class="nav-comtain">
     <nav>
       <a href="/">HOME</a>
-      <a href="{% url 'ver2'%}">EXPERIENCE</a>
-      <a href="{% url 'ver3'%}">THEME</a>
+      <a href="{% url 'beer:ver2_select'%}">EXPERIENCE</a>
+      <a href="{% url 'beer:ver3_select'%}">THEME</a>
       {% if login_session%}
       <a href="{% url 'user:logout' %}"><button class="logout-btn">LOGOUT</button></a>
       {% else %}
@@ -72,77 +75,73 @@
   </div>
   <div class="ver3-contain">
     <form class="ver3-form" method="POST">
-      <div class="ver3-select">
-        {% comment %} <div class="ver3-destination">
-          <span class="ver3-destination-span">목적지</span><br />
-          <select class="ver3-destination-detail">
-            <option class="optionbox" value='' selected>선택</option>
-            <option class="optionbox" value='seoul'>서울</option>
-            <option class="optionbox" value='gangwon'>강원도</option>
-            <option class="optionbox" value='gyeonggi'>경기도</option>
-            <option class="optionbox" value='chungcheongbuk'>충청북도</option>
-            <option class="optionbox" value='chungcheongnam'>충청남도</option>
-            <option class="optionbox" value='gyeongsangbuk'>경상북도</option>
-            <option class="optionbox" value='gyeongsanganm'>경상남도</option>
-            <option class="optionbox" value='jeollabuk'>전라북도</option>
-            <option class="optionbox" value='Jeollanam'>전라남도</option>
-          </select>
-        </div> {% endcomment %}
-        <div class="ver3-startday">
-          <span class="ver3-startday-span">출발일 </span><br /><input type="date" class="ver3-startday-detail">
-        </div>
-        <div class="ver3-combackday">
-          <span class="ver3-startday-span">복귀일 </span><br /><input type="date" class="ver3-startday-detail">
-        </div>
-        <div class="ver3-human">
-          <span class="ver3-human-span">인원수 </span><br /><select class="ver3-human-detail">
-            <option class="optionbox" value='' selected>선택</option>
-            <option class="optionbox" value='one'>1</option>
-            <option class="optionbox" value='two'>2</option>
-            <option class="optionbox" value='tree'>3</option>
-            <option class="optionbox" value='four'>4</option>
-            <option class="optionbox" value='five'>5</option>
-            <option class="optionbox" value='six'>6</option>
-            <option class="optionbox" value='seven'>7~10</option>
-            <option class="optionbox" value='eight'>11~15</option>
-          </select>
-        </div>
-      </div>
       {% csrf_token %}
-      <br />
+      <ul class="ver3-from-contain">
+        <li class="question" id="q1">
+          <div class="ver3-form-in">
+            <span class="ver3-form-num">Q 01.</span>
+            <div class="ver3-form-head">여행을 갈때 함께한다면?</div>
+            <label class="ver3-form-label" for="form-answer-1"><input id="form-answer-1" type="radio" name="together"
+                value="alone" onclick="nextlabel1();"><span class="form-content-p">난 죽어도 혼자!</span></label></br>
+            <label class="ver3-form-label" for="form-answer-2"><input id="form-answer-2" type="radio" name="together"
+                value="date" onclick="nextlabel1();"><span class="form-content-p">연인과 함께</span></label></br>
+            <label class="ver3-form-label" for="form-answer-3"><input id="form-answer-3" type="radio" name="together"
+                value="family" onclick="nextlabel1();"><span class="form-content-p">가족들이랑</span></label>
+          </div>
+        </li>
+        <li class="question" id="q2">
+          <div class="ver3-form-in">
+            <span class="ver3-form-num">Q 02.</span>
+            <div class="ver3-form-head">어떤 장소가 좋나요?</div>
+            <label class="ver3-form-label" for="form-answer-4"><input id="form-answer-4" type="radio" name="style"
+                value="foreign" onclick="nextlabel2();"><span class="form-content-p">이국적 스타일</span></label></br>
+            <label class="ver3-form-label" for="form-answer-5"><input id="form-answer-5" type="radio" name="style"
+                value="tradition" onclick="nextlabel2();"><span class="form-content-p">전통 스타일</span></label>
+          </div>
+        </li>
+        <li class="question" id="q3">
+          <div class="ver3-form-in">
+            <span class="ver3-form-num">Q 03.</span>
+            <div class="ver3-form-head">걷는 걸 좋아하나요?</div>
+            <label class="ver3-form-label" for="form-answer-6"><input id="form-answer-6" type="radio" name="walking"
+                value="walk" onclick="nextlabel3();"><span class="form-content-p">산책이 좋아요~</span></label></br>
+            <label class="ver3-form-label" for="form-answer-7"><input id="form-answer-7" type="radio" name="walking"
+                value="drive" onclick="nextlabel3();"><span class="form-content-p">차가 좋아요</span></label>
+          </div>
+        </li>
 
-      <div class="ver3-tema"><span class="ver3-tema-span">#테마</span><br />
-        <div class="ver3-tema-contain">
-          <label class="tema-label"><input onclick="CountChecked(this)" type="checkbox" name="detail"
-              value="food">음식</label>
-          <label class="tema-label"><input onclick="CountChecked(this)" type="checkbox" name="detail"
-              value="walk">산책</label>
-          <label class="tema-label"><input onclick="CountChecked(this)" type="checkbox" name="detail"
-              value="nature">자연경관</label>
-          <label class="tema-label"><input onclick="CountChecked(this)" type="checkbox" name="detail"
-              value="culture">전통</label>
-          <br><br>
-          <label class="tema-label"><input onclick="CountChecked(this)" type="checkbox" name="detail"
-              value="date">데이트</label>
-          <label class="tema-label"><input onclick="CountChecked(this)" type="checkbox" name="detail"
-              value="sleep">휴식</label>
-          <label class="tema-label"><input onclick="CountChecked(this)" type="checkbox" name="detail"
-              value="drive">드라이브</label>
-          <label class="tema-label"><input onclick="CountChecked(this)" type="checkbox" name="detail"
-              value="night">야경</label>
-          <br><br>
-          <label class="tema-label"><input onclick="CountChecked(this)" type="checkbox" name="detail"
-              value="fori">이국적</label>
-          <label class="tema-label"><input onclick="CountChecked(this)" type="checkbox" name="detail"
-              value="sns">SNS감성</label>
-          <label class="tema-label"><input onclick="CountChecked(this)" type="checkbox" name="detail"
-              value="family">가족</label>
-          <label class="tema-label"><input onclick="CountChecked(this)" type="checkbox" name="detail"
-              value="view">경치</label>
-          <br><br>
-          <input class="btn-submit" type="submit" value="Pick!" />
-        </div>
-      </div>
+
+        <li class="question" id="q4">
+          <div class="ver3-form-in">
+            <span class="ver3-form-num">Q 04.</span>
+            <div class="ver3-form-head">이번 여행의 테마는?</div>
+            <label class="ver3-form-label" for="form-answer-8"><input id="form-answer-8" type="radio" name="theme"
+                value="food" onclick="nextlabel4();"><span class="form-content-p">먹방</span></label></br>
+            <label class="ver3-form-label" for="form-answer-9"><input id="form-answer-9" type="radio" name="theme"
+                value="picture" onclick="nextlabel4();"><span class="form-content-p">사진찍기</span></label></br>
+            <label class="ver3-form-label" for="form-answer-10"><input id="form-answer-10" type="radio" name="theme"
+                value="sleep" onclick="nextlabel4();"><span class="form-content-p">여유로운 휴식</span></label>
+          </div>
+        </li>
+        <li class="question" id="q5">
+          <div class="ver3-form-in">
+            <span class="ver3-form-num">Q 05.</span>
+            <div class="ver3-form-head">어떤 스타일의 뷰를 좋아하나요?</div>
+            <label class="ver3-form-label" for="r11"><input id="r11" type="radio" name="view" value="city"
+                onclick="nextlabel5();"><span class="form-content-p">시티</span></label></br>
+            <label class="ver3-form-label" for="form-answer-12"><input id="form-answer-12" type="radio" name="view"
+                value="nature" onclick="nextlabel5();"><span class="form-content-p">자연</span></label>
+          </div>
+        </li>
+        <li class="question" id="q6">
+          <div class="ver3-form-in">
+            <div class="btn-section">
+              <button class="btn-submit" type="submit" ><a href="{% url 'beer:ver3_session'%}"><Pick/a></button>
+              
+            </div>
+          </div>
+        </li>
+      </ul>
     </form>
   </div>
   <div id='contents' style="text-align:center;">
@@ -151,25 +150,7 @@
 
     </div>
   </div>
-  <script type="text/javascript">
-    var maxCount = 3;								// 카운트 최대값은 3
-    var count = 0;   								// 카운트, 0으로 초기화 설정
 
-    function CountChecked(field) { 					// field객체를 인자로 하는 CountChecked 함수 정의
-      if (field.checked) {						// 만약 field의 속성이 checked 라면(사용자가 클릭해서 체크상태가 된다면)
-        count += 1;								// count 1 증가
-      }
-      else {										// 아니라면 (field의 속성이 checked가 아니라면)
-        count -= 1;								// count 1 감소
-      }
-
-      if (count > maxCount) {						// 만약 count 값이 maxCount 값보다 큰 경우라면
-        alert("최대 3개까지만 선택가능합니다!");	// alert 창을 띄움
-        field.checked = false;						// (마지막 onclick한)field 객체의 checked를 false(checked가 아닌 상태)로 만든다.
-        count -= 1;									// 이때 올라갔던 카운트를 취소처리해야 하므로 count를 1 감소시킨다.
-      }
-    }
-  </script>
   <footer class="footer" style="margin-top:56vh;">
     <div class="footer-addr">
       <div style="text-align:left">

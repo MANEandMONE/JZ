@@ -38,8 +38,8 @@
     <div class="nav-comtain">
         <nav>
             <a href="/">HOME</a>
-            <a href="{% url 'beer:ver2'%}">EXPERIENCE</a>
-            <a href="{% url 'beer:ver3'%}">THEME</a>
+            <a href="{% url 'beer:ver2_select'%}">EXPERIENCE</a>
+            <a href="{% url 'beer:ver3_select'%}">THEME</a>
             {% if login_session%}
             <a href="{% url 'user:logout' %}"><button>로그아웃</button></a>
             {% else %}

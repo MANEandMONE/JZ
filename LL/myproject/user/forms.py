@@ -39,6 +39,9 @@ class RegisterForm(forms.ModelForm):
                                     'required': '닉네임을 입력해주세요.',
                                     'unique': '중복된 아이디입니다.'
                                 })
+    user_gender = forms.ChoiceField(label='성별',
+                                    required=True,
+                                    widget=forms.Select())
     user_email = forms.EmailField(label='이메일',
                                   required=True,
                                   widget=forms.EmailInput(attrs={
@@ -51,12 +54,19 @@ class RegisterForm(forms.ModelForm):
                                   })
 
     field_order = [
-        'user_id', 'user_pw', 'user_pw_confirm', 'user_name', 'user_email'
+        'user_id',
+        'user_pw',
+        'user_pw_confirm',
+        'user_name',
+        'user_gender',
+        'user_email',
     ]
 
     class Meta:
         model = User
-        fields = ['user_id', 'user_pw', 'user_name', 'user_email']
+        fields = [
+            'user_id', 'user_pw', 'user_name', 'user_email', 'user_gender'
+        ]
 
     def clean(self):
         cleaned_data = super().clean()
@@ -66,6 +76,7 @@ class RegisterForm(forms.ModelForm):
         user_pw_confirm = cleaned_data.get('user_pw_confirm', '')
         user_name = cleaned_data.get('user_name', '')
         user_email = cleaned_data.get('user_email', '')
+        user_gender = cleaned_data.get('user_gender', '')
 
         if user_pw != user_pw_confirm:
             return self.add_error('user_pw_confirm', '비밀번호가 다릅니다.')

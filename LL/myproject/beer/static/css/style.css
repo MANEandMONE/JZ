@@ -2,6 +2,7 @@
     font-family:"jua";
     src: url(../font/BMJUA_ttf.ttf);
 }
+summary::-webkit-details-marker {display: none;}
 
 body {
     background-color: #f8f8ff;
@@ -230,6 +231,21 @@ nav a:nth-child(5):hover ~ #indicator
     outline: 0;
     transition: 0.2s ease color;
 }
+.logout-btn {
+    position: relative;
+    /* width: 100px; */
+    display: table-cell;
+    text-align: center;
+    background-color: #f8f8ff;
+    color: #949494;
+    text-decoration: none !important; 
+    font-weight: bold;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border: 0;
+    outline: 0;
+    transition: 0.2s ease color;
+}
 .join-btn {
     position: relative;
     /* width: 100px; */
@@ -285,6 +301,7 @@ nav a:nth-child(5):hover ~ #indicator
 .ver3-form {
     padding-top: 4%;
     padding-left: 8%;
+    padding-right: 8%;
     margin: 0 auto;
     overflow: hidden;
 }
@@ -364,62 +381,75 @@ nav a:nth-child(5):hover ~ #indicator
 }
 /* ver3 결과*/
 
-.ver3-wrapper {
-    padding-top: 5%;
-    text-align: center;
-    background-color: #F5F5F5;
-}
+    .ver3-wrapper {
+        padding-top: 5%;
+        text-align: left;
+        background-color: #F5F5F5;
+        padding-left: 10%;
+        padding-right: 10%;
+    }
 
-.ver3-result-contain {
-    display: block;
-    padding-bottom: 3%;
-}
+    .ver3-result-contain {
+        display: block;
+        padding-bottom: 3%;
+    }
 
 
-.ver3-result-info {
-    display: inline-block;
-    font-family: "jua";
-    font-size: 1.2vw;
-    background-color: #77cdd3;
-    color: #fff;
-    width: 10vw;
-    height: 5vh;
-    padding-top: 3vh;
-    text-align: center;
-    border-radius:25px ;
-    margin-right: 1%;
-}
-.ver3-result-hotel {
-    display: inline-block;
-    font-family: "jua";
-    font-size: 1.2vw;
-    background-color: #B8B783;
-    color: #fff;
-    width: 10vw;
-    height: 5vh;
-    padding-top: 3vh;
-    text-align: center;
-    border-radius:25px ;
-}
-.result-h2{
-    margin-top: 1%;
-}
-.hotel-img {
-    width: 25vw;
-    height: 45vh;
-    border-radius: 0.5vw;
-    margin-right: 1vw;
-}
+    .ver3-result-info {
+        display: inline-block;
+        font-family: "jua";
+        font-size: 1.2vw;
+        background-color: #77cdd3;
+        color: #fff;
+        width: 10vw;
+        height: 5vh;
+        padding-top: 3vh;
+        text-align: left;
+        border-radius:25px ;
+        margin-right: 1%;
+    }
+    .ver3-result-hotel {
+        display: inline-block;
+        font-family: "jua";
+        font-size: 1.2vw;
+        background-color: #B8B783;
+        color: #fff;
+        width: 10vw;
+        height: 5vh;
+        padding-top: 3vh;
+        text-align: left;
+        border-radius:25px ;
+    }
+    .result-h2{
+        margin-top: 1%;
+        width: 100%;
+        display: inline-block;
+        padding-left: 2%;
+    }
+
+    .hotel-img {
+        width: 15vw;
+        height: 25vh;
+        border-radius: 0.5vw;
+        margin-right: 1vw;
+    }
+    .restaurant-contain {
+        margin-top: 0;
+    }
 
 .hotel-contain {
+    z-index: 1;
     display: inline-block;
     width: 62vw;
-    height: 52vh;
+    height: 30vh;
     position: relative;
+    margin-top: 1.5vh;
+    border: solid 1px slategray;
+    margin-left: 10vw;
 }
 .hotel-contain-left {
-    padding-top: 3.5vh;
-    width: 42%;
+    padding-top: 2.5vh;
+    width: 20%;
     background: #e9ecef;
     height: 100%;
     float: left;
@@ -430,8 +460,8 @@ nav a:nth-child(5):hover ~ #indicator
 }
 
 .hotel-contain-right {
-    padding-top: 4.5vh;
-    width: 58%;
+    padding-top: 3.5vh;
+    width: 73%;
     background: #e9ecef;
     height: 100%;
     float: right;
@@ -440,7 +470,7 @@ nav a:nth-child(5):hover ~ #indicator
 }
 .classfication {
     color: #D82148;
-    font-size: 1.6vw;
+    font-size: 1.2vw;
     margin-bottom: 2%;
 }
 .rate-and-review {
@@ -457,18 +487,27 @@ nav a:nth-child(5):hover ~ #indicator
     padding-bottom: 9vh;
 }
 
+.result-wrapper {
+    display: flex;
+    margin-bottom: 4vh
+}
+
+
 .result-img {
     border:1px solid 1px;
-    border-radius: 3vw;
+    border-radius: 2vw;
     display: inline-block;
     text-align:center;
-    width:45vw;
-    height:70vh;
+    min-width:20vw;
+    min-height:35vh;
+    max-width: 20vw;
+    max-height: 35vh;
+
 }
 .hotel-book {
     position: absolute;
     bottom: 0px;
-    right: 0px;
+    right: 0vw;
     background-color: #1C658C;
     width:7vw;
     height: 5vh;
@@ -495,7 +534,7 @@ nav a:nth-child(5):hover ~ #indicator
 .restaurant-book {
     position: absolute;
     bottom: 0px;
-    right: 0px;
+    right: 1%;
     background-color: #1C658C;
     width:7vw;
     height: 5vh;
@@ -649,3 +688,76 @@ footer {
       flex: 2 0px;
     }
   }
+
+.page-btn {
+    display: absolute;
+}
+
+/* 설문조사 */
+
+.ver3-from-contain {
+    background-color: #fff;
+    overflow:hidden;
+    height: 50vh;
+    width: 48vw;
+    display: flex;
+}
+.ver3-form-in {
+    box-sizing: border-box;
+    padding-top: 8%;
+    text-align: center;
+    width: 48vw;
+    height: 50vh;
+    /* border: 1px solid #000; */
+}
+.ver3-form-num {
+    font-size: 1.5vw;
+    margin-bottom:16px;
+    font-size:40px;
+    display:block;
+    font-weight:bold;
+    text-align:center;
+    color:#77cdd3;
+    text-shadow:1px 1px 1px #000;
+}
+.ver3-form-head {
+    font-size: 2vw;
+    margin-bottom: 10px;
+}
+.ver3-form-in label {
+    cursor: pointer;;
+}
+
+.form-content-p {
+    font-size: 2.5vw;
+}
+
+
+.ver3-form-label input[type="radio"]{
+	display:none;
+}
+
+.ver3-form-label input[type="radio"] + span{
+	display:inline-block;
+    border: 3px solid #77cdd3;
+    border-radius: 10px;
+	background:none;
+	padding:7px 10px 10px;
+	text-align:center;
+    width: 25vw;
+	height:7vh;
+	font-weight:500;
+	cursor:pointer;
+    margin-bottom: 10px;
+}
+
+.ver3-form-label input[type="radio"]:checked + span{
+	border:3px solid #6fbec4;
+    border-radius: 10px;
+	background:#77cdd3;
+	color:#fff;
+}
+
+.btn-section {
+    padding-top: 12%;
+}

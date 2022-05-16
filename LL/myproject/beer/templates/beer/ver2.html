@@ -71,8 +71,8 @@
     <div class="nav-comtain">
         <nav>
             <a href="/">HOME</a>
-            <a href="{% url 'beer:ver2'%}">EXPERIENCE</a>
-            <a href="{% url 'beer:ver3'%}">THEME</a>
+            <a href="{% url 'beer:ver2_select'%}">EXPERIENCE</a>
+            <a href="{% url 'beer:ver3_select'%}">THEME</a>
             {% if login_session%}
             <a href="{% url 'user:logout' %}"><button class="logout-btn">LOGOUT</button></a>
             {% else %}
@@ -93,7 +93,7 @@
         <form method="POST" id="ver2-form" style="text-align:center;">
             <br>
             {% csrf_token %}
- 
+
             여행지 :
             <select name="beer" style="margin-top:5%">
                 {% for tmp in beer_list %}
@@ -103,8 +103,8 @@
             {% comment %} <button type='submit'>Pick!</button> {% endcomment %}
             <input class="btn-submit" type="submit" value="Pick!">
             <a href="{% url 'beer:ver2_session'%}">다음 페이지 이동</a>
-            
-            
+
+
 
 
 

@@ -1,4 +1,5 @@
 from django.db import models
+from .models import *
 
 
 class AuthGroup(models.Model):
@@ -169,3 +170,44 @@ class Restaurant(models.Model):
     class Meta:
         managed = False
         db_table = 'restaurant'
+
+
+class Merge(models.Model):
+    index = models.IntegerField(primary_key=True)
+    장소 = models.CharField(max_length=255, blank=True, null=True)
+    아이디 = models.CharField(max_length=255, blank=True, null=True)
+    평점 = models.IntegerField(blank=True, null=True)
+    평균평점 = models.FloatField(blank=True, null=True)
+    리뷰개수 = models.CharField(max_length=255, blank=True, null=True)
+    구분 = models.CharField(max_length=255, blank=True, null=True)
+    주소 = models.CharField(max_length=255, blank=True, null=True)
+    설명 = models.CharField(max_length=255, blank=True, null=True)
+    like = models.IntegerField(blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'merge'
+
+
+class Cart(models.Model):
+    cart_id = models.IntegerField(primary_key=True)
+    user = models.ForeignKey('user.User',
+                             models.DO_NOTHING,
+                             blank=True,
+                             null=True)
+    hotel = models.ForeignKey('beer.Hotel',
+                              models.DO_NOTHING,
+                              blank=True,
+                              null=True)
+    restaurant = models.ForeignKey('beer.Restaurant',
+                                   models.DO_NOTHING,
+                                   blank=True,
+                                   null=True)
+    tour = models.ForeignKey('beer.Tour',
+                             models.DO_NOTHING,
+                             blank=True,
+                             null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'cart'

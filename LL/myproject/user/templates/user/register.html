@@ -27,12 +27,29 @@
             <div class="login-head">JOIN</div>
             {% csrf_token %}
 
-            {% for form in forms %}
+            
             <div>
                 <label for="{{ form.id_for_label }}" class="form-font">{{ form.label }}</label>
-                {{ form }}
+                {{ forms.user_id }}
+                
+                <label for="{{ form.id_for_label }}" class="form-font">{{ form.label }}</label>
+                {{ forms.user_pw }}
+
+                <label for="{{ form.id_for_label }}" class="form-font">{{ form.label }}</label>
+                {{ forms.user_pw_confirm }}
+
+                <label for="{{ form.id_for_label }}" class="form-font">{{ form.label }}</label>
+                {{ forms.user_name }}
+
+                
+                {{ forms.user_gender }}
+
+                <label for="{{ form.id_for_label }}" class="form-font">{{ form.label }}</label>
+                {{ forms.user_email }}
+
+
             </div>
-            {% endfor %}
+
 
             {% if error %}
             {{ error }}

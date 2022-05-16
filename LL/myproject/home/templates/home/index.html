@@ -33,8 +33,8 @@
     <div class="nav-comtain">
         <nav>
             <a href="/">HOME</a>
-            <a href="{% url 'beer:ver2'%}">EXPERIENCE</a>
-            <a href="{% url 'beer:ver3'%}">THEME</a>
+            <a href="{% url 'beer:ver2_select'%}">EXPERIENCE</a>
+            <a href="{% url 'beer:ver3_select'%}">THEME</a>
             {% if login_session%}
             <a href="{% url 'user:logout' %}"><button class="logout-btn">LOGOUT</button></a>
             {% else %}
@@ -49,8 +49,8 @@
         <a class="header-a" onclick="location.href='/'">너와 나드리</a>
     </div>
     <div id="recommendation">
-        <a class="recommendation-ver1" href="{% url 'beer:ver2'%}">1. 경험으로 추천받기</a>
-        <a class="recommendation-ver3" href="{% url 'beer:ver3'%}">2. 테마로 추천받기</a><br><br>
+        <a class="recommendation-ver1" href="{% url 'beer:ver2_select'%}">1. 경험으로 추천받기</a>
+        <a class="recommendation-ver3" href="{% url 'beer:ver3_select'%}">2. 테마로 추천받기</a><br><br>
     </div>
     <footer class="footer">
         <div class="footer-addr">

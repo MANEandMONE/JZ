@@ -38,8 +38,8 @@
     <div class="nav-comtain">
         <nav>
             <a href="/">HOME</a>
-            <a href="{% url 'beer:ver2'%}">EXPERIENCE</a>
-            <a href="{% url 'beer:ver3'%}">THEME</a>
+            <a href="{% url 'beer:ver2_select'%}">EXPERIENCE</a>
+            <a href="{% url 'beer:ver3_select'%}">THEME</a>
             {% if login_session%}
             <a href="{% url 'user:logout' %}"><button class="logout-btn">LOGOUT</button></a>
             {% else %}
@@ -108,11 +108,12 @@
                         {% for a in posts %}
                     <div class="hotel-contain">
             </form>
+
             <div class="hotel-contain-left">
-
                 <div class="col-4">
-
                 </div>
+                <form method="POST" action="{% url 'beer:cart_add'%}" >
+                {% csrf_token %}
                 <a href='{{a.url}}'><img class="hotel-img" src='{{a.img}}' alt="사진은 수집중입니다😢"></a><br><br>
             </div>
             <div class="hotel-contain-right">
@@ -121,16 +122,17 @@
                 <div class="distance"></div>
                 <div class="explain"></div>
                 <p class="rate-and-review">👍{{a.rating}} {{a.distance}} {{a.address}}
-                    {{a.kind}} {{a.clean}} {{a.conv}} <br> {{a.explain}}</p>
+                    {{a.kind}} {{a.clean}} {{a.conv}}</p>
                 <div class="hotel-cost">{{a.cost}}</div>
-                <div class="hotel-book"><input type="submit" ,value="찜하기"></div>
-
+                <div class="hotel-book"><input type="submit" value="찜하기"></div>
+                </form>
             </div>
             <hr width="70%">
         </div>
         {% endfor %}
         {% endif %}
         </p>
+
         <div style="text-align:center">
             <div class="pagination">
                 {% if posts.has_previous %}
@@ -142,12 +144,10 @@
 
                 {% if posts.has_next %}
                 <button name="page" value="{{posts.next_page_number}}">Next</button>
-                <button name="page" value="{{posts.next_page_number}}">Last</a>
                     {% endif %}
             </div>
         </div>
     </div>
-    </from>
     <div id="toc-content30">
         <form method="GET">
             <input type="radio" name="rating1" value="rating1">평점 순
@@ -155,6 +155,8 @@
             <button class="btn btn-primary" type="submit" value="">정렬</button>
         </form>
         <p>
+            <form method="POST">
+            {% csrf_token %}
             {% if content_list1.count > 0 %}
             {% for a in posts1 %}
         <div class="hotel-contain">
@@ -166,7 +168,8 @@
                 <div class="classfication">{{a.classfications}}</div>
                 <p class="rate-and-address">💗{{a.rating}} 📮주소 {{a.address}} </p>
                 <p class="restaurant-hour">⏰영업시간{{a.explain}}</p>
-                <div class="restaurant-book">예약하기</div>
+                <div class="restaurant-book"><button type="submit">찜하기</button></div>
+            </form>
             </div>
             <hr width="70%">
         </div>
@@ -174,18 +177,18 @@
         {% endif %}
         </p>
         <div style="text-align:center">
-            <div class="pagination">
-                {% if posts.has_previous %}
-                <button name="page" value="1">First</button>
-                <button name="page" value="{{posts.previous_page_number}}">Previous</button>
+            <div class="pagination1">
+                {% if posts1.has_previous %}
+                    <button name="page1" value="1">First</button>
+                    <a href="http://localhost:8000/%2Fver2_session?page1={{posts1.previous_page_number}}">Previous</a>
                 {% endif %}
 
-                <span>{{posts.number}} / {{posts.paginator.num_pages}}</span>
+                <span>{{posts1.number}} / {{posts1.paginator.num_pages}}</span>
 
-                {% if posts.has_next %}
-                <button name="page" value="{{posts.next_page_number}}">Next</button>
-                <button name="page" value="{{posts.next_page_number}}">Last</a>
-                    {% endif %}
+                {% if posts1.has_next %}
+                    <a href="http://localhost:8000/%2Fver2_session?page1={{posts1.next_page_number}}">Next</a>
+
+                {% endif %}
             </div>
         </div>
     </div>
