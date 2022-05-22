@@ -136,12 +136,12 @@ def recomm_feature(df):
 
 def recomm_beer(item_sim_df, beer_name):
     # 해당 도시와 유사도가 높은 도시 5개만 추천
-    return item_sim_df[beer_name].sort_values(ascending=False)[1:10]
+    return item_sim_df[beer_name].sort_values(ascending=False)[0:10]
 
 
 def recomm_detail(item_sim_df, detail):
     # 해당 도시와 유사도가 높은 도시 5개만 추천
-    return item_sim_df[detail].sort_values(ascending=False)[1:10]
+    return item_sim_df[detail].sort_values(ascending=False)[0:10]
 
 
 # 선택한 관광지 세션 저장
@@ -305,7 +305,7 @@ def ver2_session(request):
 
     result = recomm_beer(df, beer_name)
     result = result.index.tolist()
-
+    print(result)
     # 로그인 세션 유지
     login_session = request.session.get('login_session')
 
@@ -459,7 +459,7 @@ def ver2_session(request):
     else:
         content_list = Hotel.objects.filter(place=result[0])
 
-    # 식당 정보 필터링
+    # 첫번째 관광지 식당 정보 필터링
     if rating1 == 'rating1':
         content_list1 = Restaurant.objects.filter(
             place=result[0]).order_by('-rating')
@@ -470,18 +470,338 @@ def ver2_session(request):
     else:
         content_list1 = Restaurant.objects.filter(place=result[0])
 
-    # 숙박시설 정보 Pagination
+    # 첫번째 관광지숙박시설 정보 Pagination
     page = request.GET.get('page', 1)
     paginator = Paginator(content_list, 10)
     posts = paginator.get_page(page)
 
-    # 식당 정보 Pagination
+    # 첫번째 관광지식당 정보 Pagination
     page1 = request.GET.get('page1', 1)
     paginator1 = Paginator(content_list1, 10)
     posts1 = paginator1.get_page(page1)
 
+    # 두번째 관광지 숙소
+    if rating == 'rating':
+        content_list2 = Hotel.objects.filter(
+            place=result[1]).order_by('-rating')
+
+    elif distance == 'distance':
+        content_list2 = hotel1_distance_up = Hotel.objects.filter(
+            place=result[1]).order_by('distance')
+
+    elif cost == 'cost_down':
+        content_list2 = Hotel.objects.filter(place=result[1]).order_by('-cost')
+
+    elif cost == 'cost_up':
+        content_list2 = Hotel.objects.filter(place=result[1]).order_by('cost')
+
+    elif sort == 'hotell':
+        content_list2 = Hotel.objects.filter(place=result[1],
+                                             classfication='호텔')
+
+    elif sort == 'hotell' and cost == 'cost_down':
+        content_list2 = Hotel.objects.filter(
+            place=result[1], classfication='호텔').order_by('-cost')
+
+    elif sort == 'hotell' and cost == 'cost_up':
+        content_list2 = Hotel.objects.filter(
+            place=result[1], classfication='호텔').order_by('cost')
+
+    elif sort == 'hotell' and rating == 'rating':
+        content_list2 = Hotel.objects.filter(
+            place=result[1], classfication='호텔').order_by('-rating')
+
+    elif sort == 'hotell' and distance == 'distance':
+        content_list2 = Hotel.objects.filter(
+            place=result[1], classfication='호텔').order_by('distance')
+
+    elif sort == 'guesthouse':
+        content_list2 = Hotel.objects.filter(place=result[1],
+                                             classfication='호텔')
+
+    elif sort == 'guesthouse' and cost == 'cost_down':
+        content_list2 = Hotel.objects.filter(
+            place=result[1], classfication='게스트하우스').order_by('-cost')
+
+    elif sort == 'guesthouse' and cost == 'cost_up':
+        content_list2 = Hotel.objects.filter(
+            place=result[1], classfication='게스트하우스').order_by('cost')
+
+    elif sort == 'guesthouse' and rating == 'rating':
+        content_list2 = Hotel.objects.filter(
+            place=result[1], classfication='게스트하우스').order_by('-rating')
+
+    elif sort == 'guesthouse' and distance == 'distance':
+        content_list2 = Hotel.objects.filter(
+            place=result[1], classfication='게스트하우스').order_by('distance')
+
+    elif sort == 'hostel':
+        content_list2 = Hotel.objects.filter(place=result[1],
+                                             classfication='호스텔')
+
+    elif sort == 'hostel' and cost == 'cost_down':
+        content_list2 = Hotel.objects.filter(
+            place=result[1], classfication='호스텔').order_by('-cost')
+
+    elif sort == 'hostel' and cost == 'cost_up':
+        content_list2 = Hotel.objects.filter(
+            place=result[1], classfication='호스텔').order_by('cost')
+
+    elif sort == 'hostel' and rating == 'rating':
+        content_list2 = Hotel.objects.filter(
+            place=result[1], classfication='호스텔').order_by('-rating')
+
+    elif sort == 'hostel' and distance == 'distance':
+        content_list2 = Hotel.objects.filter(
+            place=result[1], classfication='호스텔').order_by('distance')
+
+    elif sort == 'pension':
+        content_list2 = Hotel.objects.filter(place=result[1],
+                                             classfication='펜션')
+
+    elif sort == 'pension' and cost == 'cost_down':
+        content_list2 = Hotel.objects.filter(
+            place=result[1], classfication='펜션').order_by('-cost')
+
+    elif sort == 'pension' and cost == 'cost_up':
+        content_list2 = Hotel.objects.filter(
+            place=result[1], classfication='펜션').order_by('cost')
+
+    elif sort == 'pension' and rating == 'rating':
+        content_list2 = Hotel.objects.filter(
+            place=result[1], classfication='펜션').order_by('-rating')
+
+    elif sort == 'pension' and distance == 'distance':
+        content_list2 = Hotel.objects.filter(
+            place=result[1], classfication='펜션').order_by('distance')
+
+    elif sort == 'motel':
+        content_list2 = Hotel.objects.filter(place=result[1],
+                                             classfication='모텔')
+
+    elif sort == 'motel' and cost == 'cost_down':
+        content_list2 = Hotel.objects.filter(
+            place=result[1], classfication='모텔').order_by('-cost')
+
+    elif sort == 'motel' and cost == 'cost_up':
+        content_list2 = Hotel.objects.filter(
+            place=result[1], classfication='모텔').order_by('cost')
+
+    elif sort == 'motel' and rating == 'rating':
+        content_list2 = Hotel.objects.filter(
+            place=result[1], classfication='모텔').order_by('-rating')
+
+    elif sort == 'motel' and distance == 'distance':
+        content_list2 = Hotel.objects.filter(
+            place=result[1], classfication='모텔').order_by('distance')
+
+    elif sort == 'resort':
+        content_list2 = Hotel.objects.filter(place=result[1],
+                                             classfication='리조트')
+
+    elif sort == 'resort' and cost == 'cost_down':
+        content_list2 = Hotel.objects.filter(
+            place=result[1], classfication='리조트').order_by('-cost')
+
+    elif sort == 'resort' and cost == 'cost_up':
+        content_list2 = Hotel.objects.filter(
+            place=result[1], classfication='리조트').order_by('cost')
+
+    elif sort == 'resort' and rating == 'rating':
+        content_list2 = Hotel.objects.filter(
+            place=result[1], classfication='리조트').order_by('-rating')
+
+    elif sort == 'resort' and distance == 'distance':
+        content_list2 = Hotel.objects.filter(
+            place=result[1], classfication='리조트').order_by('distance')
+
+    else:
+        content_list2 = Hotel.objects.filter(place=result[1])
+
+    # 두번째 관광지 식당 정보 필터링
+    if rating1 == 'rating1':
+        content_list3 = Restaurant.objects.filter(
+            place=result[1]).order_by('-rating')
+
+    elif review == 'review':
+        content_list3 = Restaurant.objects.filter(
+            place=result[1]).order_by('-review')
+    else:
+        content_list3 = Restaurant.objects.filter(place=result[1])
+
+    # 두번쨰 관광지 숙박시설 정보 Pagination
+    page2 = request.GET.get('page2', 1)
+    paginator2 = Paginator(content_list, 10)
+    posts2 = paginator2.get_page(page2)
+
+    # 두번째 관광지 식당 정보 Pagination
+    page3 = request.GET.get('page3', 1)
+    paginator3 = Paginator(content_list3, 10)
+    posts3 = paginator3.get_page(page3)
+
+    # 세번째 관광지 숙박시설 필터링
+    if rating == 'rating':
+        content_list4 = Hotel.objects.filter(
+            place=result[2]).order_by('-rating')
+
+    elif distance == 'distance':
+        content_list4 = hotel1_distance_up = Hotel.objects.filter(
+            place=result[2]).order_by('distance')
+
+    elif cost == 'cost_down':
+        content_list4 = Hotel.objects.filter(place=result[2]).order_by('-cost')
+
+    elif cost == 'cost_up':
+        content_list4 = Hotel.objects.filter(place=result[2]).order_by('cost')
+
+    elif sort == 'hotell':
+        content_list4 = Hotel.objects.filter(place=result[2],
+                                             classfication='호텔')
+
+    elif sort == 'hotell' and cost == 'cost_down':
+        content_list4 = Hotel.objects.filter(
+            place=result[2], classfication='호텔').order_by('-cost')
+
+    elif sort == 'hotell' and cost == 'cost_up':
+        content_list4 = Hotel.objects.filter(
+            place=result[2], classfication='호텔').order_by('cost')
+
+    elif sort == 'hotell' and rating == 'rating':
+        content_list4 = Hotel.objects.filter(
+            place=result[2], classfication='호텔').order_by('-rating')
+
+    elif sort == 'hotell' and distance == 'distance':
+        content_list4 = Hotel.objects.filter(
+            place=result[2], classfication='호텔').order_by('distance')
+
+    elif sort == 'guesthouse':
+        content_list4 = Hotel.objects.filter(place=result[2],
+                                             classfication='호텔')
+
+    elif sort == 'guesthouse' and cost == 'cost_down':
+        content_list4 = Hotel.objects.filter(
+            place=result[2], classfication='게스트하우스').order_by('-cost')
+
+    elif sort == 'guesthouse' and cost == 'cost_up':
+        content_list4 = Hotel.objects.filter(
+            place=result[2], classfication='게스트하우스').order_by('cost')
+
+    elif sort == 'guesthouse' and rating == 'rating':
+        content_list4 = Hotel.objects.filter(
+            place=result[2], classfication='게스트하우스').order_by('-rating')
+
+    elif sort == 'guesthouse' and distance == 'distance':
+        content_list4 = Hotel.objects.filter(
+            place=result[2], classfication='게스트하우스').order_by('distance')
+
+    elif sort == 'hostel':
+        content_list4 = Hotel.objects.filter(place=result[2],
+                                             classfication='호스텔')
+
+    elif sort == 'hostel' and cost == 'cost_down':
+        content_list4 = Hotel.objects.filter(
+            place=result[2], classfication='호스텔').order_by('-cost')
+
+    elif sort == 'hostel' and cost == 'cost_up':
+        content_list4 = Hotel.objects.filter(
+            place=result[2], classfication='호스텔').order_by('cost')
+
+    elif sort == 'hostel' and rating == 'rating':
+        content_list4 = Hotel.objects.filter(
+            place=result[2], classfication='호스텔').order_by('-rating')
+
+    elif sort == 'hostel' and distance == 'distance':
+        content_list4 = Hotel.objects.filter(
+            place=result[2], classfication='호스텔').order_by('distance')
+
+    elif sort == 'pension':
+        content_list4 = Hotel.objects.filter(place=result[2],
+                                             classfication='펜션')
+
+    elif sort == 'pension' and cost == 'cost_down':
+        content_list4 = Hotel.objects.filter(
+            place=result[2], classfication='펜션').order_by('-cost')
+
+    elif sort == 'pension' and cost == 'cost_up':
+        content_list4 = Hotel.objects.filter(
+            place=result[2], classfication='펜션').order_by('cost')
+
+    elif sort == 'pension' and rating == 'rating':
+        content_list4 = Hotel.objects.filter(
+            place=result[2], classfication='펜션').order_by('-rating')
+
+    elif sort == 'pension' and distance == 'distance':
+        content_list4 = Hotel.objects.filter(
+            place=result[2], classfication='펜션').order_by('distance')
+
+    elif sort == 'motel':
+        content_list4 = Hotel.objects.filter(place=result[2],
+                                             classfication='모텔')
+
+    elif sort == 'motel' and cost == 'cost_down':
+        content_list4 = Hotel.objects.filter(
+            place=result[2], classfication='모텔').order_by('-cost')
+
+    elif sort == 'motel' and cost == 'cost_up':
+        content_list4 = Hotel.objects.filter(
+            place=result[2], classfication='모텔').order_by('cost')
+
+    elif sort == 'motel' and rating == 'rating':
+        content_list4 = Hotel.objects.filter(
+            place=result[2], classfication='모텔').order_by('-rating')
+
+    elif sort == 'motel' and distance == 'distance':
+        content_list4 = Hotel.objects.filter(
+            place=result[2], classfication='모텔').order_by('distance')
+
+    elif sort == 'resort':
+        content_list4 = Hotel.objects.filter(place=result[2],
+                                             classfication='리조트')
+
+    elif sort == 'resort' and cost == 'cost_down':
+        content_list4 = Hotel.objects.filter(
+            place=result[2], classfication='리조트').order_by('-cost')
+
+    elif sort == 'resort' and cost == 'cost_up':
+        content_list4 = Hotel.objects.filter(
+            place=result[2], classfication='리조트').order_by('cost')
+
+    elif sort == 'resort' and rating == 'rating':
+        content_list4 = Hotel.objects.filter(
+            place=result[2], classfication='리조트').order_by('-rating')
+
+    elif sort == 'resort' and distance == 'distance':
+        content_list4 = Hotel.objects.filter(
+            place=result[2], classfication='리조트').order_by('distance')
+
+    else:
+        content_list4 = Hotel.objects.filter(place=result[2])
+
+    # 세번째 관광지 식당 정보 필터링
+    if rating1 == 'rating1':
+        content_list5 = Restaurant.objects.filter(
+            place=result[2]).order_by('-rating')
+
+    elif review == 'review':
+        content_list5 = Restaurant.objects.filter(
+            place=result[2]).order_by('-review')
+    else:
+        content_list5 = Restaurant.objects.filter(place=result[2])
+
+    # 세번째 관광지숙박시설 정보 Pagination
+    page4 = request.GET.get('page4', 1)
+    paginator4 = Paginator(content_list4, 10)
+    posts4 = paginator4.get_page(page4)
+
+    # 세번째 관광지식당 정보 Pagination
+    page5 = request.GET.get('page5', 1)
+    paginator5 = Paginator(content_list5, 10)
+    posts5 = paginator5.get_page(page5)
+
     return render(
-        request, 'beer/ver_result.html', {
+        request,
+        'beer/ver_result.html',
+        {
             'login_session': login_session,
             'result': result,
             'sort': sort,
@@ -490,10 +810,18 @@ def ver2_session(request):
             'distance': distance,
             'rating1': rating1,
             'review': review,
-            'posts': posts,
-            'posts1': posts1,
-            'content_list': content_list,
-            'content_list1': content_list1,
+            'posts': posts,  # 첫번째 관광지 숙소 페이지네이션
+            'posts1': posts1,  # 첫번째 관광지 음식점 페이지네이션
+            'posts2': posts2,  # 두번째 관광지 숙소 페이지네이션
+            'posts3': posts3,  # 두번째 관광지 음식점 페이지네이션
+            'posts4': posts4,  # 세번째 관광지 숙소 페이지네이션
+            'posts5': posts5,  # 세번째 관광지 음식점 페이지네이션
+            'content_list': content_list,  # 첫번째 관광지 숙소
+            'content_list1': content_list1,  # 첫번째 관광지 음식점
+            'content_list2': content_list2,  # 두번째 관광지 숙소
+            'content_list3': content_list3,  # 두번째 관광지 음식점
+            'content_list4': content_list4,  # 세번째 관광지 숙소
+            'content_list5': content_list5,  # 세번째 관광지 음식점
         })
 
 
@@ -539,9 +867,7 @@ def ver3_select(request):
                               view=request.POST['view'])
 
         detail_datas.save()
-        return render(request, 'beer/ver3.html', text)
-    else:
-        return render(request, 'beer/ver3.html', text)
+    return render(request, 'beer/ver3.html', text)
 
 
 def ver3_session(request):
@@ -592,229 +918,299 @@ def ver3_session(request):
 
     if detail == ['alone', 'food', 'foreign', 'walk', 'city']:
         result.extend(cst3_list)
+        random.shuffle(result)
 
     elif detail == ['alone', 'food', 'foreign', 'walk', 'nature']:
         result.extend(cst5_list)
+        random.shuffle(result)
 
     elif detail == ['alone', 'food', 'foreign', 'drive', 'city']:
         result.extend(cst6_list)
+        random.shuffle(result)
 
     elif detail == ['alone', 'food', 'foreign', 'drive', 'nature']:
         result.extend(cst1_list)
+        random.shuffle(result)
 
     elif detail == ['alone', 'food', 'tradition', 'walk', 'city']:
         result.extend(cst2_list)
+        random.shuffle(result)
 
     elif detail == ['alone', 'food', 'tradition', 'walk', 'nature']:
         result.extend(cst8_list)
+        random.shuffle(result)
 
     elif detail == ['alone', 'food', 'tradition', 'drive', 'city']:
         result.extend(cst7_list)
+        random.shuffle(result)
 
     elif detail == ['alone', 'food', 'tradition', 'drive', 'nature']:
         result.extend(cst9_list)
-
+        random.shuffle(result)
     ##
     elif detail == ['alone', 'picture', 'foreign', 'walk', 'city']:
         result.extend(cst3_list)
+        random.shuffle(result)
 
     elif detail == ['alone', 'picture', 'foreign', 'walk', 'nature']:
         result.extend(cst9_list)
+        random.shuffle(result)
 
     elif detail == ['alone', 'picture', 'foreign', 'drive', 'city']:
         result.extend(cst1_list)
+        random.shuffle(result)
 
     elif detail == ['alone', 'picture', 'foreign', 'drive', 'nature']:
         result.extend(cst5_list)
+        random.shuffle(result)
 
     elif detail == ['alone', 'picture', 'tradition', 'walk', 'city']:
         result.extend(cst0_list)
+        random.shuffle(result)
 
     elif detail == ['alone', 'picture', 'tradition', 'walk', 'nature']:
         result.extend(cst7_list)
+        random.shuffle(result)
 
     elif detail == ['alone', 'picture', 'tradition', 'drive', 'city']:
         result.extend(cst2_list)
+        random.shuffle(result)
 
     elif detail == ['alone', 'picture', 'tradition', 'drive', 'nature']:
         result.extend(cst8_list)
+        random.shuffle(result)
 
     ##
     elif detail == ['alone', 'sleep', 'foreign', 'walk', 'city']:
         result.extend(cst3_list)
+        random.shuffle(result)
 
     elif detail == ['alone', 'sleep', 'foreign', 'walk', 'nature']:
         result.extend(cst5_list)
+        random.shuffle(result)
 
     elif detail == ['alone', 'sleep', 'foreign', 'drive', 'city']:
         result.extend(cst4_list)
+        random.shuffle(result)
 
     elif detail == ['alone', 'sleep', 'foreign', 'drive', 'nature']:
         result.extend(cst6_list)
+        random.shuffle(result)
 
     elif detail == ['alone', 'sleep', 'tradition', 'walk', 'city']:
         result.extend(cst4_list)
+        random.shuffle(result)
 
     elif detail == ['alone', 'sleep', 'tradition', 'walk', 'nature']:
         result.extend(cst8_list)
+        random.shuffle(result)
 
     elif detail == ['alone', 'sleep', 'tradition', 'drive', 'city']:
         result.extend(cst7_list)
+        random.shuffle(result)
 
     elif detail == ['alone', 'sleep', 'tradition', 'drive', 'nature']:
         result.extend(cst0_list)
+        random.shuffle(result)
 
     ##
     elif detail == ['date', 'food', 'foreign', 'walk', 'city']:
         result.extend(cst3_list)
+        random.shuffle(result)
 
     elif detail == ['date', 'food', 'foreign', 'walk', 'nature']:
         result.extend(cst6_list)
+        random.shuffle(result)
 
     elif detail == ['date', 'food', 'foreign', 'drive', 'city']:
         result.extend(cst7_list)
+        random.shuffle(result)
 
     elif detail == ['date', 'food', 'foreign', 'drive', 'nature']:
         result.extend(cst5_list)
+        random.shuffle(result)
 
     elif detail == ['date', 'food', 'tradition', 'walk', 'city']:
         result.extend(cst4_list)
+        random.shuffle(result)
 
     elif detail == ['date', 'food', 'tradition', 'walk', 'nature']:
         result.extend(cst9_list)
+        random.shuffle(result)
 
     elif detail == ['date', 'food', 'tradition', 'drive', 'city']:
         result.extend(cst2_list)
+        random.shuffle(result)
 
     elif detail == ['date', 'food', 'tradition', 'drive', 'nature']:
         result.extend(cst8_list)
+        random.shuffle(result)
 
         ##
     elif detail == ['date', 'picture', 'foreign', 'walk', 'city']:
         result.extend(cst3_list)
+        random.shuffle(result)
 
     elif detail == ['date', 'picture', 'foreign', 'walk', 'nature']:
         result.extend(cst9_list)
+        random.shuffle(result)
 
     elif detail == ['date', 'picture', 'foreign', 'drive', 'city']:
         result.extend(cst1_list)
-
+        random.shuffle(result)
     elif detail == ['date', 'picture', 'foreign', 'drive', 'nature']:
         result.extend(cst5_list)
+        random.shuffle(result)
 
     elif detail == ['date', 'picture', 'tradition', 'walk', 'city']:
         result.extend(cst0_list)
+        random.shuffle(result)
 
     elif detail == ['date', 'picture', 'tradition', 'walk', 'nature']:
         result.extend(cst7_list)
+        random.shuffle(result)
 
     elif detail == ['date', 'picture', 'tradition', 'drive', 'city']:
         result.extend(cst2_list)
+        random.shuffle(result)
 
     elif detail == ['date', 'picture', 'tradition', 'drive', 'nature']:
         result.extend(cst8_list)
+        random.shuffle(result)
 
     ###
 
     elif detail == ['date', 'sleep', 'foreign', 'walk', 'city']:
         result.extend(cst3_list)
+        random.shuffle(result)
 
     elif detail == ['date', 'sleep', 'foreign', 'walk', 'nature']:
         result.extend(cst5_list)
+        random.shuffle(result)
 
     elif detail == ['date', 'sleep', 'foreign', 'drive', 'city']:
         result.extend(cst4_list)
+        random.shuffle(result)
 
     elif detail == ['date', 'sleep', 'foreign', 'drive', 'nature']:
         result.extend(cst6_list)
+        random.shuffle(result)
 
     elif detail == ['date', 'sleep', 'tradition', 'walk', 'city']:
         result.extend(cst0_list)
+        random.shuffle(result)
 
     elif detail == ['date', 'sleep', 'tradition', 'walk', 'nature']:
         result.extend(cst8_list)
+        random.shuffle(result)
 
     elif detail == ['date', 'sleep', 'tradition', 'drive', 'city']:
         result.extend(cst7_list)
+        random.shuffle(result)
 
     elif detail == ['date', 'sleep', 'tradition', 'drive', 'nature']:
         result.extend(cst4_list)
+        random.shuffle(result)
 
     ##1
     elif detail == ['family', 'food', 'foreign', 'walk', 'city']:
         result.extend(cst3_list)
+        random.shuffle(result)
 
     elif detail == ['family', 'food', 'foreign', 'walk', 'nature']:
         result.extend(cst6_list)
+        random.shuffle(result)
 
     elif detail == ['family', 'food', 'foreign', 'drive', 'city']:
         result.extend(cst7_list)
+        random.shuffle(result)
 
     elif detail == ['family', 'food', 'foreign', 'drive', 'nature']:
         result.extend(cst5_list)
+        random.shuffle(result)
 
     elif detail == ['family', 'food', 'tradition', 'walk', 'city']:
         result.extend(cst4_list)
+        random.shuffle(result)
 
     elif detail == ['family', 'food', 'tradition', 'walk', 'nature']:
         result.extend(cst9_list)
+        random.shuffle(result)
 
     elif detail == ['family', 'food', 'tradition', 'drive', 'city']:
         result.extend(cst2_list)
+        random.shuffle(result)
 
     elif detail == ['family', 'food', 'tradition', 'drive', 'nature']:
         result.extend(cst8_list)
+        random.shuffle(result)
 
         ##
     elif detail == ['family', 'picture', 'foreign', 'walk', 'city']:
         result.extend(cst3_list)
+        random.shuffle(result)
 
     elif detail == ['family', 'picture', 'foreign', 'walk', 'nature']:
         result.extend(cst1_list)
+        random.shuffle(result)
 
     elif detail == ['family', 'picture', 'foreign', 'drive', 'city']:
         result.extend(cst4_list)
+        random.shuffle(result)
 
     elif detail == ['family', 'picture', 'foreign', 'drive', 'nature']:
         result.extend(cst7_list)
+        random.shuffle(result)
 
     elif detail == ['family', 'picture', 'tradition', 'walk', 'city']:
         result.extend(cst6_list)
+        random.shuffle(result)
 
     elif detail == ['family', 'picture', 'tradition', 'walk', 'nature']:
         result.extend(cst9_list)
+        random.shuffle(result)
 
     elif detail == ['family', 'picture', 'tradition', 'drive', 'city']:
         result.extend(cst7_list)
+        random.shuffle(result)
 
     elif detail == ['family', 'picture', 'tradition', 'drive', 'nature']:
         result.extend(cst5_list)
+        random.shuffle(result)
 
     ###
 
     elif detail == ['family', 'sleep', 'foreign', 'walk', 'city']:
         result.extend(cst3_list)
+        random.shuffle(result)
 
     elif detail == ['family', 'sleep', 'foreign', 'walk', 'nature']:
         result.extend(cst5_list)
+        random.shuffle(result)
 
     elif detail == ['family', 'sleep', 'foreign', 'drive', 'city']:
         result.extend(cst3_list)
+        random.shuffle(result)
 
     elif detail == ['family', 'sleep', 'foreign', 'drive', 'nature']:
         result.extend(cst5_list)
+        random.shuffle(result)
 
     elif detail == ['family', 'sleep', 'tradition', 'walk', 'city']:
         result.extend(cst4_list)
+        random.shuffle(result)
 
     elif detail == ['family', 'sleep', 'tradition', 'walk', 'nature']:
         result.extend(cst0_list)
+        random.shuffle(result)
 
     elif detail == ['family', 'sleep', 'tradition', 'drive', 'city']:
         result.extend(cst7_list)
+        random.shuffle(result)
 
     elif detail == ['family', 'sleep', 'tradition', 'drive', 'nature']:
         result.extend(cst4_list)
+        random.shuffle(result)
 
     if rating == 'rating':
         content_list = Hotel.objects.filter(
@@ -974,21 +1370,344 @@ def ver3_session(request):
     paginator1 = Paginator(content_list1, 10)
     posts1 = paginator1.get_page(page1)
 
-    # 관광지 Pagination
+    # 두번째 관광지 숙소
+    if rating == 'rating':
+        content_list2 = Hotel.objects.filter(
+            place=result[1]).order_by('-rating')
+
+    elif distance == 'distance':
+        content_list2 = hotel1_distance_up = Hotel.objects.filter(
+            place=result[1]).order_by('distance')
+
+    elif cost == 'cost_down':
+        content_list2 = Hotel.objects.filter(place=result[1]).order_by('-cost')
+
+    elif cost == 'cost_up':
+        content_list2 = Hotel.objects.filter(place=result[1]).order_by('cost')
+
+    elif sort == 'hotell':
+        content_list2 = Hotel.objects.filter(place=result[1],
+                                             classfication='호텔')
+
+    elif sort == 'hotell' and cost == 'cost_down':
+        content_list2 = Hotel.objects.filter(
+            place=result[1], classfication='호텔').order_by('-cost')
+
+    elif sort == 'hotell' and cost == 'cost_up':
+        content_list2 = Hotel.objects.filter(
+            place=result[1], classfication='호텔').order_by('cost')
+
+    elif sort == 'hotell' and rating == 'rating':
+        content_list2 = Hotel.objects.filter(
+            place=result[1], classfication='호텔').order_by('-rating')
+
+    elif sort == 'hotell' and distance == 'distance':
+        content_list2 = Hotel.objects.filter(
+            place=result[1], classfication='호텔').order_by('distance')
+
+    elif sort == 'guesthouse':
+        content_list2 = Hotel.objects.filter(place=result[1],
+                                             classfication='호텔')
+
+    elif sort == 'guesthouse' and cost == 'cost_down':
+        content_list2 = Hotel.objects.filter(
+            place=result[1], classfication='게스트하우스').order_by('-cost')
+
+    elif sort == 'guesthouse' and cost == 'cost_up':
+        content_list2 = Hotel.objects.filter(
+            place=result[1], classfication='게스트하우스').order_by('cost')
+
+    elif sort == 'guesthouse' and rating == 'rating':
+        content_list2 = Hotel.objects.filter(
+            place=result[1], classfication='게스트하우스').order_by('-rating')
+
+    elif sort == 'guesthouse' and distance == 'distance':
+        content_list2 = Hotel.objects.filter(
+            place=result[1], classfication='게스트하우스').order_by('distance')
+
+    elif sort == 'hostel':
+        content_list2 = Hotel.objects.filter(place=result[1],
+                                             classfication='호스텔')
+
+    elif sort == 'hostel' and cost == 'cost_down':
+        content_list2 = Hotel.objects.filter(
+            place=result[1], classfication='호스텔').order_by('-cost')
+
+    elif sort == 'hostel' and cost == 'cost_up':
+        content_list2 = Hotel.objects.filter(
+            place=result[1], classfication='호스텔').order_by('cost')
+
+    elif sort == 'hostel' and rating == 'rating':
+        content_list2 = Hotel.objects.filter(
+            place=result[1], classfication='호스텔').order_by('-rating')
+
+    elif sort == 'hostel' and distance == 'distance':
+        content_list2 = Hotel.objects.filter(
+            place=result[1], classfication='호스텔').order_by('distance')
+
+    elif sort == 'pension':
+        content_list2 = Hotel.objects.filter(place=result[1],
+                                             classfication='펜션')
+
+    elif sort == 'pension' and cost == 'cost_down':
+        content_list2 = Hotel.objects.filter(
+            place=result[1], classfication='펜션').order_by('-cost')
+
+    elif sort == 'pension' and cost == 'cost_up':
+        content_list2 = Hotel.objects.filter(
+            place=result[1], classfication='펜션').order_by('cost')
+
+    elif sort == 'pension' and rating == 'rating':
+        content_list2 = Hotel.objects.filter(
+            place=result[1], classfication='펜션').order_by('-rating')
+
+    elif sort == 'pension' and distance == 'distance':
+        content_list2 = Hotel.objects.filter(
+            place=result[1], classfication='펜션').order_by('distance')
+
+    elif sort == 'motel':
+        content_list2 = Hotel.objects.filter(place=result[1],
+                                             classfication='모텔')
+
+    elif sort == 'motel' and cost == 'cost_down':
+        content_list2 = Hotel.objects.filter(
+            place=result[1], classfication='모텔').order_by('-cost')
+
+    elif sort == 'motel' and cost == 'cost_up':
+        content_list2 = Hotel.objects.filter(
+            place=result[1], classfication='모텔').order_by('cost')
+
+    elif sort == 'motel' and rating == 'rating':
+        content_list2 = Hotel.objects.filter(
+            place=result[1], classfication='모텔').order_by('-rating')
+
+    elif sort == 'motel' and distance == 'distance':
+        content_list2 = Hotel.objects.filter(
+            place=result[1], classfication='모텔').order_by('distance')
+
+    elif sort == 'resort':
+        content_list2 = Hotel.objects.filter(place=result[1],
+                                             classfication='리조트')
+
+    elif sort == 'resort' and cost == 'cost_down':
+        content_list2 = Hotel.objects.filter(
+            place=result[1], classfication='리조트').order_by('-cost')
+
+    elif sort == 'resort' and cost == 'cost_up':
+        content_list2 = Hotel.objects.filter(
+            place=result[1], classfication='리조트').order_by('cost')
+
+    elif sort == 'resort' and rating == 'rating':
+        content_list2 = Hotel.objects.filter(
+            place=result[1], classfication='리조트').order_by('-rating')
+
+    elif sort == 'resort' and distance == 'distance':
+        content_list2 = Hotel.objects.filter(
+            place=result[1], classfication='리조트').order_by('distance')
+
+    else:
+        content_list2 = Hotel.objects.filter(place=result[1])
+
+    # 두번째 관광지 식당 정보 필터링
+    if rating1 == 'rating1':
+        content_list3 = Restaurant.objects.filter(
+            place=result[1]).order_by('-rating')
+
+    elif review == 'review':
+        content_list3 = Restaurant.objects.filter(
+            place=result[1]).order_by('-review')
+    else:
+        content_list3 = Restaurant.objects.filter(place=result[1])
+
+    # 두번쨰 관광지 숙박시설 정보 Pagination
     page2 = request.GET.get('page2', 1)
-    paginator2 = Paginator(result, 10)
+    paginator2 = Paginator(content_list, 10)
     posts2 = paginator2.get_page(page2)
+
+    # 두번째 관광지 식당 정보 Pagination
+    page3 = request.GET.get('page3', 1)
+    paginator3 = Paginator(content_list3, 10)
+    posts3 = paginator3.get_page(page3)
+
+    # 세번째 관광지 숙박시설 필터링
+    if rating == 'rating':
+        content_list4 = Hotel.objects.filter(
+            place=result[2]).order_by('-rating')
+
+    elif distance == 'distance':
+        content_list4 = hotel1_distance_up = Hotel.objects.filter(
+            place=result[2]).order_by('distance')
+
+    elif cost == 'cost_down':
+        content_list4 = Hotel.objects.filter(place=result[2]).order_by('-cost')
+
+    elif cost == 'cost_up':
+        content_list4 = Hotel.objects.filter(place=result[2]).order_by('cost')
+
+    elif sort == 'hotell':
+        content_list4 = Hotel.objects.filter(place=result[2],
+                                             classfication='호텔')
+
+    elif sort == 'hotell' and cost == 'cost_down':
+        content_list4 = Hotel.objects.filter(
+            place=result[2], classfication='호텔').order_by('-cost')
+
+    elif sort == 'hotell' and cost == 'cost_up':
+        content_list4 = Hotel.objects.filter(
+            place=result[2], classfication='호텔').order_by('cost')
+
+    elif sort == 'hotell' and rating == 'rating':
+        content_list4 = Hotel.objects.filter(
+            place=result[2], classfication='호텔').order_by('-rating')
+
+    elif sort == 'hotell' and distance == 'distance':
+        content_list4 = Hotel.objects.filter(
+            place=result[2], classfication='호텔').order_by('distance')
+
+    elif sort == 'guesthouse':
+        content_list4 = Hotel.objects.filter(place=result[2],
+                                             classfication='호텔')
+
+    elif sort == 'guesthouse' and cost == 'cost_down':
+        content_list4 = Hotel.objects.filter(
+            place=result[2], classfication='게스트하우스').order_by('-cost')
+
+    elif sort == 'guesthouse' and cost == 'cost_up':
+        content_list4 = Hotel.objects.filter(
+            place=result[2], classfication='게스트하우스').order_by('cost')
+
+    elif sort == 'guesthouse' and rating == 'rating':
+        content_list4 = Hotel.objects.filter(
+            place=result[2], classfication='게스트하우스').order_by('-rating')
+
+    elif sort == 'guesthouse' and distance == 'distance':
+        content_list4 = Hotel.objects.filter(
+            place=result[2], classfication='게스트하우스').order_by('distance')
+
+    elif sort == 'hostel':
+        content_list4 = Hotel.objects.filter(place=result[2],
+                                             classfication='호스텔')
+
+    elif sort == 'hostel' and cost == 'cost_down':
+        content_list4 = Hotel.objects.filter(
+            place=result[2], classfication='호스텔').order_by('-cost')
+
+    elif sort == 'hostel' and cost == 'cost_up':
+        content_list4 = Hotel.objects.filter(
+            place=result[2], classfication='호스텔').order_by('cost')
+
+    elif sort == 'hostel' and rating == 'rating':
+        content_list4 = Hotel.objects.filter(
+            place=result[2], classfication='호스텔').order_by('-rating')
+
+    elif sort == 'hostel' and distance == 'distance':
+        content_list4 = Hotel.objects.filter(
+            place=result[2], classfication='호스텔').order_by('distance')
+
+    elif sort == 'pension':
+        content_list4 = Hotel.objects.filter(place=result[2],
+                                             classfication='펜션')
+
+    elif sort == 'pension' and cost == 'cost_down':
+        content_list4 = Hotel.objects.filter(
+            place=result[2], classfication='펜션').order_by('-cost')
+
+    elif sort == 'pension' and cost == 'cost_up':
+        content_list4 = Hotel.objects.filter(
+            place=result[2], classfication='펜션').order_by('cost')
+
+    elif sort == 'pension' and rating == 'rating':
+        content_list4 = Hotel.objects.filter(
+            place=result[2], classfication='펜션').order_by('-rating')
+
+    elif sort == 'pension' and distance == 'distance':
+        content_list4 = Hotel.objects.filter(
+            place=result[2], classfication='펜션').order_by('distance')
+
+    elif sort == 'motel':
+        content_list4 = Hotel.objects.filter(place=result[2],
+                                             classfication='모텔')
+
+    elif sort == 'motel' and cost == 'cost_down':
+        content_list4 = Hotel.objects.filter(
+            place=result[2], classfication='모텔').order_by('-cost')
+
+    elif sort == 'motel' and cost == 'cost_up':
+        content_list4 = Hotel.objects.filter(
+            place=result[2], classfication='모텔').order_by('cost')
+
+    elif sort == 'motel' and rating == 'rating':
+        content_list4 = Hotel.objects.filter(
+            place=result[2], classfication='모텔').order_by('-rating')
+
+    elif sort == 'motel' and distance == 'distance':
+        content_list4 = Hotel.objects.filter(
+            place=result[2], classfication='모텔').order_by('distance')
+
+    elif sort == 'resort':
+        content_list4 = Hotel.objects.filter(place=result[2],
+                                             classfication='리조트')
+
+    elif sort == 'resort' and cost == 'cost_down':
+        content_list4 = Hotel.objects.filter(
+            place=result[2], classfication='리조트').order_by('-cost')
+
+    elif sort == 'resort' and cost == 'cost_up':
+        content_list4 = Hotel.objects.filter(
+            place=result[2], classfication='리조트').order_by('cost')
+
+    elif sort == 'resort' and rating == 'rating':
+        content_list4 = Hotel.objects.filter(
+            place=result[2], classfication='리조트').order_by('-rating')
+
+    elif sort == 'resort' and distance == 'distance':
+        content_list4 = Hotel.objects.filter(
+            place=result[2], classfication='리조트').order_by('distance')
+
+    else:
+        content_list4 = Hotel.objects.filter(place=result[2])
+
+    # 세번째 관광지 식당 정보 필터링
+    if rating1 == 'rating1':
+        content_list5 = Restaurant.objects.filter(
+            place=result[2]).order_by('-rating')
+
+    elif review == 'review':
+        content_list5 = Restaurant.objects.filter(
+            place=result[2]).order_by('-review')
+    else:
+        content_list5 = Restaurant.objects.filter(place=result[2])
+
+    # 세번째 관광지숙박시설 정보 Pagination
+    page4 = request.GET.get('page4', 1)
+    paginator4 = Paginator(content_list4, 10)
+    posts4 = paginator4.get_page(page4)
+
+    # 세번째 관광지식당 정보 Pagination
+    page5 = request.GET.get('page5', 1)
+    paginator5 = Paginator(content_list5, 10)
+    posts5 = paginator5.get_page(page5)
+
     return render(
-        request, 'beer/ver_result.html', {
+        request,
+        'beer/ver_result.html',
+        {
             'login_session': login_session,
             'result': result,
             'sort': sort,
             'cost': cost,
             'rating': rating,
             'distance': distance,
-            'posts': posts,
-            'posts1': posts1,
-            'content_list': content_list,
-            'content_list1': content_list1,
-            'posts2': posts
+            'posts': posts,  # 첫번째 관광지 숙소 페이지네이션
+            'posts1': posts1,  # 첫번째 관광지 음식점 페이지네이션
+            'posts2': posts2,  # 두번째 관광지 숙소 페이지네이션
+            'posts3': posts3,  # 두번째 관광지 음식점 페이지네이션
+            'posts4': posts4,  # 세번째 관광지 숙소 페이지네이션
+            'posts5': posts5,  # 세번째 관광지 음식점 페이지네이션
+            'content_list': content_list,  # 첫번째 관광지 숙소
+            'content_list1': content_list1,  # 첫번째 관광지 음식점
+            'content_list2': content_list2,  # 두번째 관광지 숙소
+            'content_list3': content_list3,  # 두번째 관광지 음식점
+            'content_list4': content_list4,  # 세번째 관광지 숙소
+            'content_list5': content_list5,  # 세번째 관광지 음식점
         })
