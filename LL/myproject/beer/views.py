@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.db import transaction
 from django.core.paginator import Paginator
 
+from django.contrib.auth.decorators import login_required
 from django.core.serializers.json import DjangoJSONEncoder
 import json
 from django.http import HttpResponse, request, response
@@ -21,9 +22,38 @@ import random
 from .models import *
 
 from django.conf import settings
-from user.models import User
+from user.models import *
+from django.urls import reverse
 
 warnings.filterwarnings('ignore')
+
+# def add_cart(request):
+#     # 요청파라미터 조회
+#     # 같은 이름으로 여러 개 값이 넘어오는 경우 getlist('name')으로 조회
+#     item_list = request.POST.getlist('item')
+#     # 요청파라미터 검증
+#     if not item_list:  # item을 선택하지 않고 요청했을 때
+#         return render(request, 'beer/ver_session.html',
+#                       {"error_message": "상품을 선택하세요"})
+
+#     # 카트를 dictionary로 생성해서 session에 저장
+#     # 카트를 session에서 조회
+#     cart = request.session.get('cart')
+#     if not cart:
+#         cart = request.session['cart'] = {}
+#         # cart = {}
+#         # request.session['cart'] = cart
+
+#     for item in item_list:
+#         # 없으면 추가, 있으면 value를 1 증가
+#         cnt = cart.get(item)
+#         if cnt:  # 카트에 있는 제품인 경우
+#             cart[item] = cnt + 1
+#         else:
+#             cart[item] = 1
+#     print(cart[item])
+#     # 장바구니 조회 페이지로 이동
+#     return redirect(reverse('cart:cart_list'))
 
 
 # 우리가 예측한 평점과 실제 평점간의 차이를 MSE로 계산
@@ -137,68 +167,128 @@ def ver2_select(request):
     return render(request, 'beer/ver2.html', text)
 
 
-# 찜하기
-# class LikeProductView(View):
+def purpose(request):
+    beer_list = pd.read_csv('result.csv', encoding='utf-8', index_col=0)
 
-#     @Login_required
-#     def post(self, request):
-#         user_data = json.loads(request.body)
+    beer_list = beer_list['locate']
 
-#         if not LikeProduct.objects.filter(product_id=user_data['product_id'],
-#                                           user_id=request.user.id).exists():
-#             LikeProduct.objects.create(
-#                 user=request.user,
-#                 product=Product.objects.get(id=user_data['product_id'])).save
+    text = {'beer_list': beer_list}
 
-#             return JsonResponse({'message': 'ADD_LIKE_PRODUCT'}, status=200)
+    login_session = request.session.get('login_session')
 
-#         delete_product = LikeProduct.objects.get(
-#             product_id=user_data['product_id'], user_id=request.user.id)
-#         delete_product.delete()
+    if login_session == '':
+        text['login_session'] = False
+    else:
+        text['login_session'] = True
 
-#         return JsonResponse({'message': 'DELETE_LIKE_PRODUCT'}, status=200)
+    if request.method == 'POST':
+        locate = request.POST.get('locate', 0)
+        family = int(request.POST.get('family', 0))
+        reports = int(request.POST.get('reports', 0))
+        history = int(request.POST.get('history', 0))
+        themepark = int(request.POST.get('themepark', 0))
+        food = int(request.POST.get('food', 0))
+        arts = int(request.POST.get('arts', 0))
+        heeling = int(request.POST.get('heeling', 0))
+        city = int(request.POST.get('city', 0))
+        nature = int(request.POST.get('nature', 0))
 
-#     @Login_required
-#     def get(self, request):
-#         like_list = []
-#         like_product = LikeProduct.objects.filter(
-#             user_id=request.user.id).prefetch_related("product")
+        purpose = [
+            locate,
+            family,
+            reports,
+            history,
+            themepark,
+            food,
+            arts,
+            heeling,
+            city,
+            nature,
+        ]
+        print(purpose)
 
-#         for product in like_product:
-#             data = {
-#                 "id": product.product.id,
-#                 "product_line": product.product.product_line,
-#                 "name": product.product.name,
-#                 "price": product.product.price,
-#                 "sale_price": product.product.sale_price,
-#                 "hash_tag": product.product.hash_tag,
-#                 "images": product.product.image_set.first().image_url,
-#                 "sale": product.product.productflag_set.first().sale_flag,
-#                 "gift": product.product.productflag_set.first().gift_flag
-#             }
+        # purpose_data = Survey(locate=locate,
+        #                       reports=reports,
+        #                       history=history,
+        #                       themepark=themepark,
+        #                       food=food,
+        #                       heeling=heeling,
+        #                       family=family,
+        #                       arts=arts,
+        #                       city=city,
+        #                       nature=nature)
+        purpose_data = Survey(
+            locate=locate,
+            family=family,
+            reports=reports,
+            history=history,
+            themepark=themepark,
+            food=food,
+            arts=arts,
+            heeling=heeling,
+            city=city,
+            nature=nature,
+        )
 
-#             like_list.append(data)
+        purpose_data.save()
 
-#         return JsonResponse({'like_list': like_list})
+    return render(request, 'beer/ver1.html', text)
 
 
-def cart_add(request, index):
+def review(request):
+    beer_list = pd.read_csv('result.csv', encoding='utf-8', index_col=0)
 
-    # 장바구니 추가
-    product = Hotel.objects.get(pk=index)
+    beer_list = beer_list['locate']
 
-    try:
-        # 장바구니는 user 를 FK 로 참조하기 때문에 save() 를 하기 위해 user 가 누구인지도 알아야 함
-        cart = Cart.objects.get(hotel=hotel.pk, user_id=request.user.pk)
-        if cart:
-            if cart.product.index == product.index:
-                cart.quantity += 1
-                cart.save()
-    except CartItem.DoesNotExist:
-        user = User.objects.get(pk=request.user.pk)
-        cart = Cart()
-        cart.save()
-        return render(request, 'beer/ver_result.html')
+    text = {'beer_list': beer_list}
+
+    login_session = request.session.get('login_session')
+
+    if login_session == '':
+        text['login_session'] = False
+    else:
+        text['login_session'] = True
+
+    if request.method == 'POST':
+        locate = request.POST.get('locate', 0)
+        review_star = request.POST.get('reviewStar', 0)
+        review_body = request.POST.get('review_body', 0)
+
+        review = (locate, review_star, review_body)
+
+        review_data = Review2(locate=locate,
+                              review_star=review_star,
+                              review_body=review_body)
+
+        print(review)
+
+        review_data.save()
+
+    return render(request, 'beer/ver1.html', text)
+
+
+# @login_required
+# def add_cart(request, product_pk):
+#     # 상품을 담기 위해 해당 상품 객체를 product 변수에 할당
+#     product = Hotel.objects.get(pk=product_pk)
+
+#     try:
+#         # 장바구니는 user 를 FK 로 참조하기 때문에 save() 를 하기 위해 user 가 누구인지도 알아야 함
+#         cart = HotelCart.objects.get(product__id=hotel.pk,
+#                                      user__id=request.user.pk)
+#         if cart:
+#             if cart.product.name == product.name:
+#                 cart.quantity += 1
+#                 cart.save()
+#     except CartItem.DoesNotExist:
+#         user = User.objects.get(pk=request.user.pk)
+#         cart = CartItem(
+#             user=user,
+#             product=product,
+#             quantity=1,
+#         )
+#         cart.save()
+#     return redirect('%2Fver2_session')
 
 
 # 세션에 저장된 관광지 가져와 계산
@@ -416,7 +506,7 @@ def ver3_select(request):
     else:
         text['login_session'] = True
 
-    # 디테일 세션 저장
+    # detail 세션 저장
     if request.method == 'POST':
         together = request.POST.get('together', '')
         request.session['together'] = together
@@ -430,17 +520,28 @@ def ver3_select(request):
         request.session['style'] = style
         text['style'] = request.session['style']
 
-        walking = request.POST.get('walking', '')
-        request.session['walking'] = walking
-        text['walking'] = request.session['walking']
+        active = request.POST.get('active', '')
+        request.session['active'] = active
+        text['active'] = request.session['active']
 
         view = request.POST.get('view', '')
         request.session['view'] = view
         text['view'] = request.session['view']
 
-        detail = [together, style, walking, theme, view]
+        detail = [together, theme, style, active, view]
+
         print(detail)
-    return render(request, 'beer/ver3.html', text)
+
+        detail_datas = Detail(together=request.POST['together'],
+                              theme=request.POST['theme'],
+                              style=request.POST['style'],
+                              active=request.POST['active'],
+                              view=request.POST['view'])
+
+        detail_datas.save()
+        return render(request, 'beer/ver3.html', text)
+    else:
+        return render(request, 'beer/ver3.html', text)
 
 
 def ver3_session(request):
@@ -483,10 +584,6 @@ def ver3_session(request):
 
     cst9_list = df_cluster.loc[df_cluster['Cluster'] == 9, 'locate'].tolist()
 
-    cst10_list = df_cluster.loc[df_cluster['Cluster'] == 10, 'locate'].tolist()
-
-    cst11_list = df_cluster.loc[df_cluster['Cluster'] == 11, 'locate'].tolist()
-
     if login_session == '':
         request.session['login_session'] = False
     else:
@@ -494,66 +591,66 @@ def ver3_session(request):
     result = []
 
     if detail == ['alone', 'food', 'foreign', 'walk', 'city']:
-        result.extend(cst0_list)
+        result.extend(cst3_list)
 
     elif detail == ['alone', 'food', 'foreign', 'walk', 'nature']:
         result.extend(cst5_list)
 
     elif detail == ['alone', 'food', 'foreign', 'drive', 'city']:
-        result.extend(cst1_list)
+        result.extend(cst6_list)
 
     elif detail == ['alone', 'food', 'foreign', 'drive', 'nature']:
-        result.extend(cst3_list)
+        result.extend(cst1_list)
 
     elif detail == ['alone', 'food', 'tradition', 'walk', 'city']:
-        result.extend(cst4_list)
+        result.extend(cst2_list)
 
     elif detail == ['alone', 'food', 'tradition', 'walk', 'nature']:
         result.extend(cst8_list)
 
     elif detail == ['alone', 'food', 'tradition', 'drive', 'city']:
-        result.extend(cst5_list)
+        result.extend(cst7_list)
 
     elif detail == ['alone', 'food', 'tradition', 'drive', 'nature']:
-        result.extend(cst2_list)
+        result.extend(cst9_list)
 
     ##
     elif detail == ['alone', 'picture', 'foreign', 'walk', 'city']:
-        result.extend(cst0_list)
+        result.extend(cst3_list)
 
     elif detail == ['alone', 'picture', 'foreign', 'walk', 'nature']:
-        result.extend(cst5_list)
+        result.extend(cst9_list)
 
     elif detail == ['alone', 'picture', 'foreign', 'drive', 'city']:
         result.extend(cst1_list)
 
     elif detail == ['alone', 'picture', 'foreign', 'drive', 'nature']:
-        result.extend(cst3_list)
-
-    elif detail == ['alone', 'picture', 'tradition', 'walk', 'city']:
-        result.extend(cst4_list)
-
-    elif detail == ['alone', 'picture', 'tradition', 'walk', 'nature']:
-        result.extend(cst8_list)
-
-    elif detail == ['alone', 'picture', 'tradition', 'drive', 'city']:
         result.extend(cst5_list)
 
-    elif detail == ['alone', 'picture', 'tradition', 'drive', 'nature']:
+    elif detail == ['alone', 'picture', 'tradition', 'walk', 'city']:
+        result.extend(cst0_list)
+
+    elif detail == ['alone', 'picture', 'tradition', 'walk', 'nature']:
+        result.extend(cst7_list)
+
+    elif detail == ['alone', 'picture', 'tradition', 'drive', 'city']:
         result.extend(cst2_list)
+
+    elif detail == ['alone', 'picture', 'tradition', 'drive', 'nature']:
+        result.extend(cst8_list)
 
     ##
     elif detail == ['alone', 'sleep', 'foreign', 'walk', 'city']:
-        result.extend(cst0_list)
+        result.extend(cst3_list)
 
     elif detail == ['alone', 'sleep', 'foreign', 'walk', 'nature']:
         result.extend(cst5_list)
 
     elif detail == ['alone', 'sleep', 'foreign', 'drive', 'city']:
-        result.extend(cst1_list)
+        result.extend(cst4_list)
 
     elif detail == ['alone', 'sleep', 'foreign', 'drive', 'nature']:
-        result.extend(cst3_list)
+        result.extend(cst6_list)
 
     elif detail == ['alone', 'sleep', 'tradition', 'walk', 'city']:
         result.extend(cst4_list)
@@ -562,162 +659,162 @@ def ver3_session(request):
         result.extend(cst8_list)
 
     elif detail == ['alone', 'sleep', 'tradition', 'drive', 'city']:
-        result.extend(cst5_list)
+        result.extend(cst7_list)
 
     elif detail == ['alone', 'sleep', 'tradition', 'drive', 'nature']:
-        result.extend(cst2_list)
+        result.extend(cst0_list)
 
     ##
     elif detail == ['date', 'food', 'foreign', 'walk', 'city']:
-        result.extend(cst0_list)
+        result.extend(cst3_list)
 
     elif detail == ['date', 'food', 'foreign', 'walk', 'nature']:
-        result.extend(cst5_list)
+        result.extend(cst6_list)
 
     elif detail == ['date', 'food', 'foreign', 'drive', 'city']:
-        result.extend(cst1_list)
+        result.extend(cst7_list)
 
     elif detail == ['date', 'food', 'foreign', 'drive', 'nature']:
-        result.extend(cst3_list)
+        result.extend(cst5_list)
 
     elif detail == ['date', 'food', 'tradition', 'walk', 'city']:
         result.extend(cst4_list)
 
     elif detail == ['date', 'food', 'tradition', 'walk', 'nature']:
-        result.extend(cst8_list)
+        result.extend(cst9_list)
 
     elif detail == ['date', 'food', 'tradition', 'drive', 'city']:
-        result.extend(cst5_list)
+        result.extend(cst2_list)
 
     elif detail == ['date', 'food', 'tradition', 'drive', 'nature']:
-        result.extend(cst2_list)
+        result.extend(cst8_list)
 
         ##
     elif detail == ['date', 'picture', 'foreign', 'walk', 'city']:
-        result.extend(cst0_list)
+        result.extend(cst3_list)
 
     elif detail == ['date', 'picture', 'foreign', 'walk', 'nature']:
-        result.extend(cst5_list)
+        result.extend(cst9_list)
 
     elif detail == ['date', 'picture', 'foreign', 'drive', 'city']:
         result.extend(cst1_list)
 
     elif detail == ['date', 'picture', 'foreign', 'drive', 'nature']:
-        result.extend(cst3_list)
-
-    elif detail == ['date', 'picture', 'tradition', 'walk', 'city']:
-        result.extend(cst4_list)
-
-    elif detail == ['date', 'picture', 'tradition', 'walk', 'nature']:
-        result.extend(cst8_list)
-
-    elif detail == ['date', 'picture', 'tradition', 'drive', 'city']:
         result.extend(cst5_list)
 
-    elif detail == ['date', 'picture', 'tradition', 'drive', 'nature']:
+    elif detail == ['date', 'picture', 'tradition', 'walk', 'city']:
+        result.extend(cst0_list)
+
+    elif detail == ['date', 'picture', 'tradition', 'walk', 'nature']:
+        result.extend(cst7_list)
+
+    elif detail == ['date', 'picture', 'tradition', 'drive', 'city']:
         result.extend(cst2_list)
+
+    elif detail == ['date', 'picture', 'tradition', 'drive', 'nature']:
+        result.extend(cst8_list)
 
     ###
 
     elif detail == ['date', 'sleep', 'foreign', 'walk', 'city']:
-        result.extend(cst0_list)
+        result.extend(cst3_list)
 
     elif detail == ['date', 'sleep', 'foreign', 'walk', 'nature']:
         result.extend(cst5_list)
 
     elif detail == ['date', 'sleep', 'foreign', 'drive', 'city']:
-        result.extend(cst1_list)
+        result.extend(cst4_list)
 
     elif detail == ['date', 'sleep', 'foreign', 'drive', 'nature']:
-        result.extend(cst3_list)
+        result.extend(cst6_list)
 
     elif detail == ['date', 'sleep', 'tradition', 'walk', 'city']:
-        result.extend(cst4_list)
+        result.extend(cst0_list)
 
     elif detail == ['date', 'sleep', 'tradition', 'walk', 'nature']:
         result.extend(cst8_list)
 
     elif detail == ['date', 'sleep', 'tradition', 'drive', 'city']:
-        result.extend(cst5_list)
+        result.extend(cst7_list)
 
     elif detail == ['date', 'sleep', 'tradition', 'drive', 'nature']:
-        result.extend(cst2_list)
+        result.extend(cst4_list)
 
     ##1
     elif detail == ['family', 'food', 'foreign', 'walk', 'city']:
-        result.extend(cst0_list)
+        result.extend(cst3_list)
 
     elif detail == ['family', 'food', 'foreign', 'walk', 'nature']:
-        result.extend(cst5_list)
+        result.extend(cst6_list)
 
     elif detail == ['family', 'food', 'foreign', 'drive', 'city']:
-        result.extend(cst1_list)
+        result.extend(cst7_list)
 
     elif detail == ['family', 'food', 'foreign', 'drive', 'nature']:
-        result.extend(cst3_list)
+        result.extend(cst5_list)
 
     elif detail == ['family', 'food', 'tradition', 'walk', 'city']:
         result.extend(cst4_list)
 
     elif detail == ['family', 'food', 'tradition', 'walk', 'nature']:
-        result.extend(cst8_list)
+        result.extend(cst9_list)
 
     elif detail == ['family', 'food', 'tradition', 'drive', 'city']:
-        result.extend(cst5_list)
+        result.extend(cst2_list)
 
     elif detail == ['family', 'food', 'tradition', 'drive', 'nature']:
-        result.extend(cst2_list)
+        result.extend(cst8_list)
 
         ##
     elif detail == ['family', 'picture', 'foreign', 'walk', 'city']:
-        result.extend(cst0_list)
-
-    elif detail == ['family', 'picture', 'foreign', 'walk', 'nature']:
-        result.extend(cst5_list)
-
-    elif detail == ['family', 'picture', 'foreign', 'drive', 'city']:
-        result.extend(cst1_list)
-
-    elif detail == ['family', 'picture', 'foreign', 'drive', 'nature']:
         result.extend(cst3_list)
 
-    elif detail == ['family', 'picture', 'tradition', 'walk', 'city']:
+    elif detail == ['family', 'picture', 'foreign', 'walk', 'nature']:
+        result.extend(cst1_list)
+
+    elif detail == ['family', 'picture', 'foreign', 'drive', 'city']:
         result.extend(cst4_list)
 
+    elif detail == ['family', 'picture', 'foreign', 'drive', 'nature']:
+        result.extend(cst7_list)
+
+    elif detail == ['family', 'picture', 'tradition', 'walk', 'city']:
+        result.extend(cst6_list)
+
     elif detail == ['family', 'picture', 'tradition', 'walk', 'nature']:
-        result.extend(cst8_list)
+        result.extend(cst9_list)
 
     elif detail == ['family', 'picture', 'tradition', 'drive', 'city']:
-        result.extend(cst5_list)
+        result.extend(cst7_list)
 
     elif detail == ['family', 'picture', 'tradition', 'drive', 'nature']:
-        result.extend(cst2_list)
+        result.extend(cst5_list)
 
     ###
 
     elif detail == ['family', 'sleep', 'foreign', 'walk', 'city']:
-        result.extend(cst0_list)
+        result.extend(cst3_list)
 
     elif detail == ['family', 'sleep', 'foreign', 'walk', 'nature']:
         result.extend(cst5_list)
 
     elif detail == ['family', 'sleep', 'foreign', 'drive', 'city']:
-        result.extend(cst1_list)
+        result.extend(cst3_list)
 
     elif detail == ['family', 'sleep', 'foreign', 'drive', 'nature']:
-        result.extend(cst3_list)
+        result.extend(cst5_list)
 
     elif detail == ['family', 'sleep', 'tradition', 'walk', 'city']:
         result.extend(cst4_list)
 
     elif detail == ['family', 'sleep', 'tradition', 'walk', 'nature']:
-        result.extend(cst8_list)
+        result.extend(cst0_list)
 
     elif detail == ['family', 'sleep', 'tradition', 'drive', 'city']:
-        result.extend(cst5_list)
+        result.extend(cst7_list)
 
     elif detail == ['family', 'sleep', 'tradition', 'drive', 'nature']:
-        result.extend(cst2_list)
+        result.extend(cst4_list)
 
     if rating == 'rating':
         content_list = Hotel.objects.filter(

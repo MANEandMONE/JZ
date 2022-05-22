@@ -1,5 +1,6 @@
 from django.db import models
 from .models import *
+from django.urls import reverse
 
 
 class AuthGroup(models.Model):
@@ -137,7 +138,10 @@ class Hotel(models.Model):
 
 
 class Tour(models.Model):
-    index = models.IntegerField(primary_key=True)
+    index = models.OneToOneField('Merge',
+                                 models.DO_NOTHING,
+                                 db_column='index',
+                                 primary_key=True)
     place = models.CharField(max_length=45, blank=True, null=True)
     rating = models.FloatField(blank=True, null=True)
     review = models.TextField(blank=True, null=True)
@@ -189,25 +193,91 @@ class Merge(models.Model):
         db_table = 'merge'
 
 
-class Cart(models.Model):
-    cart_id = models.IntegerField(primary_key=True)
+class Review(models.Model):
+    review_id = models.IntegerField(primary_key=True)
+    tourname = models.ForeignKey('Tour',
+                                 models.DO_NOTHING,
+                                 db_column='tourname',
+                                 blank=True,
+                                 null=True,
+                                 related_name='+')
     user = models.ForeignKey('user.User',
                              models.DO_NOTHING,
                              blank=True,
                              null=True)
-    hotel = models.ForeignKey('beer.Hotel',
-                              models.DO_NOTHING,
-                              blank=True,
-                              null=True)
-    restaurant = models.ForeignKey('beer.Restaurant',
-                                   models.DO_NOTHING,
-                                   blank=True,
-                                   null=True)
-    tour = models.ForeignKey('beer.Tour',
-                             models.DO_NOTHING,
-                             blank=True,
-                             null=True)
+    review_title = models.CharField(max_length=45, blank=True, null=True)
+    review_body = models.CharField(max_length=45, blank=True, null=True)
 
     class Meta:
         managed = False
-        db_table = 'cart'
+        db_table = 'review'
+
+
+class Detail(models.Model):
+    id = models.AutoField(primary_key=True)
+    together = models.CharField(max_length=45, blank=True, null=True)
+    style = models.CharField(max_length=45, blank=True, null=True)
+    active = models.CharField(max_length=45, blank=True, null=True)
+    theme = models.CharField(max_length=45, blank=True, null=True)
+    view = models.CharField(max_length=45, blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'Detail'
+
+
+class Survey(models.Model):
+    nature = models.IntegerField(blank=True, null=True, default=0)
+    food = models.IntegerField(blank=True, null=True, default=0)
+    reports = models.IntegerField(blank=True, null=True, default=0)
+    history = models.IntegerField(blank=True, null=True, default=0)
+    themepark = models.IntegerField(blank=True, null=True, default=0)
+    heeling = models.IntegerField(blank=True, null=True, default=0)
+    arts = models.IntegerField(blank=True, null=True, default=0)
+    city = models.IntegerField(blank=True, null=True, default=0)
+    family = models.IntegerField(blank=True, null=True, default=0)
+    locate = models.CharField(max_length=100, blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'survey'
+
+
+class Review1(models.Model):
+    locate = models.CharField(max_length=100, blank=True, null=True)
+    review_star = models.IntegerField(blank=True, null=True)
+    review_body = models.TextField(blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'review1'
+
+
+class HotelCart(models.Model):
+    hotelcart_id = models.IntegerField(primary_key=True)
+    user = models.ForeignKey('user.User',
+                             models.DO_NOTHING,
+                             blank=True,
+                             null=True)
+    hotel = models.ForeignKey(Hotel, models.DO_NOTHING, blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'hotel_cart'
+
+
+class Survey1(models.Model):
+    locate = models.CharField(max_length=100, blank=True, null=True, default=0)
+    family = models.IntegerField(blank=True, null=True, default=0)
+    reports = models.IntegerField(blank=True, null=True, default=0)
+    history = models.IntegerField(blank=True, null=True, default=0)
+    themepark = models.IntegerField(blank=True, null=True, default=0)
+    food = models.IntegerField(blank=True, null=True, default=0)
+    arts = models.IntegerField(blank=True, null=True, default=0)
+    heeling = models.IntegerField(blank=True, null=True, default=0)
+    city = models.IntegerField(blank=True, null=True, default=0)
+    nature = models.IntegerField(blank=True, null=True, default=0)
+
+    class Meta:
+        managed = False
+        db_table = 'survey1'

@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'beer',
     'user',
+    'like',
     'home',
     'bootstrap4',
     'rest_framework',

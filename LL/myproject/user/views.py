@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.db import transaction
-from .models import User
+from .models import *
 from .forms import RegisterForm, LoginForm
 
 

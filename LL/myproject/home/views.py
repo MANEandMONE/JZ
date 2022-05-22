@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from user.models import User
+from user.models import *
 from django.http import HttpResponse
 
 

@@ -35,6 +35,7 @@ urlpatterns = [
     path('/', include('beer.urls')),
     path('', RedirectView.as_view(url="/home", permanent=True)),
     path('user/', include('user.urls')),
+    path('like/', include('like.urls')),
     # path('', include('register.urls')),
     # path('', HomeTemplateView.as_view(), name='home'),
 ]
