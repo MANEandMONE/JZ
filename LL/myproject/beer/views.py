@@ -168,8 +168,7 @@ def ver2_select(request):
 
 
 # 고치기
-@login_required
-def purpose(request):
+def purpose(request, user):
     beer_list = pd.read_csv('result.csv', encoding='utf-8', index_col=0)
 
     beer_list = beer_list['locate']
@@ -181,6 +180,13 @@ def purpose(request):
         text['login_session'] = False
     else:
         text['login_session'] = True
+
+    next_value = request.GET.get("purpose")
+
+    if next_value:
+        return redirect(next_value)
+    else:
+        return redirect("/")
     if request.method == 'POST':
 
         locate = request.POST.get('locate', 0)

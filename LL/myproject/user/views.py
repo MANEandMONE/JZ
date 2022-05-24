@@ -15,7 +15,7 @@ def register(request):
         register_form = RegisterForm(request.POST)
         if register_form.is_valid():
             user = User(user_id=register_form.user_id,
-                        user_pw=register_form.user_pw,
+                        user_password=register_form.user_password,
                         user_name=register_form.user_name,
                         user_email=register_form.user_email)
             user.save()

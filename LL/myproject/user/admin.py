@@ -3,7 +3,7 @@ from .models import *
 
 
 class UserAdmin(admin.ModelAdmin):
-    list_display = ('user_id', 'user_pw', 'user_name', 'user_email',
+    list_display = ('user_id', 'user_password', 'user_name', 'user_email',
                     'user_register_dttm')
 
 

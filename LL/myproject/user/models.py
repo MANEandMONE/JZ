@@ -1,12 +1,16 @@
 from django.db import models
+# from django.contrib.auth.models import AbstractBaseUser
 
 
 class User(models.Model):
+    REQUIRED_FIELDS = ('user', )
+    USERNAME_FIELD = 'user_id'
+
     user_id = models.CharField(primary_key=True,
                                max_length=32,
                                verbose_name='유저 아이디')
 
-    user_pw = models.CharField(max_length=128, verbose_name='유저 비밀번호')
+    user_password = models.CharField(max_length=128, verbose_name='유저 비밀번호')
     user_name = models.CharField(max_length=16,
                                  unique=True,
                                  verbose_name='유저 이름')

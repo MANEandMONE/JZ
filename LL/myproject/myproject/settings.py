@@ -169,3 +169,12 @@ STATICFILES_DIRS = [
 MEDIA_URL = '/media/'
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static_files')
+
+# 사용자 정의 유저 모델
+# AUTH_USER_MODEL = 'user.User'
+
+# # 로그인이 완료되면 이동할 URL
+# LOGIN_REDIRECT_URL = 'home:index'
+
+# # 로그인이 필요할 경우 이동할 URL
+# LOGIN_URL = 'user:login'
