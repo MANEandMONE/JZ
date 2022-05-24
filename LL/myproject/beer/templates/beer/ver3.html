@@ -79,7 +79,7 @@
     <a class="header-a" onclick="location.href='/'">너와 나드리</a>
   </div>
   <div class="ver3-contain">
-    <form class="ver3-form" method="POST" onSubmit="goData()">
+    <form class="ver3-form" method="POST" onsubmit="return confirm('선택이 완료되었습니다. 다음페이지를 누르세요👆');">
       {% csrf_token %}
       <ul class="ver3-from-contain">
         <li class="question" id="q1">
@@ -107,11 +107,11 @@
         <li class="question" id="q3">
           <div class="ver3-form-in">
             <span class="ver3-form-num">Q 03.</span>
-            <div class="ver3-form-head">걷는 걸 좋아하나요?</div>
+            <div class="ver3-form-head">어떤 활동이 좋나요?</div>
             <label class="ver3-form-label" for="form-answer-6"><input id="form-answer-6" type="radio" name="active"
-                value="walk" onclick="nextlabel3();"><span class="form-content-p">산책이 좋아요~</span></label></br>
+                value="reports" onclick="nextlabel3();"><span class="form-content-p">레포츠가 좋아요</span></label></br>
             <label class="ver3-form-label" for="form-answer-7"><input id="form-answer-7" type="radio" name="active"
-                value="drive" onclick="nextlabel3();"><span class="form-content-p">차가 좋아요</span></label>
+                value="arts" onclick="nextlabel3();"><span class="form-content-p">전시회 보는게 좋아요</span></label>
           </div>
         </li>
 

@@ -136,12 +136,12 @@ def recomm_feature(df):
 
 def recomm_beer(item_sim_df, beer_name):
     # 해당 도시와 유사도가 높은 도시 5개만 추천
-    return item_sim_df[beer_name].sort_values(ascending=False)[0:10]
+    return item_sim_df[beer_name].sort_values(ascending=False)[1:10]
 
 
 def recomm_detail(item_sim_df, detail):
     # 해당 도시와 유사도가 높은 도시 5개만 추천
-    return item_sim_df[detail].sort_values(ascending=False)[0:10]
+    return item_sim_df[detail].sort_values(ascending=False)[1:10]
 
 
 # 선택한 관광지 세션 저장
@@ -167,6 +167,8 @@ def ver2_select(request):
     return render(request, 'beer/ver2.html', text)
 
 
+# 고치기
+@login_required
 def purpose(request):
     beer_list = pd.read_csv('result.csv', encoding='utf-8', index_col=0)
 
@@ -175,13 +177,12 @@ def purpose(request):
     text = {'beer_list': beer_list}
 
     login_session = request.session.get('login_session')
-
     if login_session == '':
         text['login_session'] = False
     else:
         text['login_session'] = True
-
     if request.method == 'POST':
+
         locate = request.POST.get('locate', 0)
         family = int(request.POST.get('family', 0))
         reports = int(request.POST.get('reports', 0))
@@ -207,16 +208,6 @@ def purpose(request):
         ]
         print(purpose)
 
-        # purpose_data = Survey(locate=locate,
-        #                       reports=reports,
-        #                       history=history,
-        #                       themepark=themepark,
-        #                       food=food,
-        #                       heeling=heeling,
-        #                       family=family,
-        #                       arts=arts,
-        #                       city=city,
-        #                       nature=nature)
         purpose_data = Survey(
             locate=locate,
             family=family,
@@ -256,7 +247,7 @@ def review(request):
 
         review = (locate, review_star, review_body)
 
-        review_data = Review2(locate=locate,
+        review_data = Review1(locate=locate,
                               review_star=review_star,
                               review_body=review_body)
 
@@ -340,13 +331,13 @@ def ver2_session(request):
         content_list = Hotel.objects.filter(place=result[0],
                                             classfication='호텔')
 
-    elif sort == 'hotell' and cost == 'cost_down':
+    elif cost == 'cost_down' and sort == 'hotell':
         content_list = Hotel.objects.filter(
-            place=result[0], classfication='호텔').order_by('-cost')
+            place=result[0], classfication='호텔').order_by('cost')
 
     elif sort == 'hotell' and cost == 'cost_up':
         content_list = Hotel.objects.filter(
-            place=result[0], classfication='호텔').order_by('cost')
+            place=result[0], classfication='호텔').order_by('-cost')
 
     elif sort == 'hotell' and rating == 'rating':
         content_list = Hotel.objects.filter(
@@ -358,7 +349,7 @@ def ver2_session(request):
 
     elif sort == 'guesthouse':
         content_list = Hotel.objects.filter(place=result[0],
-                                            classfication='호텔')
+                                            classfication='게스트하우스')
 
     elif sort == 'guesthouse' and cost == 'cost_down':
         content_list = Hotel.objects.filter(
@@ -375,26 +366,6 @@ def ver2_session(request):
     elif sort == 'guesthouse' and distance == 'distance':
         content_list = Hotel.objects.filter(
             place=result[0], classfication='게스트하우스').order_by('distance')
-
-    elif sort == 'hostel':
-        content_list = Hotel.objects.filter(place=result[0],
-                                            classfication='호스텔')
-
-    elif sort == 'hostel' and cost == 'cost_down':
-        content_list = Hotel.objects.filter(
-            place=result[0], classfication='호스텔').order_by('-cost')
-
-    elif sort == 'hostel' and cost == 'cost_up':
-        content_list = Hotel.objects.filter(
-            place=result[0], classfication='호스텔').order_by('cost')
-
-    elif sort == 'hostel' and rating == 'rating':
-        content_list = Hotel.objects.filter(
-            place=result[0], classfication='호스텔').order_by('-rating')
-
-    elif sort == 'hostel' and distance == 'distance':
-        content_list = Hotel.objects.filter(
-            place=result[0], classfication='호스텔').order_by('distance')
 
     elif sort == 'pension':
         content_list = Hotel.objects.filter(place=result[0],
@@ -517,7 +488,7 @@ def ver2_session(request):
 
     elif sort == 'guesthouse':
         content_list2 = Hotel.objects.filter(place=result[1],
-                                             classfication='호텔')
+                                             classfication='게스트하우스')
 
     elif sort == 'guesthouse' and cost == 'cost_down':
         content_list2 = Hotel.objects.filter(
@@ -534,26 +505,6 @@ def ver2_session(request):
     elif sort == 'guesthouse' and distance == 'distance':
         content_list2 = Hotel.objects.filter(
             place=result[1], classfication='게스트하우스').order_by('distance')
-
-    elif sort == 'hostel':
-        content_list2 = Hotel.objects.filter(place=result[1],
-                                             classfication='호스텔')
-
-    elif sort == 'hostel' and cost == 'cost_down':
-        content_list2 = Hotel.objects.filter(
-            place=result[1], classfication='호스텔').order_by('-cost')
-
-    elif sort == 'hostel' and cost == 'cost_up':
-        content_list2 = Hotel.objects.filter(
-            place=result[1], classfication='호스텔').order_by('cost')
-
-    elif sort == 'hostel' and rating == 'rating':
-        content_list2 = Hotel.objects.filter(
-            place=result[1], classfication='호스텔').order_by('-rating')
-
-    elif sort == 'hostel' and distance == 'distance':
-        content_list2 = Hotel.objects.filter(
-            place=result[1], classfication='호스텔').order_by('distance')
 
     elif sort == 'pension':
         content_list2 = Hotel.objects.filter(place=result[1],
@@ -676,7 +627,7 @@ def ver2_session(request):
 
     elif sort == 'guesthouse':
         content_list4 = Hotel.objects.filter(place=result[2],
-                                             classfication='호텔')
+                                             classfication='게스트하우스')
 
     elif sort == 'guesthouse' and cost == 'cost_down':
         content_list4 = Hotel.objects.filter(
@@ -876,9 +827,9 @@ def ver3_session(request):
     together = request.session.get('together')
     theme = request.session.get('theme')
     style = request.session.get('style')
-    walking = request.session.get('walking')
+    active = request.session.get('active')
     view = request.session.get('view')
-    detail = [together, theme, style, walking, view]
+    detail = [together, theme, style, active, view]
     login_session = request.session.get('login_session')
 
     cost = request.GET.get('cost', '')
@@ -916,299 +867,299 @@ def ver3_session(request):
         request.session['login_session'] = True
     result = []
 
-    if detail == ['alone', 'food', 'foreign', 'walk', 'city']:
+    if detail == ['alone', 'food', 'foreign', 'reports', 'city']:
         result.extend(cst3_list)
         random.shuffle(result)
 
-    elif detail == ['alone', 'food', 'foreign', 'walk', 'nature']:
+    elif detail == ['alone', 'food', 'foreign', 'reports', 'nature']:
         result.extend(cst5_list)
         random.shuffle(result)
 
-    elif detail == ['alone', 'food', 'foreign', 'drive', 'city']:
+    elif detail == ['alone', 'food', 'foreign', 'arts', 'city']:
         result.extend(cst6_list)
         random.shuffle(result)
 
-    elif detail == ['alone', 'food', 'foreign', 'drive', 'nature']:
+    elif detail == ['alone', 'food', 'foreign', 'arts', 'nature']:
         result.extend(cst1_list)
         random.shuffle(result)
 
-    elif detail == ['alone', 'food', 'tradition', 'walk', 'city']:
+    elif detail == ['alone', 'food', 'tradition', 'reports', 'city']:
         result.extend(cst2_list)
         random.shuffle(result)
 
-    elif detail == ['alone', 'food', 'tradition', 'walk', 'nature']:
+    elif detail == ['alone', 'food', 'tradition', 'reports', 'nature']:
         result.extend(cst8_list)
         random.shuffle(result)
 
-    elif detail == ['alone', 'food', 'tradition', 'drive', 'city']:
+    elif detail == ['alone', 'food', 'tradition', 'arts', 'city']:
         result.extend(cst7_list)
         random.shuffle(result)
 
-    elif detail == ['alone', 'food', 'tradition', 'drive', 'nature']:
+    elif detail == ['alone', 'food', 'tradition', 'arts', 'nature']:
         result.extend(cst9_list)
         random.shuffle(result)
     ##
-    elif detail == ['alone', 'picture', 'foreign', 'walk', 'city']:
+    elif detail == ['alone', 'picture', 'foreign', 'reports', 'city']:
         result.extend(cst3_list)
         random.shuffle(result)
 
-    elif detail == ['alone', 'picture', 'foreign', 'walk', 'nature']:
+    elif detail == ['alone', 'picture', 'foreign', 'reports', 'nature']:
         result.extend(cst9_list)
         random.shuffle(result)
 
-    elif detail == ['alone', 'picture', 'foreign', 'drive', 'city']:
+    elif detail == ['alone', 'picture', 'foreign', 'arts', 'city']:
         result.extend(cst1_list)
         random.shuffle(result)
 
-    elif detail == ['alone', 'picture', 'foreign', 'drive', 'nature']:
+    elif detail == ['alone', 'picture', 'foreign', 'arts', 'nature']:
         result.extend(cst5_list)
         random.shuffle(result)
 
-    elif detail == ['alone', 'picture', 'tradition', 'walk', 'city']:
+    elif detail == ['alone', 'picture', 'tradition', 'reports', 'city']:
         result.extend(cst0_list)
         random.shuffle(result)
 
-    elif detail == ['alone', 'picture', 'tradition', 'walk', 'nature']:
+    elif detail == ['alone', 'picture', 'tradition', 'reports', 'nature']:
         result.extend(cst7_list)
         random.shuffle(result)
 
-    elif detail == ['alone', 'picture', 'tradition', 'drive', 'city']:
+    elif detail == ['alone', 'picture', 'tradition', 'arts', 'city']:
         result.extend(cst2_list)
         random.shuffle(result)
 
-    elif detail == ['alone', 'picture', 'tradition', 'drive', 'nature']:
+    elif detail == ['alone', 'picture', 'tradition', 'arts', 'nature']:
         result.extend(cst8_list)
         random.shuffle(result)
 
     ##
-    elif detail == ['alone', 'sleep', 'foreign', 'walk', 'city']:
+    elif detail == ['alone', 'sleep', 'foreign', 'reports', 'city']:
         result.extend(cst3_list)
         random.shuffle(result)
 
-    elif detail == ['alone', 'sleep', 'foreign', 'walk', 'nature']:
+    elif detail == ['alone', 'sleep', 'foreign', 'reports', 'nature']:
         result.extend(cst5_list)
         random.shuffle(result)
 
-    elif detail == ['alone', 'sleep', 'foreign', 'drive', 'city']:
+    elif detail == ['alone', 'sleep', 'foreign', 'arts', 'city']:
         result.extend(cst4_list)
         random.shuffle(result)
 
-    elif detail == ['alone', 'sleep', 'foreign', 'drive', 'nature']:
+    elif detail == ['alone', 'sleep', 'foreign', 'arts', 'nature']:
         result.extend(cst6_list)
         random.shuffle(result)
 
-    elif detail == ['alone', 'sleep', 'tradition', 'walk', 'city']:
+    elif detail == ['alone', 'sleep', 'tradition', 'reports', 'city']:
         result.extend(cst4_list)
         random.shuffle(result)
 
-    elif detail == ['alone', 'sleep', 'tradition', 'walk', 'nature']:
+    elif detail == ['alone', 'sleep', 'tradition', 'reports', 'nature']:
         result.extend(cst8_list)
         random.shuffle(result)
 
-    elif detail == ['alone', 'sleep', 'tradition', 'drive', 'city']:
+    elif detail == ['alone', 'sleep', 'tradition', 'arts', 'city']:
         result.extend(cst7_list)
         random.shuffle(result)
 
-    elif detail == ['alone', 'sleep', 'tradition', 'drive', 'nature']:
+    elif detail == ['alone', 'sleep', 'tradition', 'arts', 'nature']:
         result.extend(cst0_list)
         random.shuffle(result)
 
     ##
-    elif detail == ['date', 'food', 'foreign', 'walk', 'city']:
+    elif detail == ['date', 'food', 'foreign', 'reports', 'city']:
         result.extend(cst3_list)
         random.shuffle(result)
 
-    elif detail == ['date', 'food', 'foreign', 'walk', 'nature']:
+    elif detail == ['date', 'food', 'foreign', 'reports', 'nature']:
         result.extend(cst6_list)
         random.shuffle(result)
 
-    elif detail == ['date', 'food', 'foreign', 'drive', 'city']:
+    elif detail == ['date', 'food', 'foreign', 'arts', 'city']:
         result.extend(cst7_list)
         random.shuffle(result)
 
-    elif detail == ['date', 'food', 'foreign', 'drive', 'nature']:
+    elif detail == ['date', 'food', 'foreign', 'arts', 'nature']:
         result.extend(cst5_list)
         random.shuffle(result)
 
-    elif detail == ['date', 'food', 'tradition', 'walk', 'city']:
+    elif detail == ['date', 'food', 'tradition', 'reports', 'city']:
         result.extend(cst4_list)
         random.shuffle(result)
 
-    elif detail == ['date', 'food', 'tradition', 'walk', 'nature']:
+    elif detail == ['date', 'food', 'tradition', 'reports', 'nature']:
         result.extend(cst9_list)
         random.shuffle(result)
 
-    elif detail == ['date', 'food', 'tradition', 'drive', 'city']:
+    elif detail == ['date', 'food', 'tradition', 'arts', 'city']:
         result.extend(cst2_list)
         random.shuffle(result)
 
-    elif detail == ['date', 'food', 'tradition', 'drive', 'nature']:
+    elif detail == ['date', 'food', 'tradition', 'arts', 'nature']:
         result.extend(cst8_list)
         random.shuffle(result)
 
         ##
-    elif detail == ['date', 'picture', 'foreign', 'walk', 'city']:
+    elif detail == ['date', 'picture', 'foreign', 'reports', 'city']:
         result.extend(cst3_list)
         random.shuffle(result)
 
-    elif detail == ['date', 'picture', 'foreign', 'walk', 'nature']:
+    elif detail == ['date', 'picture', 'foreign', 'reports', 'nature']:
         result.extend(cst9_list)
         random.shuffle(result)
 
-    elif detail == ['date', 'picture', 'foreign', 'drive', 'city']:
+    elif detail == ['date', 'picture', 'foreign', 'arts', 'city']:
         result.extend(cst1_list)
         random.shuffle(result)
-    elif detail == ['date', 'picture', 'foreign', 'drive', 'nature']:
+    elif detail == ['date', 'picture', 'foreign', 'arts', 'nature']:
         result.extend(cst5_list)
         random.shuffle(result)
 
-    elif detail == ['date', 'picture', 'tradition', 'walk', 'city']:
+    elif detail == ['date', 'picture', 'tradition', 'reports', 'city']:
         result.extend(cst0_list)
         random.shuffle(result)
 
-    elif detail == ['date', 'picture', 'tradition', 'walk', 'nature']:
+    elif detail == ['date', 'picture', 'tradition', 'reports', 'nature']:
         result.extend(cst7_list)
         random.shuffle(result)
 
-    elif detail == ['date', 'picture', 'tradition', 'drive', 'city']:
+    elif detail == ['date', 'picture', 'tradition', 'arts', 'city']:
         result.extend(cst2_list)
         random.shuffle(result)
 
-    elif detail == ['date', 'picture', 'tradition', 'drive', 'nature']:
+    elif detail == ['date', 'picture', 'tradition', 'arts', 'nature']:
         result.extend(cst8_list)
         random.shuffle(result)
 
     ###
 
-    elif detail == ['date', 'sleep', 'foreign', 'walk', 'city']:
+    elif detail == ['date', 'sleep', 'foreign', 'reports', 'city']:
         result.extend(cst3_list)
         random.shuffle(result)
 
-    elif detail == ['date', 'sleep', 'foreign', 'walk', 'nature']:
+    elif detail == ['date', 'sleep', 'foreign', 'reports', 'nature']:
         result.extend(cst5_list)
         random.shuffle(result)
 
-    elif detail == ['date', 'sleep', 'foreign', 'drive', 'city']:
+    elif detail == ['date', 'sleep', 'foreign', 'arts', 'city']:
         result.extend(cst4_list)
         random.shuffle(result)
 
-    elif detail == ['date', 'sleep', 'foreign', 'drive', 'nature']:
+    elif detail == ['date', 'sleep', 'foreign', 'arts', 'nature']:
         result.extend(cst6_list)
         random.shuffle(result)
 
-    elif detail == ['date', 'sleep', 'tradition', 'walk', 'city']:
+    elif detail == ['date', 'sleep', 'tradition', 'reports', 'city']:
         result.extend(cst0_list)
         random.shuffle(result)
 
-    elif detail == ['date', 'sleep', 'tradition', 'walk', 'nature']:
+    elif detail == ['date', 'sleep', 'tradition', 'reports', 'nature']:
         result.extend(cst8_list)
         random.shuffle(result)
 
-    elif detail == ['date', 'sleep', 'tradition', 'drive', 'city']:
+    elif detail == ['date', 'sleep', 'tradition', 'arts', 'city']:
         result.extend(cst7_list)
         random.shuffle(result)
 
-    elif detail == ['date', 'sleep', 'tradition', 'drive', 'nature']:
+    elif detail == ['date', 'sleep', 'tradition', 'arts', 'nature']:
         result.extend(cst4_list)
         random.shuffle(result)
 
     ##1
-    elif detail == ['family', 'food', 'foreign', 'walk', 'city']:
+    elif detail == ['family', 'food', 'foreign', 'reports', 'city']:
         result.extend(cst3_list)
         random.shuffle(result)
 
-    elif detail == ['family', 'food', 'foreign', 'walk', 'nature']:
+    elif detail == ['family', 'food', 'foreign', 'reports', 'nature']:
         result.extend(cst6_list)
         random.shuffle(result)
 
-    elif detail == ['family', 'food', 'foreign', 'drive', 'city']:
+    elif detail == ['family', 'food', 'foreign', 'arts', 'city']:
         result.extend(cst7_list)
         random.shuffle(result)
 
-    elif detail == ['family', 'food', 'foreign', 'drive', 'nature']:
+    elif detail == ['family', 'food', 'foreign', 'arts', 'nature']:
         result.extend(cst5_list)
         random.shuffle(result)
 
-    elif detail == ['family', 'food', 'tradition', 'walk', 'city']:
+    elif detail == ['family', 'food', 'tradition', 'reports', 'city']:
         result.extend(cst4_list)
         random.shuffle(result)
 
-    elif detail == ['family', 'food', 'tradition', 'walk', 'nature']:
+    elif detail == ['family', 'food', 'tradition', 'reports', 'nature']:
         result.extend(cst9_list)
         random.shuffle(result)
 
-    elif detail == ['family', 'food', 'tradition', 'drive', 'city']:
+    elif detail == ['family', 'food', 'tradition', 'arts', 'city']:
         result.extend(cst2_list)
         random.shuffle(result)
 
-    elif detail == ['family', 'food', 'tradition', 'drive', 'nature']:
+    elif detail == ['family', 'food', 'tradition', 'arts', 'nature']:
         result.extend(cst8_list)
         random.shuffle(result)
 
         ##
-    elif detail == ['family', 'picture', 'foreign', 'walk', 'city']:
+    elif detail == ['family', 'picture', 'foreign', 'reports', 'city']:
         result.extend(cst3_list)
         random.shuffle(result)
 
-    elif detail == ['family', 'picture', 'foreign', 'walk', 'nature']:
+    elif detail == ['family', 'picture', 'foreign', 'reports', 'nature']:
         result.extend(cst1_list)
         random.shuffle(result)
 
-    elif detail == ['family', 'picture', 'foreign', 'drive', 'city']:
+    elif detail == ['family', 'picture', 'foreign', 'arts', 'city']:
         result.extend(cst4_list)
         random.shuffle(result)
 
-    elif detail == ['family', 'picture', 'foreign', 'drive', 'nature']:
+    elif detail == ['family', 'picture', 'foreign', 'arts', 'nature']:
         result.extend(cst7_list)
         random.shuffle(result)
 
-    elif detail == ['family', 'picture', 'tradition', 'walk', 'city']:
+    elif detail == ['family', 'picture', 'tradition', 'reports', 'city']:
         result.extend(cst6_list)
         random.shuffle(result)
 
-    elif detail == ['family', 'picture', 'tradition', 'walk', 'nature']:
+    elif detail == ['family', 'picture', 'tradition', 'reports', 'nature']:
         result.extend(cst9_list)
         random.shuffle(result)
 
-    elif detail == ['family', 'picture', 'tradition', 'drive', 'city']:
+    elif detail == ['family', 'picture', 'tradition', 'arts', 'city']:
         result.extend(cst7_list)
         random.shuffle(result)
 
-    elif detail == ['family', 'picture', 'tradition', 'drive', 'nature']:
+    elif detail == ['family', 'picture', 'tradition', 'arts', 'nature']:
         result.extend(cst5_list)
         random.shuffle(result)
 
     ###
 
-    elif detail == ['family', 'sleep', 'foreign', 'walk', 'city']:
+    elif detail == ['family', 'sleep', 'foreign', 'reports', 'city']:
         result.extend(cst3_list)
         random.shuffle(result)
 
-    elif detail == ['family', 'sleep', 'foreign', 'walk', 'nature']:
+    elif detail == ['family', 'sleep', 'foreign', 'reports', 'nature']:
         result.extend(cst5_list)
         random.shuffle(result)
 
-    elif detail == ['family', 'sleep', 'foreign', 'drive', 'city']:
+    elif detail == ['family', 'sleep', 'foreign', 'arts', 'city']:
         result.extend(cst3_list)
         random.shuffle(result)
 
-    elif detail == ['family', 'sleep', 'foreign', 'drive', 'nature']:
+    elif detail == ['family', 'sleep', 'foreign', 'arts', 'nature']:
         result.extend(cst5_list)
         random.shuffle(result)
 
-    elif detail == ['family', 'sleep', 'tradition', 'walk', 'city']:
+    elif detail == ['family', 'sleep', 'tradition', 'reports', 'city']:
         result.extend(cst4_list)
         random.shuffle(result)
 
-    elif detail == ['family', 'sleep', 'tradition', 'walk', 'nature']:
+    elif detail == ['family', 'sleep', 'tradition', 'reports', 'nature']:
         result.extend(cst0_list)
         random.shuffle(result)
 
-    elif detail == ['family', 'sleep', 'tradition', 'drive', 'city']:
+    elif detail == ['family', 'sleep', 'tradition', 'arts', 'city']:
         result.extend(cst7_list)
         random.shuffle(result)
 
-    elif detail == ['family', 'sleep', 'tradition', 'drive', 'nature']:
+    elif detail == ['family', 'sleep', 'tradition', 'arts', 'nature']:
         result.extend(cst4_list)
         random.shuffle(result)
 
@@ -1265,26 +1216,6 @@ def ver3_session(request):
     elif sort == 'guesthouse' and distance == 'distance':
         content_list = Hotel.objects.filter(
             place=result[0], classfication='게스트하우스').order_by('distance')
-
-    elif sort == 'hostel':
-        content_list = Hotel.objects.filter(place=result[0],
-                                            classfication='호스텔')
-
-    elif sort == 'hostel' and cost == 'cost_down':
-        content_list = Hotel.objects.filter(
-            place=result[0], classfication='호스텔').order_by('-cost')
-
-    elif sort == 'hostel' and cost == 'cost_up':
-        content_list = Hotel.objects.filter(
-            place=result[0], classfication='호스텔').order_by('cost')
-
-    elif sort == 'hostel' and rating == 'rating':
-        content_list = Hotel.objects.filter(
-            place=result[0], classfication='호스텔').order_by('-rating')
-
-    elif sort == 'hostel' and distance == 'distance':
-        content_list = Hotel.objects.filter(
-            place=result[0], classfication='호스텔').order_by('distance')
 
     elif sort == 'pension':
         content_list = Hotel.objects.filter(place=result[0],
@@ -1424,26 +1355,6 @@ def ver3_session(request):
     elif sort == 'guesthouse' and distance == 'distance':
         content_list2 = Hotel.objects.filter(
             place=result[1], classfication='게스트하우스').order_by('distance')
-
-    elif sort == 'hostel':
-        content_list2 = Hotel.objects.filter(place=result[1],
-                                             classfication='호스텔')
-
-    elif sort == 'hostel' and cost == 'cost_down':
-        content_list2 = Hotel.objects.filter(
-            place=result[1], classfication='호스텔').order_by('-cost')
-
-    elif sort == 'hostel' and cost == 'cost_up':
-        content_list2 = Hotel.objects.filter(
-            place=result[1], classfication='호스텔').order_by('cost')
-
-    elif sort == 'hostel' and rating == 'rating':
-        content_list2 = Hotel.objects.filter(
-            place=result[1], classfication='호스텔').order_by('-rating')
-
-    elif sort == 'hostel' and distance == 'distance':
-        content_list2 = Hotel.objects.filter(
-            place=result[1], classfication='호스텔').order_by('distance')
 
     elif sort == 'pension':
         content_list2 = Hotel.objects.filter(place=result[1],

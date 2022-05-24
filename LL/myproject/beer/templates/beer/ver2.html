@@ -73,7 +73,7 @@
             <a href="/">HOME</a>
             <a href="{% url 'beer:ver2_select'%}">EXPERIENCE</a>
             <a href="{% url 'beer:ver3_select'%}">THEME</a>
-            {% if login_session%}
+            {% if login_session %}
             <a href="{% url 'user:logout' %}"><button class="logout-btn">LOGOUT</button></a>
             {% else %}
             <a href="{% url 'user:login' %}"><button class="login-btn">LOGIN</button></a>
@@ -88,9 +88,9 @@
     </div>
     <div class="ver2-contain">
         <h1 style="padding-top:3%;">경험했던 여행지 중 다시 가고싶은 여행지를 선택해주세요.
-            비슷한 여행지를 추천해 드립니다.    
+            비슷한 여행지를 추천해 드립니다.
         </h1>
-        <form method="POST" style="text-align:center;"onsubmit="goData();">
+        <form method="POST" style="text-align:center;" onsubmit="return confirm('선택이 완료되었습니다. 다음페이지를 누르세요👆');">
             <br>
             {% csrf_token %}
 
@@ -101,8 +101,7 @@
                 {% endfor %}
 
 
-                </button>
-                {% comment %} <input class="btn-submit" type="submit" value="Pick!" onClick="location.href={% url 'beer:ver2_session' %}"> {% endcomment %}
+
             </select>
             <input class="btn-submit" type="submit" value="Pick!" alret="성공">
             <a href="{% url 'beer:ver2_session'%}">다음 페이지 이동</a>

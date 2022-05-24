@@ -6,7 +6,7 @@ from .models import *
 
 
 class HotelAdmin(admin.ModelAdmin):
-    list_display = ('index', 'place', 'name', 'rating', 'distance', 'cost',
+    list_display = ('id', 'place', 'name', 'rating', 'distance', 'cost',
                     'address', 'explain', 'kind', 'clean', 'conv', 'url',
                     'img', 'classfication')
 

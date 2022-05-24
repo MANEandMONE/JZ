@@ -96,11 +96,10 @@
                     <div id="toc-content3">
                         <input type="radio" name="rating" value="rating">평점 순
                         <input type="radio" name="distance" value="distance">거리 순
-                        <input type="radio" name="cost" value="cost_up">가격 높은순
-                        <input type="radio" name="cost" value="cost_down">가격 낮은순
+                        <input type="radio" name="cost" value="cost_down">가격 높은순
+                        <input type="radio" name="cost" value="cost_up">가격 낮은순
                         <select name="sort" id="sort">
                             <option value="hotell" id="hotell">호텔</option>
-                            <option value="hostel" id="hostel">호스텔</option>
                             <option value="guesthouse" id="guesthouse">게스트하우스</option>
                             <option value="motel" id="motel">모텔</option>
                             <option value="resort" id="resort">리조트</option>
@@ -167,7 +166,7 @@
                     <div class="hotel-contain-right">
                         <h1>{{a.name}}</h1>
                         <div class="classfication">{{a.classfications}}</div>
-                        <p class="rate-and-address">💗{{a.rating}} 📮주소 {{a.address}} </p>
+                        <p class="rate-and-address">💗{{a.rating}} 리뷰개수:{{a.review}} 📮주소 {{a.address}} </p>
                         <p class="restaurant-hour">⏰영업시간{{a.explain}}</p>
                         <div class="restaurant-book"><button type="submit">찜하기</button></div>
             </form>
@@ -242,7 +241,7 @@
                             <input type="radio" name="cost" value="cost_down">가격 낮은순
                             <select name="sort" id="sort">
                                 <option value="hotell" id="hotell">호텔</option>
-                                <option value="hostel" id="hostel">호스텔</option>
+
                                 <option value="guesthouse" id="guesthouse">게스트하우스</option>
                                 <option value="motel" id="motel">모텔</option>
                                 <option value="resort" id="resort">리조트</option>
@@ -311,7 +310,7 @@
                                 <div class="hotel-contain-right">
                                     <h1>{{a.name}}</h1>
                                     <div class="classfication">{{a.classfications}}</div>
-                                    <p class="rate-and-address">💗{{a.rating}} 📮주소 {{a.address}} </p>
+                                    <p class="rate-and-address">💗{{a.rating}} 리뷰개수:{{a.review}} 📮주소 {{a.address}} </p>
                                     <p class="restaurant-hour">⏰영업시간{{a.explain}}</p>
                                     <div class="restaurant-book"><button type="submit">찜하기</button></div>
                         </form>
@@ -378,11 +377,10 @@
                     <form method="GET">
                         <input type="radio" name="rating" value="rating">평점 순
                         <input type="radio" name="distance" value="distance">거리 순
-                        <input type="radio" name="cost" value="cost_up">가격 높은순
-                        <input type="radio" name="cost" value="cost_down">가격 낮은순
+                        <input type="radio" name="cost" value="cost_down">가격 높은순
+                        <input type="radio" name="cost" value="cost_up">가격 낮은순
                         <select name="sort" id="sort">
                             <option value="hotell" id="hotell">호텔</option>
-                            <option value="hostel" id="hostel">호스텔</option>
                             <option value="guesthouse" id="guesthouse">게스트하우스</option>
                             <option value="motel" id="motel">모텔</option>
                             <option value="resort" id="resort">리조트</option>
@@ -451,7 +449,7 @@
                             <div class="hotel-contain-right">
                                 <h1>{{a.name}}</h1>
                                 <div class="classfication">{{a.classfications}}</div>
-                                <p class="rate-and-address">💗{{a.rating}} 📮주소 {{a.address}} </p>
+                                <p class="rate-and-address">💗{{a.rating}} 리뷰개수:{{a.review}} 📮주소 {{a.address}} </p>
                                 <p class="restaurant-hour">⏰영업시간{{a.explain}}</p>
                                 <div class="restaurant-book"><button type="submit">찜하기</button></div>
                     </form>
