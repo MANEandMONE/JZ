@@ -27,34 +27,6 @@ from django.urls import reverse
 
 warnings.filterwarnings('ignore')
 
-# def add_cart(request):
-#     # 요청파라미터 조회
-#     # 같은 이름으로 여러 개 값이 넘어오는 경우 getlist('name')으로 조회
-#     item_list = request.POST.getlist('item')
-#     # 요청파라미터 검증
-#     if not item_list:  # item을 선택하지 않고 요청했을 때
-#         return render(request, 'beer/ver_session.html',
-#                       {"error_message": "상품을 선택하세요"})
-
-#     # 카트를 dictionary로 생성해서 session에 저장
-#     # 카트를 session에서 조회
-#     cart = request.session.get('cart')
-#     if not cart:
-#         cart = request.session['cart'] = {}
-#         # cart = {}
-#         # request.session['cart'] = cart
-
-#     for item in item_list:
-#         # 없으면 추가, 있으면 value를 1 증가
-#         cnt = cart.get(item)
-#         if cnt:  # 카트에 있는 제품인 경우
-#             cart[item] = cnt + 1
-#         else:
-#             cart[item] = 1
-#     print(cart[item])
-#     # 장바구니 조회 페이지로 이동
-#     return redirect(reverse('cart:cart_list'))
-
 
 # 우리가 예측한 평점과 실제 평점간의 차이를 MSE로 계산
 def get_mse(pred, actual):
@@ -136,7 +108,7 @@ def recomm_feature(df):
 
 def recomm_beer(item_sim_df, beer_name):
     # 해당 도시와 유사도가 높은 도시 5개만 추천
-    return item_sim_df[beer_name].sort_values(ascending=False)[1:10]
+    return item_sim_df[beer_name].sort_values(ascending=False)[0:10]
 
 
 def recomm_detail(item_sim_df, detail):
@@ -168,7 +140,7 @@ def ver2_select(request):
 
 
 # 고치기
-def purpose(request, user):
+def purpose(request):
     beer_list = pd.read_csv('result.csv', encoding='utf-8', index_col=0)
 
     beer_list = beer_list['locate']
@@ -176,17 +148,12 @@ def purpose(request, user):
     text = {'beer_list': beer_list}
 
     login_session = request.session.get('login_session')
+
     if login_session == '':
         text['login_session'] = False
     else:
         text['login_session'] = True
 
-    next_value = request.GET.get("purpose")
-
-    if next_value:
-        return redirect(next_value)
-    else:
-        return redirect("/")
     if request.method == 'POST':
 
         locate = request.POST.get('locate', 0)
@@ -311,6 +278,10 @@ def ver2_session(request):
     else:
         request.session['login_session'] = True
 
+    vr0 = Tour.objects.filter(place=result[0])
+    vr1 = Tour.objects.filter(place=result[1])
+    vr2 = Tour.objects.filter(place=result[2])
+    print(vr0)
     # 숙박 시설 필터
     cost = request.GET.get('cost', '')
     sort = request.GET.get('sort', '')
@@ -588,7 +559,7 @@ def ver2_session(request):
 
     # 두번쨰 관광지 숙박시설 정보 Pagination
     page2 = request.GET.get('page2', 1)
-    paginator2 = Paginator(content_list, 10)
+    paginator2 = Paginator(content_list2, 10)
     posts2 = paginator2.get_page(page2)
 
     # 두번째 관광지 식당 정보 Pagination
@@ -759,6 +730,9 @@ def ver2_session(request):
         request,
         'beer/ver_result.html',
         {
+            'vr0': vr0,
+            'vr1': vr1,
+            'vr2': vr2,
             'login_session': login_session,
             'result': result,
             'sort': sort,
@@ -1605,6 +1579,7 @@ def ver3_session(request):
     paginator5 = Paginator(content_list5, 10)
     posts5 = paginator5.get_page(page5)
 
+    print(result)
     return render(
         request,
         'beer/ver_result.html',

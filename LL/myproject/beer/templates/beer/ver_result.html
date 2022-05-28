@@ -61,6 +61,7 @@
                 <div>
                     <h1>첫 번째 추천 여행지는 {{ result.0 }} 입니다.</h1>
                 </div>
+
                 <div class="result-wrapper">
                     <img class="result-img" src="static/mg/place/{{ result.0 }}.jfif" alt="사진은 수집중입니다😢">
                     <h2 class="result-h2">
@@ -70,6 +71,10 @@
                     </h2>
                 </div>
                 <div id="toc-content2">
+                    {% for a in vr0 %}
+                    {% if a.vr != '' %}
+                    <iframe src="{{a.vr}}" frameborder="0" width="1106" height="706"></iframe>
+                    {% else%}
                     <video id="result0" class="video-js vjs-default-skin vjs-big-play-centered" controls preload="none"
                         style="width:50vw; height:55vh; margin:0 auto; display:block;" crossorigin="anonymous">
                         <source src="/static/md/{{result.0}}.webm" type="video/webm" />
@@ -90,7 +95,8 @@
 
                         </script>
                     </video>
-                    </h2>
+                    {% endif %}
+                    {% endfor %}
                 </div>
                 <form method="GET">
                     <div id="toc-content3">
@@ -119,7 +125,7 @@
                 </div>
                 <div class="hotel-contain-right">
                     <h1>{{a.name}}</h1>
-                    <div class="classfication">{{a.classfications}}</div>
+                    <div class="classfication">{{a.classfication}}</div>
                     <div class="distance"></div>
                     <div class="explain"></div>
                     <p class="rate-and-review">👍{{a.rating}} {{a.distance}} {{a.address}}
@@ -165,9 +171,8 @@
                     </div>
                     <div class="hotel-contain-right">
                         <h1>{{a.name}}</h1>
-                        <div class="classfication">{{a.classfications}}</div>
+                        <div class="classfication">{{a.classfication}}</div>
                         <p class="rate-and-address">💗{{a.rating}} 리뷰개수:{{a.review}} 📮주소 {{a.address}} </p>
-                        <p class="restaurant-hour">⏰영업시간{{a.explain}}</p>
                         <div class="restaurant-book"><button type="submit">찜하기</button></div>
             </form>
         </div>
@@ -210,6 +215,10 @@
                     </h2>
                 </div>
                 <div id="toc-content5">
+                    {% for a in vr1 %}
+                    {% if a.vr != '' %}
+                    <iframe src="{{a.vr}}" frameborder="0" width="1106" height="706"></iframe>
+                    {% elif a.vr == None %}
                     <video id="result1" class="video-js vjs-default-skin vjs-big-play-centered" controls preload="none"
                         style="width:50vw; height:55vh; margin:0 auto; display:block;" crossorigin="anonymous">
                         <source src="/static/md/{{result.1}}.webm" type="video/webm" />
@@ -230,7 +239,8 @@
 
                         </script>
                     </video>
-                    </h2>
+                    {% endif %}
+                    {% endfor %}
                 </div>
                 <div>
                     <div id="toc-content6">
@@ -262,7 +272,7 @@
                         </div>
                         <div class="hotel-contain-right">
                             <h1>{{a.name}}</h1>
-                            <div class="classfication">{{a.classfications}}</div>
+                            <div class="classfication">{{a.classfication}}</div>
                             <div class="distance"></div>
                             <div class="explain"></div>
                             <p class="rate-and-review">👍{{a.rating}} {{a.distance}} {{a.address}}
@@ -309,9 +319,8 @@
                                 </div>
                                 <div class="hotel-contain-right">
                                     <h1>{{a.name}}</h1>
-                                    <div class="classfication">{{a.classfications}}</div>
+                                    <div class="classfication">{{a.classfication}}</div>
                                     <p class="rate-and-address">💗{{a.rating}} 리뷰개수:{{a.review}} 📮주소 {{a.address}} </p>
-                                    <p class="restaurant-hour">⏰영업시간{{a.explain}}</p>
                                     <div class="restaurant-book"><button type="submit">찜하기</button></div>
                         </form>
                     </div>
@@ -353,6 +362,10 @@
                 </h2>
             </div>
             <div id="toc-content8">
+                {% for a in vr2 %}
+                {% if a.vr != '' %}
+                <iframe src="{{a.vr}}" frameborder="0" width="1106" height="706"></iframe>
+                {% elif a.vr == None %}
                 <video id="result2" class="video-js vjs-default-skin vjs-big-play-centered" controls preload="none"
                     style="width:50vw; height:55vh; margin:0 auto; display:block;" crossorigin="anonymous">
                     <source src="/static/md/{{result.2}}.webm" type="video/webm" />
@@ -362,15 +375,18 @@
                         a web browser that <a href="http://videojs.com/html5-video-support/" target="_blank">supports
                             HTML5 video</a>
                     </p>
+
                     <script>
                         videojs('result2', {
                             plugins: {
                                 pannellum: {}
                             }
                         });
+
                     </script>
                 </video>
-                </h2>
+                {% endif %}
+                {% endfor %}
             </div>
             <div>
                 <div id="toc-content9">
@@ -400,7 +416,7 @@
                     </div>
                     <div class="hotel-contain-right">
                         <h1>{{a.name}}</h1>
-                        <div class="classfication">{{a.classfications}}</div>
+                        <div class="classfication">{{a.classfication}}</div>
                         <div class="distance"></div>
                         <div class="explain"></div>
                         <p class="rate-and-review">👍{{a.rating}} {{a.distance}} {{a.address}}
@@ -448,9 +464,10 @@
                             </div>
                             <div class="hotel-contain-right">
                                 <h1>{{a.name}}</h1>
-                                <div class="classfication">{{a.classfications}}</div>
+                                <div class="classfication">{{a.classfication}}</div>
                                 <p class="rate-and-address">💗{{a.rating}} 리뷰개수:{{a.review}} 📮주소 {{a.address}} </p>
-                                <p class="restaurant-hour">⏰영업시간{{a.explain}}</p>
+                                <p class="restaurant-hour">
+                                </p>
                                 <div class="restaurant-book"><button type="submit">찜하기</button></div>
                     </form>
                 </div>

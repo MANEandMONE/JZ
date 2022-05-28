@@ -3,9 +3,6 @@ from django.db import models
 
 
 class User(models.Model):
-    REQUIRED_FIELDS = ('user', )
-    USERNAME_FIELD = 'user_id'
-
     user_id = models.CharField(primary_key=True,
                                max_length=32,
                                verbose_name='유저 아이디')

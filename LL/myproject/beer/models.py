@@ -138,10 +138,7 @@ class Hotel(models.Model):
 
 
 class Tour(models.Model):
-    index = models.OneToOneField('Merge',
-                                 models.DO_NOTHING,
-                                 db_column='index',
-                                 primary_key=True)
+    index = models.IntegerField(primary_key=True)
     place = models.CharField(max_length=45, blank=True, null=True)
     rating = models.FloatField(blank=True, null=True)
     review = models.TextField(blank=True, null=True)
@@ -153,6 +150,8 @@ class Tour(models.Model):
     reason = models.CharField(max_length=255, blank=True, null=True)
     cluster = models.IntegerField(db_column='Cluster', blank=True,
                                   null=True)  # Field name made lowercase.
+    vr = models.TextField(db_column='VR', blank=True,
+                          null=True)  # Field name made lowercase.
 
     class Meta:
         managed = False

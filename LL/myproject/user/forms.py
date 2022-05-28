@@ -18,15 +18,15 @@ class RegisterForm(forms.ModelForm):
         label='비밀번호',
         required=True,
         widget=forms.PasswordInput(attrs={
-            'class': 'user-pw',
+            'class': 'user-password',
             'placeholder': '비밀번호'
         }),
         error_messages={'required': '비밀번호를 입력해주세요.'})
-    user_pw_confirm = forms.CharField(
+    user_password_confirm = forms.CharField(
         label='비밀번호 확인',
         required=True,
         widget=forms.PasswordInput(attrs={
-            'class': 'user-pw-confirm',
+            'class': 'user-password-confirm',
             'placeholder': '비밀번호 확인'
         }),
         error_messages={'required': '비밀번호가 일치하지 않습니다.'})
@@ -68,12 +68,12 @@ class RegisterForm(forms.ModelForm):
 
         user_id = cleaned_data.get('user_id', '')
         user_password = cleaned_data.get('user_password', '')
-        user_pw_confirm = cleaned_data.get('user_pw_confirm', '')
+        user_password_confirm = cleaned_data.get('user_password_confirm', '')
         user_name = cleaned_data.get('user_name', '')
         user_email = cleaned_data.get('user_email', '')
 
         if user_password != user_password_confirm:
-            return self.add_error('user_pw_confirm', '비밀번호가 다릅니다.')
+            return self.add_error('user_password_confirm', '비밀번호가 다릅니다.')
         elif not (4 <= len(user_id) <= 16):
             return self.add_error('user_id', '아이디는 4~16자로 입력해 주세요.')
         elif 8 > len(user_password):
@@ -81,7 +81,7 @@ class RegisterForm(forms.ModelForm):
         else:
             self.user_id = user_id
             self.user_password = PasswordHasher().hash(user_password)
-            self.user_pw_confirm = user_pw_confirm
+            self.user_password_confirm = user_password_confirm
             self.user_name = user_name
             self.user_email = user_email
 

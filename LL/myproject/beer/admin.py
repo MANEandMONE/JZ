@@ -18,7 +18,8 @@ class RestaurantAdmin(admin.ModelAdmin):
 
 class TourAdmin(admin.ModelAdmin):
     list_display = ('index', 'place', 'rating', 'review', 'classfications',
-                    'address', 'explain', 'mood', 'topic', 'reason', 'cluster')
+                    'address', 'explain', 'mood', 'topic', 'reason', 'cluster',
+                    'vr')
 
 
 class MergeAdmin(admin.ModelAdmin):
