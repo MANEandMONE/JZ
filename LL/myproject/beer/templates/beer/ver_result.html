@@ -1,4 +1,5 @@
 {% load static %}
+{% load humanize %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -18,6 +19,7 @@
     <script src="https://vjs.zencdn.net/7.1.0/video.js"></script>
     <script src="../../static/js/videojs-pannellum-plugin.js"></script>
     <script src="../../static/js/toggle.js"></script>
+
 
     <link rel="stylesheet" href={% static 'css/style.css' %}>
     <link rel="stylesheet" href={% static 'css/reset.css' %}>
@@ -42,6 +44,7 @@
             <a href="{% url 'beer:ver3_select'%}">THEME</a>
             {% if login_session%}
             <a href="{% url 'user:logout' %}"><button class="logout-btn">LOGOUT</button></a>
+            <a href="{% url 'beer:purpose' %}">Survey</a>
             {% else %}
             <a href="{% url 'user:login' %}"><button class="login-btn">LOGIN</button></a>
             <a href="{% url 'user:register' %}"><button class="join-btn">JOIN</button></a>
@@ -73,7 +76,7 @@
                 <div id="toc-content2">
                     {% for a in vr0 %}
                     {% if a.vr != '' %}
-                    <iframe src="{{a.vr}}" frameborder="0" width="1106" height="706"></iframe>
+                    <iframe src="{{a.vr}}" loading="lazy" frameborder="0" width="1106" height="706"></iframe>
                     {% else%}
                     <video id="result0" class="video-js vjs-default-skin vjs-big-play-centered" controls preload="none"
                         style="width:50vw; height:55vh; margin:0 auto; display:block;" crossorigin="anonymous">
@@ -125,12 +128,10 @@
                 </div>
                 <div class="hotel-contain-right">
                     <h1>{{a.name}}</h1>
-                    <div class="classfication">{{a.classfication}}</div>
-                    <div class="distance"></div>
-                    <div class="explain"></div>
-                    <p class="rate-and-review">👍{{a.rating}} {{a.distance}} {{a.address}}
-                        {{a.kind}} {{a.clean}} {{a.conv}}</p>
-                    <div class="hotel-cost">{{a.cost}}</div>
+                    <div class="classfication">{{a.classfications}}</div>
+                    <span>친절성:{{a.kind}}</span><span>청결성:{{a.clean}}</span><span>편의성:{{a.conv}}</span>
+                    <p class="rate-and-review">👍{{a.rating}} {{a.distance}} {{a.address}} </p>
+                    <div class="hotel-cost">{{a.cost|intcomma}}</div>
                     <input type="submit" value="찜하기">
                     </form>
                 </div>
@@ -217,7 +218,7 @@
                 <div id="toc-content5">
                     {% for a in vr1 %}
                     {% if a.vr != '' %}
-                    <iframe src="{{a.vr}}" frameborder="0" width="1106" height="706"></iframe>
+                    <iframe src="{{a.vr}}" loading="lazy" frameborder="0" width="1106" height="706"></iframe>
                     {% elif a.vr == None %}
                     <video id="result1" class="video-js vjs-default-skin vjs-big-play-centered" controls preload="none"
                         style="width:50vw; height:55vh; margin:0 auto; display:block;" crossorigin="anonymous">
@@ -272,12 +273,10 @@
                         </div>
                         <div class="hotel-contain-right">
                             <h1>{{a.name}}</h1>
-                            <div class="classfication">{{a.classfication}}</div>
-                            <div class="distance"></div>
-                            <div class="explain"></div>
-                            <p class="rate-and-review">👍{{a.rating}} {{a.distance}} {{a.address}}
-                                {{a.kind}} {{a.clean}} {{a.conv}}</p>
-                            <div class="hotel-cost">{{a.cost}}</div>
+                            <div class="classfication">{{a.classfications}}</div>
+                            <span>친절성:{{a.kind}}</span><span>청결성:{{a.clean}}</span><span>편의성:{{a.conv}}</span>
+                            <p class="rate-and-review">👍{{a.rating}} {{a.distance}} {{a.address}} </p>
+                            <div class="hotel-cost">{{a.cost|intcomma}}</div>
                             <input type="submit" value="찜하기">
                             </form>
                         </div>
@@ -354,7 +353,7 @@
                 <h1>세 번째 추천 여행지는 {{ result.2 }} 입니다.</h1>
             </div>
             <div class="result-wrapper">
-                <img class="result-img" src="static/mg/place/{{ result.2 }}.jfif" alt="사진은 수집중입니다😢">
+                <img class="result-img" loading="lazy" src="static/mg/place/{{ result.2 }}.jfif" alt="사진은 수집중입니다😢">
                 <h2 class="result-h2">
                     <span id="toc-toggle7" onclick="openCloseToc7()">맛집 보러 가기</span>
                     <span id="toc-toggle8" onclick="openCloseToc8()">관련 영상 보기</span>
@@ -416,12 +415,10 @@
                     </div>
                     <div class="hotel-contain-right">
                         <h1>{{a.name}}</h1>
-                        <div class="classfication">{{a.classfication}}</div>
-                        <div class="distance"></div>
-                        <div class="explain"></div>
-                        <p class="rate-and-review">👍{{a.rating}} {{a.distance}} {{a.address}}
-                            {{a.kind}} {{a.clean}} {{a.conv}}</p>
-                        <div class="hotel-cost">{{a.cost}}</div>
+                        <div class="classfication">{{a.classfications}}</div>
+                        <span>친절성:{{a.kind}}</span><span>청결성:{{a.clean}}</span><span>편의성:{{a.conv}}</span>
+                        <p class="rate-and-review">👍{{a.rating}} {{a.distance}} {{a.address}} </p>
+                        <div class="hotel-cost">{{a.cost|intcomma}}</div>
                         <input type="submit" value="찜하기">
                         </form>
                     </div>
@@ -493,6 +490,9 @@
             </div>
         </div>
     </div>
+    <footer include-html={% static 'html/footer.html' %}>
+        <script>includeHTML();</script>
+    </footer>
 </body>
 
 </html>

@@ -79,7 +79,8 @@
     <a class="header-a" onclick="location.href='/'">너와 나드리</a>
   </div>
   <div class="ver3-contain">
-    <form class="ver3-form" method="POST" onsubmit="return confirm('선택이 완료되었습니다. 다음페이지를 누르세요👆');">
+    <iframe name="formsubmit" style="display: none;"></iframe>
+    <form class="ver3-form" method="post" onsubmit="alert('성공')" target="formsubmit">
       {% csrf_token %}
       <ul class="ver3-from-contain">
         <li class="question" id="q1">

@@ -108,7 +108,7 @@ def recomm_feature(df):
 
 def recomm_beer(item_sim_df, beer_name):
     # 해당 도시와 유사도가 높은 도시 5개만 추천
-    return item_sim_df[beer_name].sort_values(ascending=False)[0:10]
+    return item_sim_df[beer_name].sort_values(ascending=False)[1:10]
 
 
 def recomm_detail(item_sim_df, detail):
@@ -849,299 +849,229 @@ def ver3_session(request):
 
     if detail == ['alone', 'food', 'foreign', 'reports', 'city']:
         result.extend(cst3_list)
-        random.shuffle(result)
 
     elif detail == ['alone', 'food', 'foreign', 'reports', 'nature']:
         result.extend(cst5_list)
-        random.shuffle(result)
 
     elif detail == ['alone', 'food', 'foreign', 'arts', 'city']:
         result.extend(cst6_list)
-        random.shuffle(result)
 
     elif detail == ['alone', 'food', 'foreign', 'arts', 'nature']:
         result.extend(cst1_list)
-        random.shuffle(result)
 
     elif detail == ['alone', 'food', 'tradition', 'reports', 'city']:
         result.extend(cst2_list)
-        random.shuffle(result)
 
     elif detail == ['alone', 'food', 'tradition', 'reports', 'nature']:
         result.extend(cst8_list)
-        random.shuffle(result)
 
     elif detail == ['alone', 'food', 'tradition', 'arts', 'city']:
         result.extend(cst7_list)
-        random.shuffle(result)
 
     elif detail == ['alone', 'food', 'tradition', 'arts', 'nature']:
         result.extend(cst9_list)
-        random.shuffle(result)
+
     ##
     elif detail == ['alone', 'picture', 'foreign', 'reports', 'city']:
         result.extend(cst3_list)
-        random.shuffle(result)
 
     elif detail == ['alone', 'picture', 'foreign', 'reports', 'nature']:
         result.extend(cst9_list)
-        random.shuffle(result)
 
     elif detail == ['alone', 'picture', 'foreign', 'arts', 'city']:
         result.extend(cst1_list)
-        random.shuffle(result)
 
     elif detail == ['alone', 'picture', 'foreign', 'arts', 'nature']:
         result.extend(cst5_list)
-        random.shuffle(result)
 
     elif detail == ['alone', 'picture', 'tradition', 'reports', 'city']:
         result.extend(cst0_list)
-        random.shuffle(result)
 
     elif detail == ['alone', 'picture', 'tradition', 'reports', 'nature']:
         result.extend(cst7_list)
-        random.shuffle(result)
 
     elif detail == ['alone', 'picture', 'tradition', 'arts', 'city']:
         result.extend(cst2_list)
-        random.shuffle(result)
 
     elif detail == ['alone', 'picture', 'tradition', 'arts', 'nature']:
         result.extend(cst8_list)
-        random.shuffle(result)
 
     ##
     elif detail == ['alone', 'sleep', 'foreign', 'reports', 'city']:
         result.extend(cst3_list)
-        random.shuffle(result)
 
     elif detail == ['alone', 'sleep', 'foreign', 'reports', 'nature']:
         result.extend(cst5_list)
-        random.shuffle(result)
 
     elif detail == ['alone', 'sleep', 'foreign', 'arts', 'city']:
         result.extend(cst4_list)
-        random.shuffle(result)
 
     elif detail == ['alone', 'sleep', 'foreign', 'arts', 'nature']:
         result.extend(cst6_list)
-        random.shuffle(result)
 
     elif detail == ['alone', 'sleep', 'tradition', 'reports', 'city']:
         result.extend(cst4_list)
-        random.shuffle(result)
 
     elif detail == ['alone', 'sleep', 'tradition', 'reports', 'nature']:
         result.extend(cst8_list)
-        random.shuffle(result)
 
     elif detail == ['alone', 'sleep', 'tradition', 'arts', 'city']:
         result.extend(cst7_list)
-        random.shuffle(result)
 
     elif detail == ['alone', 'sleep', 'tradition', 'arts', 'nature']:
         result.extend(cst0_list)
-        random.shuffle(result)
 
     ##
     elif detail == ['date', 'food', 'foreign', 'reports', 'city']:
         result.extend(cst3_list)
-        random.shuffle(result)
 
     elif detail == ['date', 'food', 'foreign', 'reports', 'nature']:
         result.extend(cst6_list)
-        random.shuffle(result)
 
     elif detail == ['date', 'food', 'foreign', 'arts', 'city']:
         result.extend(cst7_list)
-        random.shuffle(result)
 
     elif detail == ['date', 'food', 'foreign', 'arts', 'nature']:
         result.extend(cst5_list)
-        random.shuffle(result)
 
     elif detail == ['date', 'food', 'tradition', 'reports', 'city']:
         result.extend(cst4_list)
-        random.shuffle(result)
 
     elif detail == ['date', 'food', 'tradition', 'reports', 'nature']:
         result.extend(cst9_list)
-        random.shuffle(result)
 
     elif detail == ['date', 'food', 'tradition', 'arts', 'city']:
         result.extend(cst2_list)
-        random.shuffle(result)
 
     elif detail == ['date', 'food', 'tradition', 'arts', 'nature']:
         result.extend(cst8_list)
-        random.shuffle(result)
 
         ##
     elif detail == ['date', 'picture', 'foreign', 'reports', 'city']:
         result.extend(cst3_list)
-        random.shuffle(result)
 
     elif detail == ['date', 'picture', 'foreign', 'reports', 'nature']:
         result.extend(cst9_list)
-        random.shuffle(result)
 
     elif detail == ['date', 'picture', 'foreign', 'arts', 'city']:
         result.extend(cst1_list)
-        random.shuffle(result)
+
     elif detail == ['date', 'picture', 'foreign', 'arts', 'nature']:
         result.extend(cst5_list)
-        random.shuffle(result)
 
     elif detail == ['date', 'picture', 'tradition', 'reports', 'city']:
         result.extend(cst0_list)
-        random.shuffle(result)
 
     elif detail == ['date', 'picture', 'tradition', 'reports', 'nature']:
         result.extend(cst7_list)
-        random.shuffle(result)
 
     elif detail == ['date', 'picture', 'tradition', 'arts', 'city']:
         result.extend(cst2_list)
-        random.shuffle(result)
 
     elif detail == ['date', 'picture', 'tradition', 'arts', 'nature']:
         result.extend(cst8_list)
-        random.shuffle(result)
 
     ###
 
     elif detail == ['date', 'sleep', 'foreign', 'reports', 'city']:
         result.extend(cst3_list)
-        random.shuffle(result)
 
     elif detail == ['date', 'sleep', 'foreign', 'reports', 'nature']:
         result.extend(cst5_list)
-        random.shuffle(result)
 
     elif detail == ['date', 'sleep', 'foreign', 'arts', 'city']:
         result.extend(cst4_list)
-        random.shuffle(result)
 
     elif detail == ['date', 'sleep', 'foreign', 'arts', 'nature']:
         result.extend(cst6_list)
-        random.shuffle(result)
 
     elif detail == ['date', 'sleep', 'tradition', 'reports', 'city']:
         result.extend(cst0_list)
-        random.shuffle(result)
 
     elif detail == ['date', 'sleep', 'tradition', 'reports', 'nature']:
         result.extend(cst8_list)
-        random.shuffle(result)
 
     elif detail == ['date', 'sleep', 'tradition', 'arts', 'city']:
         result.extend(cst7_list)
-        random.shuffle(result)
 
     elif detail == ['date', 'sleep', 'tradition', 'arts', 'nature']:
         result.extend(cst4_list)
-        random.shuffle(result)
 
     ##1
     elif detail == ['family', 'food', 'foreign', 'reports', 'city']:
         result.extend(cst3_list)
-        random.shuffle(result)
 
     elif detail == ['family', 'food', 'foreign', 'reports', 'nature']:
         result.extend(cst6_list)
-        random.shuffle(result)
 
     elif detail == ['family', 'food', 'foreign', 'arts', 'city']:
         result.extend(cst7_list)
-        random.shuffle(result)
 
     elif detail == ['family', 'food', 'foreign', 'arts', 'nature']:
         result.extend(cst5_list)
-        random.shuffle(result)
 
     elif detail == ['family', 'food', 'tradition', 'reports', 'city']:
         result.extend(cst4_list)
-        random.shuffle(result)
 
     elif detail == ['family', 'food', 'tradition', 'reports', 'nature']:
         result.extend(cst9_list)
-        random.shuffle(result)
 
     elif detail == ['family', 'food', 'tradition', 'arts', 'city']:
         result.extend(cst2_list)
-        random.shuffle(result)
 
     elif detail == ['family', 'food', 'tradition', 'arts', 'nature']:
         result.extend(cst8_list)
-        random.shuffle(result)
 
         ##
     elif detail == ['family', 'picture', 'foreign', 'reports', 'city']:
         result.extend(cst3_list)
-        random.shuffle(result)
 
     elif detail == ['family', 'picture', 'foreign', 'reports', 'nature']:
         result.extend(cst1_list)
-        random.shuffle(result)
 
     elif detail == ['family', 'picture', 'foreign', 'arts', 'city']:
         result.extend(cst4_list)
-        random.shuffle(result)
 
     elif detail == ['family', 'picture', 'foreign', 'arts', 'nature']:
         result.extend(cst7_list)
-        random.shuffle(result)
 
     elif detail == ['family', 'picture', 'tradition', 'reports', 'city']:
         result.extend(cst6_list)
-        random.shuffle(result)
 
     elif detail == ['family', 'picture', 'tradition', 'reports', 'nature']:
         result.extend(cst9_list)
-        random.shuffle(result)
 
     elif detail == ['family', 'picture', 'tradition', 'arts', 'city']:
         result.extend(cst7_list)
-        random.shuffle(result)
 
     elif detail == ['family', 'picture', 'tradition', 'arts', 'nature']:
         result.extend(cst5_list)
-        random.shuffle(result)
 
     ###
 
     elif detail == ['family', 'sleep', 'foreign', 'reports', 'city']:
         result.extend(cst3_list)
-        random.shuffle(result)
 
     elif detail == ['family', 'sleep', 'foreign', 'reports', 'nature']:
         result.extend(cst5_list)
-        random.shuffle(result)
 
     elif detail == ['family', 'sleep', 'foreign', 'arts', 'city']:
         result.extend(cst3_list)
-        random.shuffle(result)
 
     elif detail == ['family', 'sleep', 'foreign', 'arts', 'nature']:
         result.extend(cst5_list)
-        random.shuffle(result)
 
     elif detail == ['family', 'sleep', 'tradition', 'reports', 'city']:
         result.extend(cst4_list)
-        random.shuffle(result)
 
     elif detail == ['family', 'sleep', 'tradition', 'reports', 'nature']:
         result.extend(cst0_list)
-        random.shuffle(result)
 
     elif detail == ['family', 'sleep', 'tradition', 'arts', 'city']:
         result.extend(cst7_list)
-        random.shuffle(result)
 
     elif detail == ['family', 'sleep', 'tradition', 'arts', 'nature']:
         result.extend(cst4_list)
-        random.shuffle(result)
 
     if rating == 'rating':
         content_list = Hotel.objects.filter(

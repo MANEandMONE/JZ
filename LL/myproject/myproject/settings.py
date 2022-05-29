@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'corsheaders',
     'embed_video',
+    'django.contrib.humanize',
 ]
 
 MIDDLEWARE = [
