@@ -36,7 +36,8 @@
   display: none;
   background-color: #e9ecef;
   height: 65vh;
-  padding-top: 10vh;
+  padding-top: 5vh;
+  padding-bottom: 5vh;
   text-align: center;
 }
 
@@ -127,7 +128,8 @@
   display: none;
   background-color: #e9ecef;
   height: 65vh;
-  padding-top: 10vh;
+  padding-top: 5vh;
+  padding-bottom: 5vh;
   text-align: center;
 }
 
@@ -218,7 +220,8 @@
   display: none;
   background-color: #e9ecef;
   height: 65vh;
-  padding-top: 10vh;
+  padding-top: 5vh;
+  padding-bottom: 5vh;
   text-align: center;
 }
 

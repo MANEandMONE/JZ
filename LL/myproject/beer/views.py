@@ -1509,6 +1509,10 @@ def ver3_session(request):
     paginator5 = Paginator(content_list5, 10)
     posts5 = paginator5.get_page(page5)
 
+    vr0 = Tour.objects.filter(place=result[0])
+    vr1 = Tour.objects.filter(place=result[1])
+    vr2 = Tour.objects.filter(place=result[2])
+
     print(result)
     return render(
         request,
@@ -1520,6 +1524,9 @@ def ver3_session(request):
             'cost': cost,
             'rating': rating,
             'distance': distance,
+            'vr0': vr0,
+            'vr1': vr1,
+            'vr2': vr2,
             'posts': posts,  # 첫번째 관광지 숙소 페이지네이션
             'posts1': posts1,  # 첫번째 관광지 음식점 페이지네이션
             'posts2': posts2,  # 두번째 관광지 숙소 페이지네이션
