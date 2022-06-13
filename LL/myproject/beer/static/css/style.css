@@ -58,6 +58,7 @@ body {
     background-color: #f8f8ff;
     box-sizing: border-box;
 }
+
 .a-span {
     color: #EC994B;
     display: inline;
@@ -69,22 +70,7 @@ body {
     height: 32vh;
     background-image: url(../mg/travel1.png);
     background-size: contain;
-    background-repeat: no-repeat;  
-    background-position: center; 
-    text-decoration: none !important;
-    color: #2f2f2f;
-    font-size: 1.5vw;
-    font-weight: bold;
-    font-family: "jua";
-    text-align: center;
-}
-.recommendation-ver2 {
-    display: inline-block;
-    width: 12vw;
-    height: 32vh;
-    background-image: url(../mg/travel3.png);
-    background-size: contain;
-    background-repeat: no-repeat;  
+    background-repeat: no-repeat;
     background-position: center;
     text-decoration: none !important;
     color: #2f2f2f;
@@ -93,6 +79,23 @@ body {
     font-family: "jua";
     text-align: center;
 }
+
+.recommendation-ver2 {
+    display: inline-block;
+    width: 12vw;
+    height: 32vh;
+    background-image: url(../mg/travel3.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    text-decoration: none !important;
+    color: #2f2f2f;
+    font-size: 1.5vw;
+    font-weight: bold;
+    font-family: "jua";
+    text-align: center;
+}
+
 /* .recommendation-ver3 {
     display: inline-block;
     width: 12vw;
@@ -139,6 +142,7 @@ nav a {
     padding: 10px 20px;
     transition: 0.2s ease color;
 }
+
 nav a:nth-child(5) {
     position: relative;
     width: 33.333%;
@@ -275,7 +279,8 @@ nav a:nth-child(5):hover~#indicator {
     outline: 0;
     transition: 0.2s ease color;
 }
-.login-btn:hover{
+
+.login-btn:hover {
     color: #000;
 }
 
@@ -295,7 +300,8 @@ nav a:nth-child(5):hover~#indicator {
     outline: 0;
     transition: 0.2s ease color;
 }
-.logout-btn:hover{
+
+.logout-btn:hover {
     color: #000;
 }
 
@@ -315,7 +321,7 @@ nav a:nth-child(5):hover~#indicator {
     transition: 0.2s ease color;
 }
 
-.join-btn:hover{
+.join-btn:hover {
     color: #000;
 }
 
@@ -325,20 +331,7 @@ nav a:nth-child(5):hover~#indicator {
 
 
 /* 경험으로 추천받기 ver1 */
-.ver1-contain {
-    position: absolute;
-    align-items: left;
-    text-align: left;
-    font-family: "jua";
-    background-color: #f8f8ff;
-    border: solid 1px #e6e6e6;
-    border-radius: 6vh;
-    height: 65vh;
-    width: 30vw;
-    top: 49vh;
-    left: 35vw;
-    z-index: 1000;
-}
+
 
 #ver1-form {
     text-align: center;
@@ -603,13 +596,18 @@ nav a:nth-child(5):hover~#indicator {
     box-sizing: border-box;
     text-align: left;
 }
-.hotel-contain-right span{
+
+.hotel-contain-right span {
     background-color: #D1E2FA;
     color: #2155CD;
     margin-right: 10px;
     border-radius: 10px;
     padding: 5px;
     font-weight: bold;
+}
+
+.hotel-contain-right h1 {
+    margin-bottom: 20px;
 }
 
 .classfication {
@@ -619,6 +617,7 @@ nav a:nth-child(5):hover~#indicator {
 }
 
 .rate-and-review {
+    margin-top: 20px;
     font-size: 1vw;
     font-weight: bold;
 }
@@ -927,8 +926,8 @@ footer {
     border-radius: 6vh;
     height: 50vh;
     width: 30vw;
-    top: 140vh;
-    left: 35vw;
+    top: 90vh;
+    left: 50vw;
     z-index: 1000;
 }
 
@@ -995,4 +994,26 @@ footer {
     border-radius: 5px;
     font-size: 16px;
     resize: none;
+}
+
+.result-distance {
+    margin-top: 5px;
+    color: #959595;
+    font-size: 1vw;
+    font-weight: bold;
+}
+
+.ver1-contain {
+    position: absolute;
+    align-items: left;
+    text-align: left;
+    font-family: "jua";
+    background-color: #f8f8ff;
+    border: solid 1px #e6e6e6;
+    border-radius: 6vh;
+    height: 65vh;
+    width: 30vw;
+    top: 90vh;
+    left: 15vw;
+    z-index: 1000;
 }

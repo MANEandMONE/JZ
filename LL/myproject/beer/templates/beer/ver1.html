@@ -83,6 +83,7 @@
       <a href="{% url 'beer:ver3_select'%}">THEME</a>
       {% if login_session%}
       <a href="{% url 'user:logout' %}"><button class="logout-btn">LOGOUT</button></a>
+      <a href="{% url 'beer:purpose' %}">Survey</a>
       {% else %}
       <a href="{% url 'user:login' %}"><button class="login-btn">LOGIN</button></a>
       <a href="{% url 'user:register' %}"><button class="join-btn">JOIN</button></a>
@@ -95,7 +96,7 @@
     <a class="header-a" onclick="location.href='/'">너와 나드리</a>
   </div>
   <div class="ver1-contain">
-    <form method="POST" id="ver1-form" onsubmit="return confirm('설문에 응해주셔서 감사합니다😊');">
+    <form method="POST" id="ver1-form" onsubmit="alert('설문에 응해주셔서 감사합니다😊')">
       {% csrf_token %}
       <div class="ques-1">
         <div class="form-qeus">어디를 방문했나요?</div>
@@ -137,8 +138,7 @@
     </form>
   </div>
   <div class="ver1-review-contain">
-    <form method="POST" class="review-form" onsubmit="return confirm('리뷰를 작성해주셔서 감사합니다😊');"
-      action="{% url 'beer:review' %}">
+    <form method="POST" class="review-form" onsubmit="alert('리뷰를 작성해주셔서 감사합니다😊')" action="{% url 'beer:review' %}">
       {% csrf_token %}
       <div class="ques-1">
         <div class="form-qeus">어디를 방문했나요?</div>

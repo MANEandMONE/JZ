@@ -67,6 +67,7 @@
       <a href="{% url 'beer:ver3_select'%}">THEME</a>
       {% if login_session%}
       <a href="{% url 'user:logout' %}"><button class="logout-btn">LOGOUT</button></a>
+      <a href="{% url 'beer:purpose' %}">Survey</a>
       {% else %}
       <a href="{% url 'user:login' %}"><button class="login-btn">LOGIN</button></a>
       <a href="{% url 'user:register' %}"><button class="join-btn">JOIN</button></a>
@@ -80,7 +81,7 @@
   </div>
   <div class="ver3-contain">
     <iframe name="formsubmit" style="display: none;"></iframe>
-    <form class="ver3-form" method="post" onsubmit="alert('성공')" target="formsubmit">
+    <form class="ver3-form" method="post" onsubmit="alert('선택을 완료했습니다. 다음페이지 버튼을 눌러주세요!😎')" target="formsubmit">
       {% csrf_token %}
       <ul class="ver3-from-contain">
         <li class="question" id="q1">
@@ -142,14 +143,15 @@
         <li class="question" id="q6">
           <div class="ver3-form-in">
             <div class="btn-section">
-              <input class="btn-submit" type="submit" value="Pick!">
+              <input class="btn-submit" type="submit" value="Pick!"><br><br>
+              <a href="{% url 'beer:ver3_session'%}" style="text-align:center; display:block;">다음 페이지 이동</a>
 
 
             </div>
           </div>
         </li>
       </ul>
-      <a href="{% url 'beer:ver3_session'%}" style="text-align:center; display:block;">다음 페이지 이동</a>
+
     </form>
   </div>
   <div id='contents' style="text-align:center;">

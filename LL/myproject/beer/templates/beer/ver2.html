@@ -76,6 +76,7 @@
             <a href="{% url 'beer:ver3_select'%}">THEME</a>
             {% if login_session %}
             <a href="{% url 'user:logout' %}"><button class="logout-btn">LOGOUT</button></a>
+            <a href="{% url 'beer:purpose' %}">Survey</a>
             {% else %}
             <a href="{% url 'user:login' %}"><button class="login-btn">LOGIN</button></a>
             <a href="{% url 'user:register' %}"><button class="join-btn">JOIN</button></a>
@@ -92,7 +93,8 @@
             비슷한 여행지를 추천해 드립니다.
         </h1>
         <iframe name="formsubmit" style="display: none;"></iframe>
-        <form class="ver3-form" method="POST" onsubmit="alert('성공')" target="formsubmit" style="text-align:center;">
+        <form class="ver3-form" method="POST" onsubmit="alert('선택을 완료했습니다. 다음페이지 버튼을 눌러주세요!😎')" target="formsubmit"
+            style="text-align:center;">
             <br>
             {% csrf_token %}
 

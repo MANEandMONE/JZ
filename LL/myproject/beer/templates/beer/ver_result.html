@@ -103,10 +103,10 @@
                 </div>
                 <form method="GET">
                     <div id="toc-content3">
-                        <input type="radio" name="rating" value="rating">평점 순
-                        <input type="radio" name="distance" value="distance">거리 순
-                        <input type="radio" name="cost" value="cost_down">가격 높은순
-                        <input type="radio" name="cost" value="cost_up">가격 낮은순
+                        <input type="checkbox" name="rating" value="rating">평점 순
+                        <input type="checkbox" name="distance" value="distance">거리 순
+                        <input type="checkbox" name="cost" value="cost_down">가격 높은순
+                        <input type="checkbox" name="cost" value="cost_up">가격 낮은순
                         <select name="sort" id="sort">
                             <option value="hotell" id="hotell">호텔</option>
                             <option value="guesthouse" id="guesthouse">게스트하우스</option>
@@ -130,9 +130,14 @@
                     <h1>{{a.name}}</h1>
                     <div class="classfication">{{a.classfications}}</div>
                     <span>친절성:{{a.kind}}</span><span>청결성:{{a.clean}}</span><span>편의성:{{a.conv}}</span>
-                    <p class="rate-and-review">👍{{a.rating}} {{a.distance}} {{a.address}} </p>
-                    <div class="hotel-cost">{{a.cost|intcomma}}</div>
-                    <input type="submit" value="찜하기">
+                    <p class="rate-and-review">👍{{a.rating}}</p>
+                    <p class="rate-and-review">{{a.address}} <br><br>
+                        <span class="result-distance">{{result.0}}으로부터
+                            거리:{{a.distance}}Km</span>
+                    </p>
+                    <div class="hotel-cost">₩{{a.cost|intcomma}}</div>
+                    <input type="submit" value="찜하기" class="restaurant-book">
+
                     </form>
                 </div>
                 <hr width="70%">
@@ -145,7 +150,6 @@
             <div style="text-align:center">
                 <div class="pagination">
                     {% if posts.has_previous %}
-                    <button name="page" value="1">First</button>
                     <button name="page" value="{{posts.previous_page_number}}">Previous</button>
                     {% endif %}
                     <span>{{posts.number}} / {{posts.paginator.num_pages}}</span>
@@ -157,8 +161,8 @@
         </div>
         <div id="toc-content1">
             <form method="GET">
-                <input type="radio" name="rating1" value="rating1">평점 순
-                <input type="radio" name="review" value="review">리뷰 개수
+                <input type="checkbox" name="rating1" value="rating1">평점 순
+                <input type="checkbox" name="review" value="review">리뷰 개수
                 <button class="btn btn-primary" type="submit" value="">정렬</button>
             </form>
             <p>
@@ -173,8 +177,10 @@
                     <div class="hotel-contain-right">
                         <h1>{{a.name}}</h1>
                         <div class="classfication">{{a.classfication}}</div>
-                        <p class="rate-and-address">💗{{a.rating}} 리뷰개수:{{a.review}} 📮주소 {{a.address}} </p>
-                        <div class="restaurant-book"><button type="submit">찜하기</button></div>
+                        <p class="rate-and-address">💗{{a.rating}} 리뷰개수:{{a.review}}</p>
+                        <p class="rate-and-address">📮주소 {{a.address}} </p>
+                        <input type="submit" value="찜하기" class="restaurant-book">
+
             </form>
         </div>
         <hr width="70%">
@@ -185,7 +191,6 @@
     <div style="text-align:center">
         <div class="pagination1">
             {% if posts1.has_previous %}
-            <button name="page1" value="1">First</button>
             <a href="http://localhost:8000/%2Fver2_session?page1={{posts1.previous_page_number}}">Previous</a>
             {% endif %}
 
@@ -246,10 +251,10 @@
                 <div>
                     <div id="toc-content6">
                         <form method="GET">
-                            <input type="radio" name="rating" value="rating">평점 순
-                            <input type="radio" name="distance" value="distance">거리 순
-                            <input type="radio" name="cost" value="cost_up">가격 높은순
-                            <input type="radio" name="cost" value="cost_down">가격 낮은순
+                            <input type="checkbox" name="rating" value="rating">평점 순
+                            <input type="checkbox" name="distance" value="distance">거리 순
+                            <input type="checkbox" name="cost" value="cost_down">가격 높은순
+                            <input type="checkbox" name="cost" value="cost_up">가격 낮은순
                             <select name="sort" id="sort">
                                 <option value="hotell" id="hotell">호텔</option>
 
@@ -275,9 +280,13 @@
                             <h1>{{a.name}}</h1>
                             <div class="classfication">{{a.classfications}}</div>
                             <span>친절성:{{a.kind}}</span><span>청결성:{{a.clean}}</span><span>편의성:{{a.conv}}</span>
-                            <p class="rate-and-review">👍{{a.rating}} {{a.distance}} {{a.address}} </p>
-                            <div class="hotel-cost">{{a.cost|intcomma}}</div>
-                            <input type="submit" value="찜하기">
+                            <p class="rate-and-review">👍{{a.rating}}</p>
+                            <p class="rate-and-review">{{a.address}} <br><br>
+                                <span class="result-distance">{{result.1}}으로부터
+                                    거리:{{a.distance}}Km</span>
+                            </p>
+                            <div class="hotel-cost">₩{{a.cost|intcomma}}</div>
+                            <input type="submit" value="찜하기" class="restaurant-book">
                             </form>
                         </div>
                         <hr width="70%">
@@ -289,12 +298,15 @@
                     <div style="text-align:center">
                         <div class="pagination2">
                             {% if posts2.has_previous %}
-                            <button name="page2" value="1">First</button>
-                            <button name="page2" value="{{posts2.previous_page_number}}">Previous</button>
+                            <a
+                                href="http://localhost:8000/%2Fver2_session?page2={{posts2.previous_page_number}}">Previous</a>
                             {% endif %}
+
                             <span>{{posts2.number}} / {{posts2.paginator.num_pages}}</span>
+
                             {% if posts2.has_next %}
-                            <button name="page2" value="{{posts2.next_page_number}}">Next</button>
+                            <a href="http://localhost:8000/%2Fver2_session?page2={{posts2.next_page_number}}">Next</a>
+
                             {% endif %}
                         </div>
                     </div>
@@ -302,8 +314,8 @@
                 <div>
                     <div id="toc-content4">
                         <form method="GET">
-                            <input type="radio" name="rating1" value="rating1">평점 순
-                            <input type="radio" name="review" value="review">리뷰 개수
+                            <input type="checkbox" name="rating1" value="rating1">평점 순
+                            <input type="checkbox" name="review" value="review">리뷰 개수
                             <button class="btn btn-primary" type="submit" value="">정렬</button>
                         </form>
                         <p>
@@ -319,8 +331,9 @@
                                 <div class="hotel-contain-right">
                                     <h1>{{a.name}}</h1>
                                     <div class="classfication">{{a.classfication}}</div>
-                                    <p class="rate-and-address">💗{{a.rating}} 리뷰개수:{{a.review}} 📮주소 {{a.address}} </p>
-                                    <div class="restaurant-book"><button type="submit">찜하기</button></div>
+                                    <p class="rate-and-address">💗{{a.rating}} 리뷰개수:{{a.review}}</p>
+                                    <p class="rate-and-address">📮주소 {{a.address}} </p>
+                                    <input type="submit" value="찜하기" class="restaurant-book">
                         </form>
                     </div>
                     <hr width="70%">
@@ -331,13 +344,12 @@
                 <div style="text-align:center">
                     <div class="pagination3">
                         {% if posts3.has_previous %}
-                        <button name="page3" value="1">First</button>
                         <a
-                            href="http://localhost:8000/%2Fver2_session?page1={{posts3.previous_page_number}}">Previous</a>
+                            href="http://localhost:8000/%2Fver2_session?page3={{posts3.previous_page_number}}">Previous</a>
                         {% endif %}
                         <span>{{posts3.number}} / {{posts3.paginator.num_pages}}</span>
                         {% if posts3.has_next %}
-                        <a href="http://localhost:8000/%2Fver2_session?page1={{posts3.next_page_number}}">Next</a>
+                        <a href="http://localhost:8000/%2Fver2_session?page3={{posts3.next_page_number}}">Next</a>
                         {% endif %}
                     </div>
                 </div>
@@ -390,10 +402,10 @@
             <div>
                 <div id="toc-content9">
                     <form method="GET">
-                        <input type="radio" name="rating" value="rating">평점 순
-                        <input type="radio" name="distance" value="distance">거리 순
-                        <input type="radio" name="cost" value="cost_down">가격 높은순
-                        <input type="radio" name="cost" value="cost_up">가격 낮은순
+                        <input type="checkbox" name="rating" value="rating">평점 순
+                        <input type="checkbox" name="distance" value="distance">거리 순
+                        <input type="checkbox" name="cost" value="cost_down">가격 높은순
+                        <input type="checkbox" name="cost" value="cost_up">가격 낮은순
                         <select name="sort" id="sort">
                             <option value="hotell" id="hotell">호텔</option>
                             <option value="guesthouse" id="guesthouse">게스트하우스</option>
@@ -417,9 +429,13 @@
                         <h1>{{a.name}}</h1>
                         <div class="classfication">{{a.classfications}}</div>
                         <span>친절성:{{a.kind}}</span><span>청결성:{{a.clean}}</span><span>편의성:{{a.conv}}</span>
-                        <p class="rate-and-review">👍{{a.rating}} {{a.distance}} {{a.address}} </p>
-                        <div class="hotel-cost">{{a.cost|intcomma}}</div>
-                        <input type="submit" value="찜하기">
+                        <p class="rate-and-review">👍{{a.rating}}</p>
+                        <p class="rate-and-review">{{a.address}} <br><br>
+                            <span class="result-distance">{{result.2}}으로부터
+                                거리:{{a.distance}}Km</span>
+                        </p>
+                        <div class="hotel-cost">₩{{a.cost|intcomma}}</div>
+                        <input type="submit" value="찜하기" class="restaurant-book">
                         </form>
                     </div>
                     <hr width="70%">
@@ -430,14 +446,15 @@
                 <div style="text-align:center">
                     <div class="pagination4">
                         {% if posts4.has_previous %}
-                        <button name="page4" value="1">First</button>
-                        <button name="page4" value="{{posts4.previous_page_number}}">Previous</button>
+                        <a
+                            href="http://localhost:8000/%2Fver2_session?page4={{posts4.previous_page_number}}">Previous</a>
                         {% endif %}
 
                         <span>{{posts4.number}} / {{posts4.paginator.num_pages}}</span>
 
                         {% if posts4.has_next %}
-                        <button name="page4" value="{{posts4.next_page_number}}">Next</button>
+                        <a href="http://localhost:8000/%2Fver2_session?page4={{posts4.next_page_number}}">Next</a>
+
                         {% endif %}
                     </div>
                 </div>
@@ -445,8 +462,8 @@
             <div>
                 <div id="toc-content7">
                     <form method="GET">
-                        <input type="radio" name="rating1" value="rating1">평점 순
-                        <input type="radio" name="review" value="review">리뷰 개수
+                        <input type="checkbox" name="rating1" value="rating1">평점 순
+                        <input type="checkbox" name="review" value="review">리뷰 개수
                         <button class="btn btn-primary" type="submit" value="">정렬</button>
                     </form>
                     <p>
@@ -462,10 +479,11 @@
                             <div class="hotel-contain-right">
                                 <h1>{{a.name}}</h1>
                                 <div class="classfication">{{a.classfication}}</div>
-                                <p class="rate-and-address">💗{{a.rating}} 리뷰개수:{{a.review}} 📮주소 {{a.address}} </p>
+                                <p class="rate-and-address">💗{{a.rating}} 리뷰개수:{{a.review}}</p>
+                                <p class="rate-and-address">📮주소 {{a.address}} </p>
                                 <p class="restaurant-hour">
                                 </p>
-                                <div class="restaurant-book"><button type="submit">찜하기</button></div>
+                                <input type="submit" value="찜하기" class="restaurant-book">
                     </form>
                 </div>
                 <hr width="70%">
@@ -476,14 +494,13 @@
             <div style="text-align:center">
                 <div class="pagination5">
                     {% if posts5.has_previous %}
-                    <button name="page5" value="1">First</button>
-                    <a href="http://localhost:8000/%2Fver2_session?page1={{posts5.previous_page_number}}">Previous</a>
+                    <a href="http://localhost:8000/%2Fver2_session?page5={{posts5.previous_page_number}}">Previous</a>
                     {% endif %}
 
                     <span>{{posts5.number}} / {{posts5.paginator.num_pages}}</span>
 
                     {% if posts5.has_next %}
-                    <a href="http://localhost:8000/%2Fver2_session?page1={{posts5.next_page_number}}">Next</a>
+                    <a href="http://localhost:8000/%2Fver2_session?page5={{posts5.next_page_number}}">Next</a>
 
                     {% endif %}
                 </div>
